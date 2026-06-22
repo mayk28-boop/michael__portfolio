@@ -1,115 +1,894 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akong Portfolio</title>
-    <!-- Tailwind CSS para sa paspas ug nindot nga styling -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael G. Navarro | Graphic Designer</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #030816;
+      --blue: #00d9ff;
+      --blue2: #0077ff;
+      --white: #eefaff;
+      --muted: #9bb6c7;
+      --glass: rgba(255, 255, 255, 0.08);
+      --border: rgba(0, 217, 255, 0.28);
+      --shadow: 0 0 35px rgba(0, 217, 255, 0.25);
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0, 217, 255, 0.22), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(0, 119, 255, 0.2), transparent 35%),
+        var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent, rgba(0, 217, 255, 0.05), transparent),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.015) 0px,
+          rgba(255, 255, 255, 0.015) 1px,
+          transparent 1px,
+          transparent 80px
+        );
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .water-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .wave {
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      border-radius: 43% 57% 60% 40%;
+      background: rgba(0, 217, 255, 0.08);
+      filter: blur(35px);
+      animation: floatWater 13s infinite linear;
+    }
+
+    .wave:nth-child(1) {
+      top: -220px;
+      left: -180px;
+    }
+
+    .wave:nth-child(2) {
+      bottom: -260px;
+      right: -190px;
+      animation-duration: 16s;
+      background: rgba(0, 119, 255, 0.1);
+    }
+
+    .wave:nth-child(3) {
+      top: 35%;
+      left: 45%;
+      width: 420px;
+      height: 420px;
+      animation-duration: 18s;
+      background: rgba(0, 217, 255, 0.05);
+    }
+
+    @keyframes floatWater {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(180deg) scale(1.15);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    .cursor-water {
+      position: fixed;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 217, 255, 0.9);
+      box-shadow: 0 0 25px rgba(0, 217, 255, 0.7);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: width 0.25s, height 0.25s, background 0.25s;
+    }
+
+    .cursor-water.active {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.2), transparent 70%);
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 18px;
+      z-index: 100;
+      margin: 18px auto;
+      width: min(1120px, 92%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      background: rgba(4, 12, 28, 0.65);
+      backdrop-filter: blur(18px);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--blue);
+      text-shadow: 0 0 16px rgba(0, 217, 255, 0.8);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.85;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+      text-shadow: 0 0 15px var(--blue);
+    }
+
+    .status {
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--blue);
+      border: 1px solid var(--border);
+      background: rgba(0, 217, 255, 0.08);
+      font-size: 12px;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--blue);
+      margin-bottom: 22px;
+      font-size: 13px;
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      background: var(--blue);
+      border-radius: 50%;
+      box-shadow: 0 0 18px var(--blue);
+      animation: pulse 1.4s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.7);
+        opacity: 0.4;
+      }
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, var(--blue), #6eeaff);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(0, 217, 255, 0.18);
+    }
+
+    .hero h2 {
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 22px;
+      font-size: clamp(18px, 3vw, 25px);
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: #c7d9e5;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--white);
+      border: 1px solid var(--border);
+      background: rgba(0, 217, 255, 0.08);
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .btn::before,
+    .skill-card::before,
+    .project-card::before,
+    .icon-link::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -80% -50%;
+      width: 220%;
+      height: 120%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(0, 217, 255, 0.35),
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transform: rotate(8deg);
+      transition: 0.55s ease;
+    }
+
+    .btn:hover::before,
+    .skill-card:hover::before,
+    .project-card:hover::before,
+    .icon-link:hover::before {
+      bottom: 120%;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px rgba(0, 217, 255, 0.45);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.35), rgba(0, 119, 255, 0.18));
+    }
+
+    .profile-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 34px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .profile-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 217, 255, 0.25), transparent 32%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .profile-card:hover::after {
+      opacity: 1;
+    }
+
+    .profile-img {
+      width: 100%;
+      aspect-ratio: 1 / 1.1;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .id-card {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .id-card small {
+      color: var(--blue);
+    }
+
+    .id-card h3 {
+      margin: 6px 0;
+    }
+
+    .section-title {
+      margin-bottom: 28px;
+    }
+
+    .section-title span {
+      color: var(--blue);
+      letter-spacing: 2px;
+      font-size: 13px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 5vw, 52px);
+      margin-top: 8px;
+    }
+
+    .glass-box {
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      line-height: 1.8;
+      color: #c7d9e5;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .skill-card {
+      position: relative;
+      min-height: 170px;
+      padding: 22px;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(14px);
+      overflow: hidden;
+      transition: 0.35s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 0 32px rgba(0, 217, 255, 0.35);
+    }
+
+    .skill-icon {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(0, 217, 255, 0.12);
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      margin-bottom: 18px;
+      font-size: 25px;
+      overflow: hidden;
+    }
+
+    .skill-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .skill-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-card {
+      position: relative;
+      padding: 26px;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+      transition: 0.35s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 32px rgba(0, 217, 255, 0.35);
+    }
+
+    .project-type {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .project-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .project-card p {
+      color: #c7d9e5;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .chip {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 217, 255, 0.22);
+      color: var(--muted);
+      font-size: 12px;
+      background: rgba(0, 217, 255, 0.06);
+    }
+
+    .mini-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .contact-info p {
+      color: #c7d9e5;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .icon-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .icon-link {
+      position: relative;
+      overflow: hidden;
+      padding: 13px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      color: var(--white);
+      background: rgba(0, 217, 255, 0.07);
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .icon-link:hover {
+      color: var(--blue);
+      transform: translateY(-5px);
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.38);
+    }
+
+    footer {
+      padding: 28px 0;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(0, 217, 255, 0.14);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 65px 0;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-card {
+        padding: 14px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans sticky-nav">
 
-    <!-- NAVIGATION BAR -->
-    <nav class="bg-gray-800 p-4 sticky top-0 z-50 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-teal-400 tracking-wider">JUAN DEV</a>
-            <div class="space-x-6">
-                <a href="#about" class="hover:text-teal-400 transition">About</a>
-                <a href="#skills" class="hover:text-teal-400 transition">Skills</a>
-                <a href="#projects" class="hover:text-teal-400 transition">Projects</a>
-                <a href="#contact" class="hover:text-teal-400 transition">Contact</a>
-            </div>
+<body>
+  <div class="cursor-water"></div>
+
+  <div class="water-bg">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+
+  <nav>
+    <div class="logo">MICHAEL_</div>
+
+    <div class="nav-links">
+      <a href="#about">ABOUT</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+
+    <div class="status">OPEN TO WORK</div>
+  </nav>
+
+  <main class="container">
+    <section class="hero" id="home">
+      <div class="hero-text reveal">
+        <div class="tag">
+          <span class="pulse"></span>
+          BSIS · Davao del Norte State College
         </div>
-    </nav>
 
-    <!-- HERO SECTION -->
-    <section class="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-b from-gray-900 to-gray-850 px-4">
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-4">Kumusta! Ako si <span class="text-teal-400">[Imong Pangalan]</span></h1>
-        <p class="text-lg md:text-xl text-gray-400 max-w-xl mb-8">
-            Usa ka aspiring Web Developer / Student nga ganahan maghimo og mga chada nga websites ug applications.
+        <h1>Hi, I’m <span class="gradient-text">Michael.</span></h1>
+        <h2>Graphic Designer · Visual Creator · UI/UX Learner</h2>
+
+        <p>
+          Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean,
+          modern, and eye-catching visual designs. My skills include photo editing,
+          video editing, and basic network configuration. I’m always willing to learn
+          new tools and improve my skills to create better and more professional outputs.
         </p>
-        <a href="#projects" class="bg-teal-500 hover:bg-teal-600 text-gray-950 font-bold py-3 px-6 rounded-full transition transform hover:scale-105 shadow-md">
-            Tan-awa Akong Agi
-        </a>
-    </section>
 
-    <!-- ABOUT ME -->
-    <section id="about" class="py-20 bg-gray-800 px-4">
-        <div class="container mx-auto max-w-3xl text-center">
-            <h2 class="text-3xl font-bold mb-6 text-teal-400">Mahitungod Kanako</h2>
-            <p class="text-gray-300 leading-relaxed text-lg">
-                Isulat diri ang mubo nga introduksyon sa imong kaugalingon, bai. Pwede nimo i-apil kung unsa imong kurso, unsa imong mga hilig sa programming, ug kung unsa imong mga tumong isip usa ka developer.
-            </p>
+        <div class="buttons">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="#contact">Get In Touch</a>
         </div>
-    </section>
+      </div>
 
-    <!-- SKILLS SECTION -->
-    <section id="skills" class="py-20 bg-gray-900 px-4">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="text-3xl font-bold mb-12 text-teal-400">Mga Katakos (Skills)</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
-                    <p class="font-bold text-xl text-orange-400">HTML5</p>
-                </div>
-                <div class="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
-                    <p class="font-bold text-xl text-blue-400">CSS3</p>
-                </div>
-                <div class="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
-                    <p class="font-bold text-xl text-yellow-400">JavaScript</p>
-                </div>
-                <div class="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
-                    <p class="font-bold text-xl text-purple-400">Tailwind</p>
-                </div>
-            </div>
+      <div class="profile-card reveal">
+        <img src="assets/profile.jpg" alt="Michael G. Navarro" class="profile-img" />
+
+        <div class="id-card">
+          <small>[ DIGITAL ID ]</small>
+          <h3>Michael G. Navarro</h3>
+          <p>Graphic Designer · DNSC Student</p>
+          <p style="color: #00d9ff; margin-top: 8px;">ACTIVE — CREATIVE PORTFOLIO</p>
         </div>
+      </div>
     </section>
 
-    <!-- PROJECTS SECTION -->
-    <section id="projects" class="py-20 bg-gray-800 px-4">
-        <div class="container mx-auto max-w-5xl">
-            <h2 class="text-3xl font-bold mb-12 text-center text-teal-400">Akong mga Proyekto</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Project 1 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg border border-gray-700 transition hover:border-teal-500">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Project Title 1</h3>
-                        <p class="text-gray-400 mb-4">I-describe diri kung unsa ni nga project. Unsa ang iyang gamit ug unsa nga tech stack imong gigamit.</p>
-                        <a href="#" class="text-teal-400 hover:underline">View on GitHub &rarr;</a>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg border border-gray-700 transition hover:border-teal-500">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Project Title 2</h3>
-                        <p class="text-gray-400 mb-4">Laing proyekto na sad nimo, mahimo nga school project o personal project nimo.</p>
-                        <a href="#" class="text-teal-400 hover:underline">View on GitHub &rarr;</a>
-                    </div>
-                </div>
-            </div>
+    <section id="about" class="reveal">
+      <div class="section-title">
+        <span>[ ABOUT ]</span>
+        <h2>Designing visuals that feel modern and professional.</h2>
+      </div>
+
+      <div class="glass-box">
+        <p>
+          I am a 4th year college student with a growing interest in graphic design,
+          visual editing, and user interface design. I enjoy creating designs that are
+          simple, clean, and attractive while making sure the message is easy to understand.
+        </p>
+
+        <br />
+
+        <p>
+          My creative work focuses on photo editing, video editing, layout design,
+          and digital content creation. I also have experience using Figma, where I can
+          create interface layouts and interactive prototypes for web or app design ideas.
+          Aside from creative work, I also have basic knowledge in network configuration,
+          which helps me understand technical setups and system connectivity.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <div class="section-title">
+        <span>[ SKILLS ]</span>
+        <h2>Tools and skills I work with.</h2>
+      </div>
+
+      <div class="grid skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">🎨</div>
+          <h3>Graphic Design</h3>
+          <p>Creating clean, modern, and eye-catching visual layouts for digital content.</p>
         </div>
-    </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="py-20 bg-gray-900 px-4 text-center">
-        <div class="container mx-auto max-w-xl">
-            <h2 class="text-3xl font-bold mb-6 text-teal-400">Estorya Ta!</h2>
-            <p class="text-gray-400 mb-8">Kung naa kay pangutana o gusto ka makigtambayayong, i-message ko diri:</p>
-            <div class="space-y-4">
-                <p class="text-lg">Email: <a href="mailto:imongemail@gmail.com" class="text-teal-400 hover:underline">imongemail@gmail.com</a></p>
-                <div class="flex justify-center space-x-6 text-2xl mt-4">
-                    <a href="#" class="hover:text-teal-400">GitHub</a>
-                    <a href="#" class="hover:text-teal-400">LinkedIn</a>
-                    <a href="#" class="hover:text-teal-400">Facebook</a>
-                </div>
-            </div>
+        <div class="skill-card">
+          <div class="skill-icon">🖼️</div>
+          <h3>Photo Editing</h3>
+          <p>Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
         </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🎬</div>
+          <h3>Video Editing</h3>
+          <p>Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">💎</div>
+          <h3>Figma Prototype</h3>
+          <p>Designing UI layouts and creating clickable prototypes for web and app concepts.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🌐</div>
+          <h3>Basic Network Configuration</h3>
+          <p>Setting up basic network connections, configurations, and connectivity settings.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">✨</div>
+          <h3>Creative Direction</h3>
+          <p>Choosing colors, styles, spacing, and visual direction for a more polished output.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">📱</div>
+          <h3>Social Media Design</h3>
+          <p>Creating posters, banners, thumbnails, and digital content for online platforms.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">⚡</div>
+          <h3>Fast Learner</h3>
+          <p>Willing to explore new design tools, trends, and techniques to improve my work.</p>
+        </div>
+      </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-gray-950 py-6 text-center text-sm text-gray-500 border-t border-gray-800">
-        <p>&copy; 2026 [Imong Pangalan]. All Rights Reserved.</p>
-    </footer>
+    <section id="projects" class="reveal">
+      <div class="section-title">
+        <span>[ PROJECTS ]</span>
+        <h2>Selected creative work.</h2>
+      </div>
 
+      <div class="grid projects-grid">
+        <div class="project-card">
+          <div class="project-type">UI/UX DESIGN · FIGMA PROTOTYPE</div>
+          <h3>Interactive Figma Prototype</h3>
+          <p>
+            A clickable prototype created in Figma to present a clean interface flow,
+            screen layout, and user interaction concept.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Figma</span>
+            <span class="chip">UI Design</span>
+            <span class="chip">Prototype</span>
+            <span class="chip">Wireframe</span>
+          </div>
+
+          <a class="mini-link" href="PASTE_YOUR_FIGMA_PROTOTYPE_LINK_HERE" target="_blank">
+            [ VIEW PROTOTYPE ]
+          </a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-type">GRAPHIC DESIGN · DIGITAL CONTENT</div>
+          <h3>Social Media Poster Designs</h3>
+          <p>
+            A collection of poster and layout designs focused on strong visuals,
+            readable text, balanced spacing, and modern color combinations.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Poster Design</span>
+            <span class="chip">Layout</span>
+            <span class="chip">Branding</span>
+          </div>
+
+          <a class="mini-link" href="#contact">[ REQUEST SAMPLE ]</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-type">VIDEO EDITING · CREATIVE MEDIA</div>
+          <h3>Short Video Edits</h3>
+          <p>
+            Edited video content with smooth pacing, transitions, visual timing,
+            and improved flow for more engaging presentation.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Video Editing</span>
+            <span class="chip">Transitions</span>
+            <span class="chip">Visual Flow</span>
+          </div>
+
+          <a class="mini-link" href="#contact">[ CONTACT ME ]</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-type">TECHNICAL SKILL · NETWORK SETUP</div>
+          <h3>Basic Network Configuration</h3>
+          <p>
+            Practical experience in configuring basic network settings and connectivity
+            setups, with attention to proper access and stable connection.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Networking</span>
+            <span class="chip">Configuration</span>
+            <span class="chip">Technical Setup</span>
+          </div>
+
+          <a class="mini-link" href="#skills">[ VIEW SKILLS ]</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <div class="section-title">
+        <span>[ CONTACT ]</span>
+        <h2>Let’s create something clean and creative.</h2>
+      </div>
+
+      <div class="glass-box contact-card">
+        <div class="contact-info">
+          <p>
+            I am open to creative projects, school-related design work, portfolio
+            collaborations, and opportunities where I can improve my skills in design,
+            editing, and UI/UX prototyping.
+          </p>
+
+          <div class="icon-links">
+            <a class="icon-link" href="mailto:navarro.michael@dnsc.edu.ph">Email</a>
+            <a class="icon-link" href="tel:09158480061">Call</a>
+            <a class="icon-link" href="PASTE_YOUR_FIGMA_PROTOTYPE_LINK_HERE" target="_blank">Figma</a>
+          </div>
+        </div>
+
+        <div>
+          <p><strong>Email:</strong> navarro.michael@dnsc.edu.ph</p>
+          <p><strong>Phone:</strong> 09158480061</p>
+          <p><strong>Location:</strong> Davao del Norte, Philippines</p>
+          <p><strong>Status:</strong> Available for creative work</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Michael G. Navarro · Graphic Designer · Portfolio Online
+  </footer>
+
+  <script>
+    const cursor = document.querySelector(".cursor-water");
+    const hoverItems = document.querySelectorAll("a, .skill-card, .project-card, .profile-card, .skill-icon");
+
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+    });
+
+    hoverItems.forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        cursor.classList.add("active");
+      });
+
+      item.addEventListener("mouseleave", () => {
+        cursor.classList.remove("active");
+      });
+    });
+
+    const cards = document.querySelectorAll(".profile-card, .skill-card, .project-card");
+
+    cards.forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        card.style.setProperty("--x", x + "%");
+        card.style.setProperty("--y", y + "%");
+      });
+    });
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    reveals.forEach((el) => observer.observe(el));
+  </script>
 </body>
-</html>
 </html>
