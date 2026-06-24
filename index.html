@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -73,7 +72,7 @@
       content: "";
       position: fixed;
       inset: 0;
-      z-index: -2;
+      z-index: -3;
       pointer-events: none;
       background:
         linear-gradient(120deg, transparent, rgba(0, 217, 255, 0.05), transparent),
@@ -89,12 +88,10 @@
     .water-bg {
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: -2;
       overflow: hidden;
       pointer-events: none;
-      background:
-        radial-gradient(circle at top left, rgba(0, 217, 255, 0.25), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(0, 119, 255, 0.25), transparent 35%);
+      contain: strict;
     }
 
     .smoke {
@@ -110,6 +107,7 @@
       opacity: 0.58;
       animation: smokeWave 18s ease-in-out infinite alternate;
       mix-blend-mode: screen;
+      will-change: transform;
     }
 
     .smoke1 {
@@ -181,6 +179,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
       padding: 14px 18px;
       border: 1px solid var(--border);
       background: var(--nav-bg);
@@ -195,6 +194,7 @@
       letter-spacing: 2px;
       color: var(--blue);
       text-shadow: 0 0 16px rgba(0, 217, 255, 0.8);
+      white-space: nowrap;
     }
 
     .nav-links {
@@ -216,6 +216,12 @@
       text-shadow: 0 0 15px var(--blue);
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .status {
       padding: 8px 12px;
       border-radius: 999px;
@@ -223,10 +229,160 @@
       border: 1px solid var(--border);
       background: rgba(0, 217, 255, 0.08);
       font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .settings-wrap {
+      position: relative;
+    }
+
+    .settings-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.16), transparent 28%),
+        rgba(0, 217, 255, 0.08);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 20px;
+      display: grid;
+      place-items: center;
+      transition: 0.25s ease;
+      box-shadow: inset 0 0 15px rgba(0, 217, 255, 0.06);
+    }
+
+    .settings-btn:hover {
+      transform: translateY(-4px) rotate(35deg) scale(1.08);
+      border-color: rgba(0, 217, 255, 0.62);
+      box-shadow:
+        0 0 22px rgba(0, 217, 255, 0.36),
+        0 0 24px rgba(255, 0, 212, 0.12);
+    }
+
+    .settings-panel {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      z-index: 1000;
+      width: min(330px, 88vw);
+      display: none;
+      padding: 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 217, 255, 0.35);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)),
+        rgba(5, 18, 35, 0.86);
+      backdrop-filter: blur(14px) saturate(1.25);
+      -webkit-backdrop-filter: blur(14px) saturate(1.25);
+      box-shadow:
+        0 24px 46px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 32px rgba(0, 217, 255, 0.26);
+      animation: settingsPop 0.25s ease forwards;
+      overflow: hidden;
+    }
+
+    .settings-panel.show {
+      display: block;
+    }
+
+    .settings-panel::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 18%),
+        radial-gradient(circle at 90% 80%, rgba(0, 217, 255, 0.18), transparent 24%),
+        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      pointer-events: none;
+      animation: glassLightMove 5s ease-in-out infinite alternate;
+    }
+
+    .settings-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .settings-content h4 {
+      color: var(--blue);
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .settings-section {
+      margin-top: 13px;
+      padding-top: 13px;
+      border-top: 1px solid rgba(0, 217, 255, 0.18);
+    }
+
+    .settings-label {
+      display: block;
+      color: var(--text-soft);
+      font-size: 12px;
+      margin-bottom: 9px;
+      letter-spacing: 0.8px;
+    }
+
+    .settings-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .theme-btn,
+    .lang-btn {
+      min-width: 48px;
+      min-height: 39px;
+      padding: 9px 10px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(0, 217, 255, 0.08);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .theme-btn:hover,
+    .lang-btn:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 217, 255, 0.62);
+      box-shadow:
+        0 0 18px rgba(0, 217, 255, 0.35),
+        0 0 20px rgba(255, 0, 212, 0.12);
+    }
+
+    .theme-btn.active-theme,
+    .lang-btn.active-lang {
+      color: var(--blue);
+      border-color: rgba(0, 217, 255, 0.72);
+      background: rgba(0, 217, 255, 0.16);
+      box-shadow: 0 0 18px rgba(0, 217, 255, 0.35);
+    }
+
+    @keyframes settingsPop {
+      from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     section {
-      padding: 90px 0;
+      content-visibility: auto;
+      contain-intrinsic-size: 900px;
+    }
+
+    .hero {
+      content-visibility: visible;
     }
 
     .hero {
@@ -235,6 +391,60 @@
       grid-template-columns: 1.2fr 0.8fr;
       gap: 36px;
       align-items: center;
+      padding: 90px 0;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .gradient-text {
+      color: var(--blue);
+      text-shadow: 0 0 24px rgba(0, 217, 255, 0.75);
+    }
+
+    .hero-text h2 {
+      color: var(--text-soft);
+      font-size: clamp(20px, 3vw, 30px);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .hero-text p {
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin-bottom: 26px;
+      max-width: 680px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 13px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      color: var(--white);
+      background: rgba(0, 217, 255, 0.07);
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.28s ease;
+    }
+
+    .btn.primary {
+      background: rgba(0, 217, 255, 0.16);
+      color: var(--blue);
+    }
+
+    .btn:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow: 0 0 26px rgba(0, 217, 255, 0.32);
     }
 
     .dnsc-alien-wrap {
@@ -264,10 +474,8 @@
       box-shadow:
         inset 0 0 18px rgba(0, 217, 255, 0.12),
         0 0 22px rgba(0, 217, 255, 0.18);
-      transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease,
-        border-color 0.28s ease;
+      transition: 0.28s ease;
+      will-change: transform;
     }
 
     .dnsc-alien-btn::before {
@@ -405,245 +613,6 @@
       }
     }
 
-    .dnsc-options-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 21000;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.38);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
-
-    .dnsc-options-overlay.show {
-      display: grid;
-      animation: overlayFade 0.28s ease forwards;
-    }
-
-    .dnsc-options-box {
-      position: relative;
-      width: min(420px, 92vw);
-      padding: 22px;
-      border-radius: 30px;
-      border: 1px solid rgba(0, 217, 255, 0.35);
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
-        rgba(5, 18, 35, 0.72);
-      backdrop-filter: blur(9px) saturate(1.35);
-      -webkit-backdrop-filter: blur(9px) saturate(1.35);
-      box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.48),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18),
-        0 0 42px rgba(0, 217, 255, 0.32);
-      animation: glassPop 0.42s cubic-bezier(0.16, 0.84, 0.26, 1) forwards;
-      overflow: hidden;
-    }
-
-    .dnsc-options-box::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.25), transparent 18%),
-        radial-gradient(circle at 80% 75%, rgba(0, 217, 255, 0.24), transparent 24%),
-        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-      opacity: 0.75;
-      pointer-events: none;
-      animation: glassLightMove 5s ease-in-out infinite alternate;
-    }
-
-    .dnsc-options-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .dnsc-options-header {
-      margin-bottom: 18px;
-    }
-
-    .dnsc-options-header span {
-      color: var(--blue);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .dnsc-options-header h3 {
-      margin-top: 7px;
-      font-size: 25px;
-      color: var(--white);
-    }
-
-    .dnsc-options-header p {
-      margin-top: 8px;
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .dnsc-option-links {
-      display: grid;
-      gap: 12px;
-    }
-
-    .dnsc-option-link {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 15px;
-      border-radius: 20px;
-      border: 1px solid rgba(0, 217, 255, 0.24);
-      color: var(--white);
-      text-decoration: none;
-      background: rgba(0, 217, 255, 0.08);
-      transition: 0.25s ease;
-    }
-
-    .dnsc-option-link:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 217, 255, 0.62);
-      background: rgba(0, 217, 255, 0.14);
-      box-shadow:
-        0 12px 24px rgba(0, 0, 0, 0.28),
-        0 0 24px rgba(0, 217, 255, 0.26);
-    }
-
-    .dnsc-option-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.26), transparent 24%),
-        rgba(0, 217, 255, 0.13);
-      border: 1px solid rgba(0, 217, 255, 0.28);
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .dnsc-option-text strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .dnsc-option-text small {
-      color: var(--text-soft);
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .dnsc-close-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      z-index: 3;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      background: rgba(3, 8, 22, 0.72);
-      color: var(--white);
-      cursor: pointer;
-      font-size: 24px;
-      line-height: 1;
-      transition: 0.25s ease;
-    }
-
-    .dnsc-close-btn:hover {
-      color: var(--blue);
-      transform: rotate(90deg) scale(1.08);
-      box-shadow: 0 0 22px rgba(0, 217, 255, 0.4);
-    }
-
-    @keyframes overlayFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes glassPop {
-      from {
-        opacity: 0;
-        transform: translateY(34px) scale(0.92);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes glassLightMove {
-      from {
-        transform: translate(-4%, -3%) rotate(0deg);
-      }
-
-      to {
-        transform: translate(5%, 4%) rotate(8deg);
-      }
-    }
-
-    h1 {
-      font-size: clamp(42px, 7vw, 86px);
-      line-height: 0.95;
-      margin-bottom: 20px;
-    }
-
-    .gradient-text {
-      color: var(--blue);
-      text-shadow: 0 0 24px rgba(0, 217, 255, 0.75);
-    }
-
-    .hero-text h2 {
-      color: var(--text-soft);
-      font-size: clamp(20px, 3vw, 30px);
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .hero-text p {
-      color: var(--text-soft);
-      line-height: 1.8;
-      margin-bottom: 26px;
-      max-width: 680px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 13px 18px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      color: var(--white);
-      background: rgba(0, 217, 255, 0.07);
-      text-decoration: none;
-      font-weight: 700;
-      transition: 0.28s ease;
-    }
-
-    .btn.primary {
-      background: rgba(0, 217, 255, 0.16);
-      color: var(--blue);
-    }
-
-    .btn:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0, 217, 255, 0.55);
-      box-shadow: 0 0 26px rgba(0, 217, 255, 0.32);
-    }
-
     .profile-card,
     .glass-box,
     .skill-card,
@@ -660,6 +629,7 @@
       border-radius: 34px;
       overflow: hidden;
       transition: 0.32s ease;
+      will-change: transform;
     }
 
     .profile-card:hover {
@@ -920,25 +890,443 @@
       font-size: 12px;
     }
 
-    .certificate-popup {
+    .section-title {
+      margin-bottom: 28px;
+    }
+
+    .section-title span {
+      color: var(--blue);
+      letter-spacing: 2px;
+      font-size: 13px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 5vw, 52px);
+      margin-top: 8px;
+    }
+
+    .glass-box {
+      border-radius: 30px;
+      padding: 28px;
+      line-height: 1.8;
+      color: var(--text-soft);
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .skill-card {
+      position: relative;
+      min-height: 170px;
+      padding: 22px;
+      border-radius: 26px;
+      overflow: visible;
+      transition: 0.32s ease;
+      will-change: transform;
+    }
+
+    .skill-card:hover,
+    .project-card:hover {
+      transform: translateY(-16px) scale(1.035);
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow:
+        0 22px 38px rgba(0, 0, 0, 0.4),
+        0 0 36px rgba(0, 217, 255, 0.38);
+    }
+
+    .skill-icon {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(0, 217, 255, 0.12);
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      margin-bottom: 18px;
+      font-size: 25px;
+      overflow: visible;
+      transition: 0.3s ease;
+    }
+
+    .skill-card:hover .skill-icon {
+      transform: translateY(-10px) scale(1.14);
+      background: rgba(0, 217, 255, 0.2);
+      box-shadow: 0 14px 28px rgba(0, 217, 255, 0.28);
+    }
+
+    .skill-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .skill-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .video-sample-trigger {
+      cursor: pointer;
+    }
+
+    .sample-edit-btn {
+      margin-top: 14px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(0, 217, 255, 0.1);
+      color: var(--blue);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      transition: 0.28s ease;
+    }
+
+    .video-sample-trigger:hover .sample-edit-btn {
+      transform: translateY(-4px);
+      background: rgba(0, 217, 255, 0.16);
+      box-shadow: 0 0 22px rgba(0, 217, 255, 0.35);
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-card {
+      padding: 26px;
+      border-radius: 28px;
+      overflow: visible;
+      transition: 0.32s ease;
+      will-change: transform;
+    }
+
+    .project-type {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .project-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .project-card p {
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .chip {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 217, 255, 0.22);
+      color: var(--muted);
+      font-size: 12px;
+      background: rgba(0, 217, 255, 0.06);
+    }
+
+    .mini-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .contact-info p {
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .icon-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .icon-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      color: var(--white);
+      background: rgba(0, 217, 255, 0.07);
+      text-decoration: none;
+      transition: 0.28s ease;
+      overflow: visible;
+    }
+
+    .icon-link::after,
+    .skill-icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -14px;
+      width: 72%;
+      height: 12px;
+      border-radius: 999px;
+      transform: translateX(-50%) scaleX(0.75);
+      background: linear-gradient(
+        90deg,
+        #ff004c,
+        #ff8c00,
+        #ffee00,
+        #00ff85,
+        #00d9ff,
+        #7a5cff,
+        #ff00d4,
+        #ff004c
+      );
+      background-size: 300% 100%;
+      filter: blur(10px);
+      opacity: 0;
+      transition: 0.28s ease;
+      animation: rainbowGlow 1.8s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .icon-link:hover {
+      color: var(--blue);
+      transform: translateY(-12px) scale(1.08);
+      background: rgba(0, 217, 255, 0.14);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow:
+        0 16px 28px rgba(0, 0, 0, 0.35),
+        0 0 34px rgba(0, 217, 255, 0.42);
+    }
+
+    .icon-link:hover::after,
+    .skill-card:hover .skill-icon::after {
+      opacity: 1;
+      transform: translateX(-50%) scaleX(1.12);
+    }
+
+    @keyframes rainbowGlow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 300% 50%;
+      }
+    }
+
+    .popup-overlay,
+    .video-popup,
+    .certificate-popup,
+    .dnsc-options-overlay {
       position: fixed;
       inset: 0;
-      z-index: 22000;
       display: none;
       place-items: center;
       padding: 20px;
-      background: rgba(0, 0, 0, 0.62);
+      background: rgba(0, 0, 0, 0.68);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
 
-    .certificate-popup.show {
+    .popup-overlay {
+      z-index: 10000;
+    }
+
+    .video-popup {
+      z-index: 20000;
+    }
+
+    .dnsc-options-overlay {
+      z-index: 21000;
+      background: rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .certificate-popup {
+      z-index: 22000;
+      background: rgba(0, 0, 0, 0.62);
+    }
+
+    .popup-overlay.show,
+    .video-popup.show,
+    .certificate-popup.show,
+    .dnsc-options-overlay.show {
       display: grid;
       animation: overlayFade 0.28s ease forwards;
     }
 
-    .certificate-popup-box {
+    .popup-box,
+    .video-popup-box,
+    .certificate-popup-box,
+    .dnsc-options-box {
       position: relative;
+      border: 1px solid var(--border);
+      background: var(--nav-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      animation: popupRise 0.4s ease forwards;
+    }
+
+    .popup-box {
+      width: min(430px, 92vw);
+      padding: 26px;
+      border-radius: 28px;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .popup-box h3 {
+      color: var(--blue);
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .popup-box p {
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .popup-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .popup-box button {
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(0, 217, 255, 0.18);
+      color: var(--white);
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.25s ease;
+      min-width: 140px;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .video-popup-box {
+      width: min(430px, 92vw);
+      padding: 18px;
+      border-radius: 30px;
+    }
+
+    .video-popup-box::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -18px;
+      width: 72%;
+      height: 18px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: linear-gradient(
+        90deg,
+        #ff004c,
+        #ff8c00,
+        #ffee00,
+        #00ff85,
+        #00d9ff,
+        #7a5cff,
+        #ff00d4,
+        #ff004c
+      );
+      background-size: 300% 100%;
+      filter: blur(16px);
+      opacity: 0.9;
+      animation: rainbowGlow 1.7s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .video-popup-header {
+      padding: 8px 6px 14px;
+    }
+
+    .video-popup-header span {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .video-popup-header h3 {
+      margin-top: 6px;
+      font-size: 22px;
+      color: var(--white);
+    }
+
+    .video-popup video {
+      width: 100%;
+      max-height: 72vh;
+      aspect-ratio: 9 / 16;
+      object-fit: contain;
+      display: block;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      background: #000;
+    }
+
+    .video-close-btn,
+    .certificate-close-btn,
+    .dnsc-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(4, 12, 28, 0.95);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 1;
+      transition: 0.25s ease;
+    }
+
+    .video-close-btn:hover,
+    .certificate-close-btn:hover,
+    .dnsc-close-btn:hover {
+      color: var(--blue);
+      transform: rotate(90deg) scale(1.08);
+      box-shadow: 0 0 28px rgba(0, 217, 255, 0.6);
+    }
+
+    .certificate-popup-box {
       isolation: isolate;
       width: min(930px, 94vw);
       max-height: 92vh;
@@ -954,7 +1342,6 @@
         inset 0 0 24px rgba(0, 217, 255, 0.12),
         0 28px 60px rgba(0, 0, 0, 0.55),
         0 0 46px rgba(0, 217, 255, 0.34);
-      animation: certificatePopupRise 0.42s ease forwards;
       overflow: hidden;
     }
 
@@ -1053,35 +1440,122 @@
       background: transparent;
     }
 
-    .certificate-close-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      z-index: 3;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
+    .dnsc-options-box {
+      width: min(420px, 92vw);
+      padding: 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(0, 217, 255, 0.35);
       background:
-        radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.16), transparent 20%),
-        rgba(4, 12, 28, 0.88);
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
+        rgba(5, 18, 35, 0.72);
+      overflow: hidden;
+    }
+
+    .dnsc-options-box::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.25), transparent 18%),
+        radial-gradient(circle at 80% 75%, rgba(0, 217, 255, 0.24), transparent 24%),
+        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      opacity: 0.75;
+      pointer-events: none;
+      animation: glassLightMove 5s ease-in-out infinite alternate;
+    }
+
+    .dnsc-options-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .dnsc-options-header {
+      margin-bottom: 18px;
+    }
+
+    .dnsc-options-header span {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .dnsc-options-header h3 {
+      margin-top: 7px;
+      font-size: 25px;
       color: var(--white);
-      cursor: pointer;
-      font-size: 28px;
-      line-height: 1;
-      box-shadow:
-        0 0 22px rgba(0, 217, 255, 0.42),
-        0 10px 22px rgba(0, 0, 0, 0.45);
+    }
+
+    .dnsc-options-header p {
+      margin-top: 8px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .dnsc-option-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .dnsc-option-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 217, 255, 0.24);
+      color: var(--white);
+      text-decoration: none;
+      background: rgba(0, 217, 255, 0.08);
       transition: 0.25s ease;
     }
 
-    .certificate-close-btn:hover {
-      color: var(--blue);
-      transform: rotate(90deg) scale(1.08);
-      box-shadow: 0 0 28px rgba(0, 217, 255, 0.6);
+    .dnsc-option-link:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 217, 255, 0.62);
+      background: rgba(0, 217, 255, 0.14);
+      box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.28),
+        0 0 24px rgba(0, 217, 255, 0.26);
     }
 
-    @keyframes certificatePopupRise {
+    .dnsc-option-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.26), transparent 24%),
+        rgba(0, 217, 255, 0.13);
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .dnsc-option-text strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .dnsc-option-text small {
+      color: var(--text-soft);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    @keyframes overlayFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes popupRise {
       from {
         opacity: 0;
         transform: translateY(40px) scale(0.92);
@@ -1093,149 +1567,1130 @@
       }
     }
 
-    .settings-wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .settings-btn {
-      width: 43px;
-      height: 43px;
-      border-radius: 15px;
-      border: 1px solid var(--border);
-      background:
-        radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.16), transparent 28%),
-        rgba(0, 217, 255, 0.08);
-      color: var(--white);
-      cursor: pointer;
-      font-size: 20px;
-      display: grid;
-      place-items: center;
-      transition: 0.25s ease;
-      box-shadow: inset 0 0 15px rgba(0, 217, 255, 0.06);
-    }
-
-    .settings-btn:hover {
-      transform: translateY(-4px) rotate(35deg) scale(1.08);
-      border-color: rgba(0, 217, 255, 0.62);
-      box-shadow:
-        0 0 22px rgba(0, 217, 255, 0.36),
-        0 0 24px rgba(255, 0, 212, 0.12);
-    }
-
-    .settings-panel {
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      z-index: 1000;
-      width: min(330px, 86vw);
-      display: none;
-      padding: 16px;
-      border-radius: 24px;
-      border: 1px solid rgba(0, 217, 255, 0.35);
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)),
-        rgba(5, 18, 35, 0.86);
-      backdrop-filter: blur(14px) saturate(1.25);
-      -webkit-backdrop-filter: blur(14px) saturate(1.25);
-      box-shadow:
-        0 24px 46px rgba(0, 0, 0, 0.42),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        0 0 32px rgba(0, 217, 255, 0.26);
-      animation: settingsPop 0.25s ease forwards;
-      overflow: hidden;
-    }
-
-    .settings-panel.show {
-      display: block;
-    }
-
-    .settings-panel::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 18%),
-        radial-gradient(circle at 90% 80%, rgba(0, 217, 255, 0.18), transparent 24%),
-        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-      pointer-events: none;
-      animation: glassLightMove 5s ease-in-out infinite alternate;
-    }
-
-    .settings-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .settings-content h4 {
-      color: var(--blue);
-      font-size: 13px;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-    }
-
-    .settings-section {
-      margin-top: 13px;
-      padding-top: 13px;
-      border-top: 1px solid rgba(0, 217, 255, 0.18);
-    }
-
-    .settings-label {
-      display: block;
-      color: var(--text-soft);
-      font-size: 12px;
-      margin-bottom: 9px;
-      letter-spacing: 0.8px;
-    }
-
-    .settings-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .theme-btn,
-    .lang-btn {
-      min-width: 48px;
-      min-height: 39px;
-      padding: 9px 10px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(0, 217, 255, 0.08);
-      color: var(--white);
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 700;
-      transition: 0.25s ease;
-    }
-
-    .theme-btn:hover,
-    .lang-btn:hover {
-      transform: translateY(-4px);
-      border-color: rgba(0, 217, 255, 0.62);
-      box-shadow:
-        0 0 18px rgba(0, 217, 255, 0.35),
-        0 0 20px rgba(255, 0, 212, 0.12);
-    }
-
-    .theme-btn.active-theme,
-    .lang-btn.active-lang {
-      color: var(--blue);
-      border-color: rgba(0, 217, 255, 0.72);
-      background: rgba(0, 217, 255, 0.16);
-      box-shadow: 0 0 18px rgba(0, 217, 255, 0.35);
-    }
-
-    @keyframes settingsPop {
+    @keyframes glassLightMove {
       from {
-        opacity: 0;
-        transform: translateY(-8px) scale(0.96);
+        transform: translate(-4%, -3%) rotate(0deg);
       }
 
       to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translate(5%, 4%) rotate(8deg);
       }
     }
+
+    footer {
+      padding: 28px 0;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(0, 217, 255, 0.14);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .status {
+        display: none;
+      }
+
+      .settings-panel {
+        position: fixed;
+        top: 82px;
+        right: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 65px 0;
+      }
+
+      .hero {
+        padding: 65px 0;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-card {
+        padding: 14px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+
+      .certificate-popup-box {
+        padding: 16px;
+      }
+
+      .certificate-frame-wrap {
+        height: 55vh;
+        padding: 7px;
+      }
+
+      .certificate-popup-header h3 {
+        font-size: 21px;
+      }
+
+      .smoke {
+        width: 180px;
+        height: 180px;
+        filter: none;
+        opacity: 0.3;
+        animation-duration: 34s;
+        mix-blend-mode: normal;
+      }
+
+      .smoke1 {
+        top: -55px;
+        left: -65px;
+      }
+
+      .smoke2 {
+        width: 220px;
+        height: 220px;
+        bottom: -70px;
+        right: -75px;
+      }
+
+      .smoke3,
+      .smoke4 {
+        display: none;
+      }
+
+      .profile-card,
+      .glass-box,
+      .skill-card,
+      .project-card,
+      nav,
+      .settings-panel {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="popup-overlay" id="desktopPopup">
+    <div class="popup-box">
+      <h3>Better on Desktop</h3>
+      <p>
+        For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.
+      </p>
+
+      <div class="popup-actions">
+        <button id="continuePopup">Continue Anyway</button>
+        <button id="backPopup" class="back-btn">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dnsc-options-overlay" id="dnscOptionsOverlay">
+    <div class="dnsc-options-box">
+      <button class="dnsc-close-btn" id="closeDnscOptions" aria-label="Close DNSC options">×</button>
+
+      <div class="dnsc-options-content">
+        <div class="dnsc-options-header">
+          <span>[ DNSC PORTAL ACCESS ]</span>
+          <h3>Choose Destination</h3>
+          <p>Select where you want to go. These links will open in a new tab.</p>
+        </div>
+
+        <div class="dnsc-option-links">
+          <a class="dnsc-option-link" href="https://dnsc.edu.ph/" target="_blank" rel="noopener noreferrer">
+            <div class="dnsc-option-icon">🌐</div>
+            <div class="dnsc-option-text">
+              <strong>DNSC Official Website</strong>
+              <small>Visit the official Davao del Norte State College website.</small>
+            </div>
+          </a>
+
+          <a class="dnsc-option-link" href="https://www.facebook.com/officialdnsc/" target="_blank" rel="noopener noreferrer">
+            <div class="dnsc-option-icon">📘</div>
+            <div class="dnsc-option-text">
+              <strong>DNSC Facebook Page</strong>
+              <small>Open the official DNSC Facebook page.</small>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="video-popup" id="videoPopup">
+    <div class="video-popup-box">
+      <button class="video-close-btn" id="closeVideoPopup" aria-label="Close video popup">×</button>
+
+      <div class="video-popup-header">
+        <span>[ SAMPLE SHORT EDIT ]</span>
+        <h3>Michael’s Video Editing Sample</h3>
+      </div>
+
+      <video id="sampleVideo" controls preload="metadata" playsinline>
+        <source src="assets/sample-edit.mp4.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="certificate-popup" id="certificatePopup">
+    <div class="certificate-popup-box">
+      <button class="certificate-close-btn" id="closeCertificatePopup" aria-label="Close certificate popup">×</button>
+
+      <div class="certificate-popup-header">
+        <span>[ CERTIFICATE ]</span>
+        <h3>Cybersecurity Essentials</h3>
+        <p>Cisco Networking Academy · Davao Del Norte State College</p>
+      </div>
+
+      <div class="certificate-frame-wrap">
+        <img
+          src="assets/profile.jpg.jpg"
+          class="certificate-frame"
+          alt="Michael Navarro Certificate"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="water-bg">
+    <div class="smoke smoke1"></div>
+    <div class="smoke smoke2"></div>
+    <div class="smoke smoke3"></div>
+    <div class="smoke smoke4"></div>
+  </div>
+
+  <nav>
+    <div class="logo">MICHAEL_</div>
+
+    <div class="nav-links">
+      <a href="#about" data-i18n="navAbout">ABOUT</a>
+      <a href="#skills" data-i18n="navSkills">SKILLS</a>
+      <a href="#projects" data-i18n="navProjects">PROJECTS</a>
+      <a href="#contact" data-i18n="navContact">CONTACT</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="status" data-i18n="statusTop">OPEN TO WORK</div>
+
+      <div class="settings-wrap">
+        <button class="settings-btn" id="settingsBtn" type="button" aria-label="Open settings">⚙️</button>
+
+        <div class="settings-panel" id="settingsPanel">
+          <div class="settings-content">
+            <h4>⚙️ SETTINGS</h4>
+
+            <div class="settings-section">
+              <span class="settings-label">Theme</span>
+              <div class="settings-row">
+                <button class="theme-btn active-theme" data-theme="default" type="button">🌙 Dark</button>
+                <button class="theme-btn" data-theme="light" type="button">☀️ Light</button>
+                <button class="theme-btn" data-theme="colorblind" type="button">👁️ Eye</button>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <span class="settings-label">Language</span>
+              <div class="settings-row">
+                <button class="lang-btn active-lang" data-lang="en" type="button">EN</button>
+                <button class="lang-btn" data-lang="bisaya" type="button">BIS</button>
+                <button class="lang-btn" data-lang="tl" type="button">TAG</button>
+                <button class="lang-btn" data-lang="ja" type="button">JP</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <div class="dnsc-alien-wrap">
+          <button class="dnsc-alien-btn" id="dnscAlienButton" type="button">
+            <span class="dnsc-alien-icon"></span>
+
+            <span class="dnsc-alien-text">
+              <strong>DNSC ACCESS</strong>
+              <span>LONG PRESS 2–3 SEC</span>
+            </span>
+
+            <span class="hold-progress"></span>
+          </button>
+        </div>
+
+        <h1 data-i18n-html="heroTitle">Hi, I’m <span class="gradient-text">Michael.</span></h1>
+        <h2 data-i18n="heroSubtitle">Graphic Designer · Visual Creator · UI/UX Learner</h2>
+
+        <p data-i18n="heroText">
+          Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean,
+          modern, and eye-catching visual designs. My skills include photo editing,
+          video editing, and basic network configuration. I’m always willing to learn
+          new tools and improve my skills to create better and more professional outputs.
+        </p>
+
+        <div class="buttons">
+          <a class="btn primary" href="#projects" data-i18n="viewProjects">View Projects</a>
+          <a class="btn" href="#contact" data-i18n="getInTouch">Get In Touch</a>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <img
+          src="assets/profile.jpg"
+          alt="Michael G. Navarro"
+          class="profile-img"
+          loading="eager"
+          decoding="async"
+        />
+
+        <div class="id-card" id="digitalIdCard">
+          <small data-i18n="digitalId">[ DIGITAL ID ]</small>
+          <h3>Michael G. Navarro</h3>
+          <p data-i18n="idRole">Graphic Designer · DNSC Student</p>
+          <p style="color: var(--blue); margin-top: 8px;" data-i18n="idStatus">ACTIVE — CREATIVE PORTFOLIO</p>
+        </div>
+
+        <button class="certificate-icon-btn" id="openCertificatePopup" type="button">
+          <span class="certificate-icon">🏅</span>
+          <span class="certificate-text">
+            <strong data-i18n="certificate">Certificate</strong>
+            <small data-i18n="certSmall">Tap to view achievement</small>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-title">
+        <span data-i18n="aboutSpan">[ ABOUT ]</span>
+        <h2 data-i18n="aboutTitle">Designing visuals that feel modern and professional.</h2>
+      </div>
+
+      <div class="glass-box">
+        <p data-i18n="aboutP1">
+          I am a 4th year college student with a growing interest in graphic design,
+          visual editing, and user interface design. I enjoy creating designs that are
+          simple, clean, and attractive while making sure the message is easy to understand.
+        </p>
+
+        <br />
+
+        <p data-i18n="aboutP2">
+          My creative work focuses on photo editing, video editing, layout design,
+          and digital content creation. I also have experience using Figma, where I can
+          create interface layouts and interactive prototypes for web or app design ideas.
+          Aside from creative work, I also have basic knowledge in network configuration,
+          which helps me understand technical setups and system connectivity.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-title">
+        <span data-i18n="skillsSpan">[ SKILLS ]</span>
+        <h2 data-i18n="skillsTitle">Tools and skills I work with.</h2>
+      </div>
+
+      <div class="grid skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">🎨</div>
+          <h3 data-i18n="skill1Title">Graphic Design</h3>
+          <p data-i18n="skill1Text">Creating clean, modern, and eye-catching visual layouts for digital content.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🖼️</div>
+          <h3 data-i18n="skill2Title">Photo Editing</h3>
+          <p data-i18n="skill2Text">Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
+        </div>
+
+        <div class="skill-card video-sample-trigger" id="openVideoSample">
+          <div class="skill-icon">🎬</div>
+          <h3 data-i18n="skill3Title">Video Editing</h3>
+          <p data-i18n="skill3Text">Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
+          <button class="sample-edit-btn" type="button" data-i18n="sampleBtn">View Sample Edit</button>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">💎</div>
+          <h3 data-i18n="skill4Title">Figma Prototype</h3>
+          <p data-i18n="skill4Text">Designing UI layouts and creating clickable prototypes for web and app concepts.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🌐</div>
+          <h3 data-i18n="skill5Title">Basic Network Configuration</h3>
+          <p data-i18n="skill5Text">Setting up basic network connections, configurations, and connectivity settings.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">✨</div>
+          <h3 data-i18n="skill6Title">Creative Direction</h3>
+          <p data-i18n="skill6Text">Choosing colors, styles, spacing, and visual direction for a more polished output.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">📱</div>
+          <h3 data-i18n="skill7Title">Social Media Design</h3>
+          <p data-i18n="skill7Text">Creating posters, banners, thumbnails, and digital content for online platforms.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">⚡</div>
+          <h3 data-i18n="skill8Title">Fast Learner</h3>
+          <p data-i18n="skill8Text">Willing to explore new design tools, trends, and techniques to improve my work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-title">
+        <span data-i18n="projectsSpan">[ PROJECTS ]</span>
+        <h2 data-i18n="projectsTitle">Selected creative work.</h2>
+      </div>
+
+      <div class="grid projects-grid">
+        <div class="project-card">
+          <div class="project-type" data-i18n="proj1Type">UI/UX DESIGN · FIGMA PROTOTYPE</div>
+          <h3 data-i18n="proj1Title">Interactive Figma Prototype</h3>
+          <p data-i18n="proj1Text">
+            A clickable prototype created in Figma to present a clean interface flow,
+            screen layout, and user interaction concept.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Figma</span>
+            <span class="chip">UI Design</span>
+            <span class="chip">Prototype</span>
+            <span class="chip">Wireframe</span>
+          </div>
+
+          <a
+            class="mini-link"
+            href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=zMthvpgWqKfyunAp-1&starting-point-node-id=100%3A16"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="proj1Link"
+          >
+            [ VIEW PROTOTYPE ]
+          </a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-type" data-i18n="proj2Type">GRAPHIC DESIGN · DIGITAL CONTENT</div>
+          <h3 data-i18n="proj2Title">Social Media Poster Designs</h3>
+          <p data-i18n="proj2Text">
+            A collection of poster and layout designs focused on strong visuals,
+            readable text, balanced spacing, and modern color combinations.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Poster Design</span>
+            <span class="chip">Layout</span>
+            <span class="chip">Branding</span>
+          </div>
+
+          <a class="mini-link" href="#contact" data-i18n="requestSample">[ REQUEST SAMPLE ]</a>
+        </div>
+
+        <div class="project-card video-sample-trigger" id="openVideoSampleProject">
+          <div class="project-type" data-i18n="proj3Type">VIDEO EDITING · CREATIVE MEDIA</div>
+          <h3 data-i18n="proj3Title">Short Video Edits</h3>
+          <p data-i18n="proj3Text">
+            Edited video content with smooth pacing, transitions, visual timing,
+            and improved flow for more engaging presentation.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Video Editing</span>
+            <span class="chip">Transitions</span>
+            <span class="chip">Visual Flow</span>
+          </div>
+
+          <a class="mini-link" href="javascript:void(0)" data-i18n="viewSample">[ VIEW SAMPLE EDIT ]</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-type" data-i18n="proj4Type">TECHNICAL SKILL · NETWORK SETUP</div>
+          <h3 data-i18n="proj4Title">Basic Network Configuration</h3>
+          <p data-i18n="proj4Text">
+            Practical experience in configuring basic network settings and connectivity
+            setups, with attention to proper access and stable connection.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Networking</span>
+            <span class="chip">Configuration</span>
+            <span class="chip">Technical Setup</span>
+          </div>
+
+          <a class="mini-link" href="#skills" data-i18n="viewSkills">[ VIEW SKILLS ]</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-title">
+        <span data-i18n="contactSpan">[ CONTACT ]</span>
+        <h2 data-i18n="contactTitle">Let’s create something clean and creative.</h2>
+      </div>
+
+      <div class="glass-box contact-card">
+        <div class="contact-info">
+          <p data-i18n="contactText">
+            I am open to creative projects, school-related design work, portfolio
+            collaborations, and opportunities where I can improve my skills in design,
+            editing, and UI/UX prototyping.
+          </p>
+
+          <div class="icon-links">
+            <a
+              class="icon-link"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=navarro.michael@dnsc.edu.ph"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Gmail
+            </a>
+
+            <a class="icon-link" href="tel:+639158480061">Call</a>
+
+            <a
+              class="icon-link"
+              href="https://www.facebook.com/share/17sqYuH8bE/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Facebook
+            </a>
+
+            <a
+              class="icon-link"
+              href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=b9U4PNwgAzjz0mZn-1&starting-point-node-id=100%3A16"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Figma
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p><strong>Email:</strong> navarro.michael@dnsc.edu.ph</p>
+          <p><strong data-i18n="phoneLabel">Phone:</strong> 09158480061</p>
+          <p><strong data-i18n="facebookLabel">Facebook:</strong> Michael G. Navarro</p>
+          <p><strong data-i18n="locationLabel">Location:</strong> Davao del Norte, Philippines</p>
+          <p><strong data-i18n="statusLabel">Status:</strong> <span data-i18n="statusValue">Available for creative work</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-i18n="footer">
+    © 2026 Michael G. Navarro · Graphic Designer · Portfolio Online
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        navAbout: "ABOUT",
+        navSkills: "SKILLS",
+        navProjects: "PROJECTS",
+        navContact: "CONTACT",
+        statusTop: "OPEN TO WORK",
+        heroTitle: "Hi, I’m <span class='gradient-text'>Michael.</span>",
+        heroSubtitle: "Graphic Designer · Visual Creator · UI/UX Learner",
+        heroText: "Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean, modern, and eye-catching visual designs. My skills include photo editing, video editing, and basic network configuration. I’m always willing to learn new tools and improve my skills to create better and more professional outputs.",
+        viewProjects: "View Projects",
+        getInTouch: "Get In Touch",
+        digitalId: "[ DIGITAL ID ]",
+        idRole: "Graphic Designer · DNSC Student",
+        idStatus: "ACTIVE — CREATIVE PORTFOLIO",
+        certificate: "Certificate",
+        certSmall: "Tap to view achievement",
+        aboutSpan: "[ ABOUT ]",
+        aboutTitle: "Designing visuals that feel modern and professional.",
+        aboutP1: "I am a 4th year college student with a growing interest in graphic design, visual editing, and user interface design. I enjoy creating designs that are simple, clean, and attractive while making sure the message is easy to understand.",
+        aboutP2: "My creative work focuses on photo editing, video editing, layout design, and digital content creation. I also have experience using Figma, where I can create interface layouts and interactive prototypes for web or app design ideas. Aside from creative work, I also have basic knowledge in network configuration, which helps me understand technical setups and system connectivity.",
+        skillsSpan: "[ SKILLS ]",
+        skillsTitle: "Tools and skills I work with.",
+        skill1Title: "Graphic Design",
+        skill1Text: "Creating clean, modern, and eye-catching visual layouts for digital content.",
+        skill2Title: "Photo Editing",
+        skill2Text: "Enhancing images, improving colors, retouching, and preparing visuals for posting.",
+        skill3Title: "Video Editing",
+        skill3Text: "Editing short videos, adding transitions, arranging clips, and improving visual flow.",
+        sampleBtn: "View Sample Edit",
+        skill4Title: "Figma Prototype",
+        skill4Text: "Designing UI layouts and creating clickable prototypes for web and app concepts.",
+        skill5Title: "Basic Network Configuration",
+        skill5Text: "Setting up basic network connections, configurations, and connectivity settings.",
+        skill6Title: "Creative Direction",
+        skill6Text: "Choosing colors, styles, spacing, and visual direction for a more polished output.",
+        skill7Title: "Social Media Design",
+        skill7Text: "Creating posters, banners, thumbnails, and digital content for online platforms.",
+        skill8Title: "Fast Learner",
+        skill8Text: "Willing to explore new design tools, trends, and techniques to improve my work.",
+        projectsSpan: "[ PROJECTS ]",
+        projectsTitle: "Selected creative work.",
+        proj1Type: "UI/UX DESIGN · FIGMA PROTOTYPE",
+        proj1Title: "Interactive Figma Prototype",
+        proj1Text: "A clickable prototype created in Figma to present a clean interface flow, screen layout, and user interaction concept.",
+        proj1Link: "[ VIEW PROTOTYPE ]",
+        proj2Type: "GRAPHIC DESIGN · DIGITAL CONTENT",
+        proj2Title: "Social Media Poster Designs",
+        proj2Text: "A collection of poster and layout designs focused on strong visuals, readable text, balanced spacing, and modern color combinations.",
+        requestSample: "[ REQUEST SAMPLE ]",
+        proj3Type: "VIDEO EDITING · CREATIVE MEDIA",
+        proj3Title: "Short Video Edits",
+        proj3Text: "Edited video content with smooth pacing, transitions, visual timing, and improved flow for more engaging presentation.",
+        viewSample: "[ VIEW SAMPLE EDIT ]",
+        proj4Type: "TECHNICAL SKILL · NETWORK SETUP",
+        proj4Title: "Basic Network Configuration",
+        proj4Text: "Practical experience in configuring basic network settings and connectivity setups, with attention to proper access and stable connection.",
+        viewSkills: "[ VIEW SKILLS ]",
+        contactSpan: "[ CONTACT ]",
+        contactTitle: "Let’s create something clean and creative.",
+        contactText: "I am open to creative projects, school-related design work, portfolio collaborations, and opportunities where I can improve my skills in design, editing, and UI/UX prototyping.",
+        phoneLabel: "Phone:",
+        facebookLabel: "Facebook:",
+        locationLabel: "Location:",
+        statusLabel: "Status:",
+        statusValue: "Available for creative work",
+        footer: "© 2026 Michael G. Navarro · Graphic Designer · Portfolio Online"
+      },
+
+      bisaya: {
+        navAbout: "MAHITUNGOD",
+        navSkills: "KASANAYAN",
+        navProjects: "PROYEKTO",
+        navContact: "KONTAK",
+        statusTop: "OPEN SA TRABAHO",
+        heroTitle: "Kumusta, ako si <span class='gradient-text'>Michael.</span>",
+        heroSubtitle: "Graphic Designer · Visual Creator · UI/UX Learner",
+        heroText: "Kumusta, ako si Michael G. Navarro, usa ka Graphic Designer nga ganahan mohimo ug limpyo, moderno, ug nindot nga visual designs. Kabalo ko sa photo editing, video editing, ug basic network configuration. Andam ko kanunay makat-on ug bag-ong tools aron mas mo-improve akong outputs.",
+        viewProjects: "Tan-awa ang Proyekto",
+        getInTouch: "Kontaka Ko",
+        digitalId: "[ DIGITAL ID ]",
+        idRole: "Graphic Designer · DNSC Student",
+        idStatus: "ACTIVE — CREATIVE PORTFOLIO",
+        certificate: "Certificate",
+        certSmall: "Tap para makita ang achievement",
+        aboutSpan: "[ MAHITUNGOD ]",
+        aboutTitle: "Naghimo ug visual designs nga moderno ug professional tan-awon.",
+        aboutP1: "Ako usa ka 4th year college student nga interesado sa graphic design, visual editing, ug user interface design. Ganahan ko mohimo ug design nga simple, limpyo, ug dali masabtan.",
+        aboutP2: "Ang akong creative work naka-focus sa photo editing, video editing, layout design, ug digital content creation. Naa pud koy experience sa Figma para makahimo ug UI layouts ug clickable prototypes. Naa pud koy basic knowledge sa network configuration.",
+        skillsSpan: "[ KASANAYAN ]",
+        skillsTitle: "Mga tools ug skills nga akong ginagamit.",
+        skill1Title: "Graphic Design",
+        skill1Text: "Paghimo ug limpyo, moderno, ug eye-catching nga visual layouts para sa digital content.",
+        skill2Title: "Photo Editing",
+        skill2Text: "Pag-enhance sa images, pag-ayo sa colors, retouching, ug pagprepare sa visuals para posting.",
+        skill3Title: "Video Editing",
+        skill3Text: "Pag-edit sa short videos, pagbutang transitions, pag-arrange sa clips, ug pagpa-nindot sa visual flow.",
+        sampleBtn: "Tan-awa ang Sample Edit",
+        skill4Title: "Figma Prototype",
+        skill4Text: "Paghimo ug UI layouts ug clickable prototypes para sa web ug app concepts.",
+        skill5Title: "Basic Network Configuration",
+        skill5Text: "Pag-set up sa basic network connections, configurations, ug connectivity settings.",
+        skill6Title: "Creative Direction",
+        skill6Text: "Pagpili sa colors, styles, spacing, ug visual direction para mas polished ang output.",
+        skill7Title: "Social Media Design",
+        skill7Text: "Paghimo ug posters, banners, thumbnails, ug digital content para online platforms.",
+        skill8Title: "Fast Learner",
+        skill8Text: "Andam makat-on ug bag-ong design tools, trends, ug techniques para mo-improve.",
+        projectsSpan: "[ PROYEKTO ]",
+        projectsTitle: "Pipila sa akong creative works.",
+        proj1Type: "UI/UX DESIGN · FIGMA PROTOTYPE",
+        proj1Title: "Interactive Figma Prototype",
+        proj1Text: "Usa ka clickable prototype nga gihimo sa Figma aron ipakita ang limpyo nga interface flow, screen layout, ug user interaction concept.",
+        proj1Link: "[ TAN-AWA ANG PROTOTYPE ]",
+        proj2Type: "GRAPHIC DESIGN · DIGITAL CONTENT",
+        proj2Title: "Social Media Poster Designs",
+        proj2Text: "Mga poster ug layout designs nga naka-focus sa nindot nga visuals, klaro nga text, sakto nga spacing, ug modern color combinations.",
+        requestSample: "[ PANGAYO SAMPLE ]",
+        proj3Type: "VIDEO EDITING · CREATIVE MEDIA",
+        proj3Title: "Short Video Edits",
+        proj3Text: "Edited video content nga naay smooth pacing, transitions, visual timing, ug mas maayo nga flow.",
+        viewSample: "[ TAN-AWA ANG SAMPLE EDIT ]",
+        proj4Type: "TECHNICAL SKILL · NETWORK SETUP",
+        proj4Title: "Basic Network Configuration",
+        proj4Text: "Practical experience sa pag-configure sa basic network settings ug connectivity setups.",
+        viewSkills: "[ TAN-AWA ANG SKILLS ]",
+        contactSpan: "[ KONTAK ]",
+        contactTitle: "Maghimo ta ug limpyo ug creative nga output.",
+        contactText: "Open ko sa creative projects, school-related design work, portfolio collaborations, ug opportunities nga makatabang mo-improve akong skills sa design, editing, ug UI/UX prototyping.",
+        phoneLabel: "Telepono:",
+        facebookLabel: "Facebook:",
+        locationLabel: "Lokasyon:",
+        statusLabel: "Status:",
+        statusValue: "Available para creative work",
+        footer: "© 2026 Michael G. Navarro · Graphic Designer · Portfolio Online"
+      },
+
+      tl: {
+        navAbout: "TUNGKOL",
+        navSkills: "KASANAYAN",
+        navProjects: "PROYEKTO",
+        navContact: "KONTAK",
+        statusTop: "OPEN SA TRABAHO",
+        heroTitle: "Hi, ako si <span class='gradient-text'>Michael.</span>",
+        heroSubtitle: "Graphic Designer · Visual Creator · UI/UX Learner",
+        heroText: "Hi, ako si Michael G. Navarro, isang Graphic Designer na mahilig gumawa ng malinis, moderno, at kaakit-akit na visual designs. Kabilang sa aking skills ang photo editing, video editing, at basic network configuration. Lagi akong handang matuto ng bagong tools para mas mapaganda ang aking outputs.",
+        viewProjects: "Tingnan ang Projects",
+        getInTouch: "Makipag-ugnayan",
+        digitalId: "[ DIGITAL ID ]",
+        idRole: "Graphic Designer · DNSC Student",
+        idStatus: "ACTIVE — CREATIVE PORTFOLIO",
+        certificate: "Sertipiko",
+        certSmall: "I-tap para makita ang achievement",
+        aboutSpan: "[ TUNGKOL ]",
+        aboutTitle: "Gumagawa ng visuals na moderno at professional tingnan.",
+        aboutP1: "Ako ay isang 4th year college student na may interes sa graphic design, visual editing, at user interface design. Gusto kong gumawa ng designs na simple, malinis, at madaling maintindihan.",
+        aboutP2: "Nakatuon ang aking creative work sa photo editing, video editing, layout design, at digital content creation. May karanasan din ako sa Figma para gumawa ng UI layouts at clickable prototypes. May basic knowledge din ako sa network configuration.",
+        skillsSpan: "[ KASANAYAN ]",
+        skillsTitle: "Mga tools at skills na ginagamit ko.",
+        skill1Title: "Graphic Design",
+        skill1Text: "Paggawa ng malinis, moderno, at kaakit-akit na visual layouts para sa digital content.",
+        skill2Title: "Photo Editing",
+        skill2Text: "Pag-enhance ng images, pag-ayos ng colors, retouching, at paghahanda ng visuals para sa posting.",
+        skill3Title: "Video Editing",
+        skill3Text: "Pag-edit ng short videos, paglalagay ng transitions, pag-aayos ng clips, at pagpapaganda ng visual flow.",
+        sampleBtn: "Tingnan ang Sample Edit",
+        skill4Title: "Figma Prototype",
+        skill4Text: "Pag-design ng UI layouts at paggawa ng clickable prototypes para sa web at app concepts.",
+        skill5Title: "Basic Network Configuration",
+        skill5Text: "Pag-set up ng basic network connections, configurations, at connectivity settings.",
+        skill6Title: "Creative Direction",
+        skill6Text: "Pagpili ng colors, styles, spacing, at visual direction para mas polished ang output.",
+        skill7Title: "Social Media Design",
+        skill7Text: "Paggawa ng posters, banners, thumbnails, at digital content para sa online platforms.",
+        skill8Title: "Fast Learner",
+        skill8Text: "Handang matuto ng bagong design tools, trends, at techniques para mas gumaling.",
+        projectsSpan: "[ PROYEKTO ]",
+        projectsTitle: "Mga piling creative works.",
+        proj1Type: "UI/UX DESIGN · FIGMA PROTOTYPE",
+        proj1Title: "Interactive Figma Prototype",
+        proj1Text: "Isang clickable prototype na ginawa sa Figma upang ipakita ang malinaw na interface flow, screen layout, at user interaction concept.",
+        proj1Link: "[ TINGNAN ANG PROTOTYPE ]",
+        proj2Type: "GRAPHIC DESIGN · DIGITAL CONTENT",
+        proj2Title: "Social Media Poster Designs",
+        proj2Text: "Koleksyon ng poster at layout designs na nakatuon sa magandang visuals, malinaw na text, balanseng spacing, at modern color combinations.",
+        requestSample: "[ HUMINGI NG SAMPLE ]",
+        proj3Type: "VIDEO EDITING · CREATIVE MEDIA",
+        proj3Title: "Short Video Edits",
+        proj3Text: "Edited video content na may smooth pacing, transitions, visual timing, at mas magandang flow.",
+        viewSample: "[ TINGNAN ANG SAMPLE EDIT ]",
+        proj4Type: "TECHNICAL SKILL · NETWORK SETUP",
+        proj4Title: "Basic Network Configuration",
+        proj4Text: "Practical experience sa pag-configure ng basic network settings at connectivity setups.",
+        viewSkills: "[ TINGNAN ANG SKILLS ]",
+        contactSpan: "[ KONTAK ]",
+        contactTitle: "Gumawa tayo ng malinis at creative na output.",
+        contactText: "Open ako sa creative projects, school-related design work, portfolio collaborations, at opportunities kung saan mas mapapabuti ko ang aking skills sa design, editing, at UI/UX prototyping.",
+        phoneLabel: "Telepono:",
+        facebookLabel: "Facebook:",
+        locationLabel: "Lokasyon:",
+        statusLabel: "Status:",
+        statusValue: "Available para sa creative work",
+        footer: "© 2026 Michael G. Navarro · Graphic Designer · Portfolio Online"
+      },
+
+      ja: {
+        navAbout: "紹介",
+        navSkills: "スキル",
+        navProjects: "作品",
+        navContact: "連絡先",
+        statusTop: "仕事受付中",
+        heroTitle: "こんにちは、<span class='gradient-text'>Michael</span>です。",
+        heroSubtitle: "グラフィックデザイナー · ビジュアルクリエイター · UI/UX 学習者",
+        heroText: "こんにちは、Michael G. Navarroです。私は、清潔で現代的、そして目を引くビジュアルデザインを作ることが好きなグラフィックデザイナーです。写真編集、動画編集、基本的なネットワーク設定のスキルがあります。より良い成果物を作るために、新しいツールを学び続けています。",
+        viewProjects: "作品を見る",
+        getInTouch: "連絡する",
+        digitalId: "[ デジタルID ]",
+        idRole: "グラフィックデザイナー · DNSC 学生",
+        idStatus: "ACTIVE — クリエイティブポートフォリオ",
+        certificate: "証明書",
+        certSmall: "タップして実績を見る",
+        aboutSpan: "[ 紹介 ]",
+        aboutTitle: "現代的でプロフェッショナルなビジュアルを制作します。",
+        aboutP1: "私はグラフィックデザイン、ビジュアル編集、ユーザーインターフェースデザインに興味を持つ大学4年生です。シンプルで見やすく、分かりやすいデザインを作ることが好きです。",
+        aboutP2: "私のクリエイティブワークは、写真編集、動画編集、レイアウトデザイン、デジタルコンテンツ制作に焦点を当てています。Figmaを使ったUIレイアウトやクリック可能なプロトタイプ制作の経験もあります。また、基本的なネットワーク設定の知識もあります。",
+        skillsSpan: "[ スキル ]",
+        skillsTitle: "使用しているツールとスキル。",
+        skill1Title: "グラフィックデザイン",
+        skill1Text: "デジタルコンテンツ向けに、清潔で現代的、目を引くビジュアルレイアウトを制作します。",
+        skill2Title: "写真編集",
+        skill2Text: "画像の強化、色調整、レタッチ、投稿用ビジュアルの準備を行います。",
+        skill3Title: "動画編集",
+        skill3Text: "短い動画の編集、トランジション追加、クリップ整理、自然な流れの調整を行います。",
+        sampleBtn: "サンプルを見る",
+        skill4Title: "Figmaプロトタイプ",
+        skill4Text: "Webやアプリのコンセプト向けに、UIレイアウトとクリック可能なプロトタイプを作成します。",
+        skill5Title: "基本的なネットワーク設定",
+        skill5Text: "基本的なネットワーク接続、設定、接続環境の調整を行います。",
+        skill6Title: "クリエイティブ方向性",
+        skill6Text: "より洗練された出力のために、色、スタイル、余白、ビジュアル方向性を選びます。",
+        skill7Title: "SNSデザイン",
+        skill7Text: "オンラインプラットフォーム向けのポスター、バナー、サムネイル、デジタルコンテンツを制作します。",
+        skill8Title: "学習意欲",
+        skill8Text: "新しいデザインツール、トレンド、技術を学び、スキルを向上させます。",
+        projectsSpan: "[ 作品 ]",
+        projectsTitle: "選ばれたクリエイティブ作品。",
+        proj1Type: "UI/UXデザイン · FIGMAプロトタイプ",
+        proj1Title: "インタラクティブFigmaプロトタイプ",
+        proj1Text: "明確なインターフェースフロー、画面レイアウト、ユーザー操作のコンセプトを示すクリック可能なFigmaプロトタイプです。",
+        proj1Link: "[ プロトタイプを見る ]",
+        proj2Type: "グラフィックデザイン · デジタルコンテンツ",
+        proj2Title: "SNSポスターデザイン",
+        proj2Text: "強いビジュアル、読みやすい文字、バランスの良い余白、現代的な色の組み合わせに重点を置いたポスターとレイアウトデザインです。",
+        requestSample: "[ サンプルを依頼 ]",
+        proj3Type: "動画編集 · クリエイティブメディア",
+        proj3Title: "短編動画編集",
+        proj3Text: "スムーズなテンポ、トランジション、視覚的なタイミング、自然な流れを重視した動画編集です。",
+        viewSample: "[ サンプル編集を見る ]",
+        proj4Type: "技術スキル · ネットワーク設定",
+        proj4Title: "基本的なネットワーク設定",
+        proj4Text: "基本的なネットワーク設定と接続環境の構成に関する実践経験があります。",
+        viewSkills: "[ スキルを見る ]",
+        contactSpan: "[ 連絡先 ]",
+        contactTitle: "清潔でクリエイティブな作品を一緒に作りましょう。",
+        contactText: "クリエイティブプロジェクト、学校関連のデザイン作業、ポートフォリオコラボレーション、デザイン・編集・UI/UXプロトタイピングのスキル向上につながる機会を歓迎しています。",
+        phoneLabel: "電話:",
+        facebookLabel: "Facebook:",
+        locationLabel: "場所:",
+        statusLabel: "状態:",
+        statusValue: "クリエイティブ作業に対応可能",
+        footer: "© 2026 Michael G. Navarro · グラフィックデザイナー · オンラインポートフォリオ"
+      }
+    };
+
+    const popup = document.getElementById("desktopPopup");
+    const continuePopup = document.getElementById("continuePopup");
+    const backPopup = document.getElementById("backPopup");
+
+    function isMobileDevice() {
+      const smallScreen = window.innerWidth <= 900;
+      const touchDevice = navigator.maxTouchPoints > 0;
+      const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+      return smallScreen || touchDevice || coarsePointer;
+    }
+
+    function showMobilePopup() {
+      if (popup && isMobileDevice() && !sessionStorage.getItem("desktopNoticeClosed")) {
+        popup.classList.add("show");
+      }
+    }
+
+    window.addEventListener("load", () => {
+      setTimeout(showMobilePopup, 400);
+    });
+
+    continuePopup?.addEventListener("click", () => {
+      popup.classList.remove("show");
+      sessionStorage.setItem("desktopNoticeClosed", "yes");
+    });
+
+    backPopup?.addEventListener("click", () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "https://www.google.com";
+      }
+    });
+
+    const settingsBtn = document.getElementById("settingsBtn");
+    const settingsPanel = document.getElementById("settingsPanel");
+    const themeButtons = document.querySelectorAll(".theme-btn");
+    const langButtons = document.querySelectorAll(".lang-btn");
+
+    settingsBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      settingsPanel?.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!settingsPanel?.contains(e.target) && !settingsBtn?.contains(e.target)) {
+        settingsPanel?.classList.remove("show");
+      }
+    });
+
+    function applyTheme(theme) {
+      document.body.classList.remove("light-theme", "colorblind-theme");
+
+      if (theme === "light") {
+        document.body.classList.add("light-theme");
+      }
+
+      if (theme === "colorblind") {
+        document.body.classList.add("colorblind-theme");
+      }
+
+      themeButtons.forEach((btn) => {
+        btn.classList.toggle("active-theme", btn.dataset.theme === theme);
+      });
+
+      localStorage.setItem("portfolioTheme", theme);
+    }
+
+    const savedTheme = localStorage.getItem("portfolioTheme") || "default";
+    applyTheme(savedTheme);
+
+    themeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        applyTheme(button.dataset.theme);
+      });
+    });
+
+    function applyLanguage(lang) {
+      const dictionary = translations[lang] || translations.en;
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (dictionary[key]) {
+          element.textContent = dictionary[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+        const key = element.dataset.i18nHtml;
+        if (dictionary[key]) {
+          element.innerHTML = dictionary[key];
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+      });
+
+      const langCode = lang === "ja" ? "ja" : lang === "tl" ? "tl" : lang === "bisaya" ? "ceb" : "en";
+      document.documentElement.lang = langCode;
+      localStorage.setItem("portfolioLanguage", lang);
+    }
+
+    const savedLanguage = localStorage.getItem("portfolioLanguage") || "en";
+    applyLanguage(savedLanguage);
+
+    langButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        applyLanguage(button.dataset.lang);
+      });
+    });
+
+    const openVideoSample = document.getElementById("openVideoSample");
+    const openVideoSampleProject = document.getElementById("openVideoSampleProject");
+    const videoPopup = document.getElementById("videoPopup");
+    const closeVideoPopup = document.getElementById("closeVideoPopup");
+    const sampleVideo = document.getElementById("sampleVideo");
+
+    function openSampleVideo() {
+      if (!videoPopup) return;
+
+      videoPopup.classList.add("show");
+      document.body.style.overflow = "hidden";
+
+      if (sampleVideo) {
+        sampleVideo.load();
+      }
+    }
+
+    function closeSampleVideo() {
+      if (!videoPopup) return;
+
+      videoPopup.classList.remove("show");
+      document.body.style.overflow = "";
+
+      if (sampleVideo) {
+        sampleVideo.pause();
+        sampleVideo.currentTime = 0;
+      }
+    }
+
+    openVideoSample?.addEventListener("click", openSampleVideo);
+    openVideoSampleProject?.addEventListener("click", openSampleVideo);
+    closeVideoPopup?.addEventListener("click", closeSampleVideo);
+
+    videoPopup?.addEventListener("click", (e) => {
+      if (e.target === videoPopup) {
+        closeSampleVideo();
+      }
+    });
+
+    const digitalIdCard = document.getElementById("digitalIdCard");
+
+    function createWaterRipple(event) {
+      if (!digitalIdCard) return;
+
+      const rect = digitalIdCard.getBoundingClientRect();
+      const clientX = event.clientX ?? rect.left + rect.width / 2;
+      const clientY = event.clientY ?? rect.top + rect.height / 2;
+
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      digitalIdCard.style.setProperty("--tap-x", x + "px");
+      digitalIdCard.style.setProperty("--tap-y", y + "px");
+
+      digitalIdCard.classList.remove("water-tap");
+      void digitalIdCard.offsetWidth;
+      digitalIdCard.classList.add("water-tap");
+
+      digitalIdCard.querySelectorAll(".id-water-drop, .id-water-ripple").forEach((effect) => effect.remove());
+
+      const drop = document.createElement("span");
+      drop.className = "id-water-drop";
+      drop.style.setProperty("--drop-x", x + "px");
+      drop.style.setProperty("--drop-y", y + "px");
+      digitalIdCard.appendChild(drop);
+
+      for (let i = 1; i <= 4; i++) {
+        const ripple = document.createElement("span");
+        ripple.className = "id-water-ripple ripple-" + i;
+        ripple.style.setProperty("--drop-x", x + "px");
+        ripple.style.setProperty("--drop-y", y + "px");
+        digitalIdCard.appendChild(ripple);
+      }
+
+      setTimeout(() => {
+        drop.remove();
+        digitalIdCard.querySelectorAll(".id-water-ripple").forEach((ripple) => ripple.remove());
+        digitalIdCard.classList.remove("water-tap");
+      }, 2300);
+    }
+
+    digitalIdCard?.addEventListener("click", createWaterRipple);
+
+    const dnscAlienButton = document.getElementById("dnscAlienButton");
+    const dnscOptionsOverlay = document.getElementById("dnscOptionsOverlay");
+    const closeDnscOptions = document.getElementById("closeDnscOptions");
+
+    let holdTimer = null;
+
+    function openDnscOptions() {
+      dnscAlienButton?.classList.remove("holding");
+      dnscOptionsOverlay?.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDnscPopup() {
+      dnscOptionsOverlay?.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    function startHold(e) {
+      e.preventDefault();
+
+      if (!dnscAlienButton) return;
+
+      dnscAlienButton.classList.add("holding");
+
+      clearTimeout(holdTimer);
+      holdTimer = setTimeout(() => {
+        openDnscOptions();
+      }, 2300);
+    }
+
+    function cancelHold() {
+      clearTimeout(holdTimer);
+      dnscAlienButton?.classList.remove("holding");
+    }
+
+    dnscAlienButton?.addEventListener("pointerdown", startHold);
+    dnscAlienButton?.addEventListener("pointerup", cancelHold);
+    dnscAlienButton?.addEventListener("pointerleave", cancelHold);
+    dnscAlienButton?.addEventListener("pointercancel", cancelHold);
+
+    closeDnscOptions?.addEventListener("click", closeDnscPopup);
+
+    dnscOptionsOverlay?.addEventListener("click", (e) => {
+      if (e.target === dnscOptionsOverlay) {
+        closeDnscPopup();
+      }
+    });
+
+    const openCertificatePopup = document.getElementById("openCertificatePopup");
+    const certificatePopup = document.getElementById("certificatePopup");
+    const closeCertificatePopup = document.getElementById("closeCertificatePopup");
+
+    function openCertificate() {
+      if (!certificatePopup) return;
+
+      certificatePopup.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCertificate() {
+      if (!certificatePopup) return;
+
+      certificatePopup.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    openCertificatePopup?.addEventListener("click", openCertificate);
+    closeCertificatePopup?.addEventListener("click", closeCertificate);
+
+    certificatePopup?.addEventListener("click", (e) => {
+      if (e.target === certificatePopup) {
+        closeCertificate();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (settingsPanel?.classList.contains("show")) {
+          settingsPanel.classList.remove("show");
+        }
+
+        if (videoPopup?.classList.contains("show")) {
+          closeSampleVideo();
+        }
+
+        if (dnscOptionsOverlay?.classList.contains("show")) {
+          closeDnscPopup();
+        }
+
+        if (certificatePopup?.classList.contains("show")) {
+          closeCertificate();
+        }
+
+        if (popup?.classList.contains("show")) {
+          popup.classList.remove("show");
+          sessionStorage.setItem("desktopNoticeClosed", "yes");
+        }
+      }
+    });
+  </script>
+</body>
+</html>
