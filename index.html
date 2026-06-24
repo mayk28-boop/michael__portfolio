@@ -366,21 +366,15 @@
       background: linear-gradient(135deg, rgba(0, 217, 255, 0.35), rgba(0, 119, 255, 0.18));
     }
 
-    .profile-card,
-    .glass-box,
-    .skill-card,
-    .project-card {
+    .profile-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 34px;
       border: 1px solid var(--border);
       background: var(--card-bg);
       -webkit-backdrop-filter: blur(14px);
       backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
-    }
-
-    .profile-card {
-      position: relative;
-      padding: 22px;
-      border-radius: 34px;
       overflow: hidden;
       transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
       will-change: transform;
@@ -451,7 +445,12 @@
     }
 
     .glass-box {
+      border: 1px solid var(--border);
       border-radius: 30px;
+      background: var(--card-bg);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
       padding: 28px;
       line-height: 1.8;
       color: var(--text-soft);
@@ -466,34 +465,29 @@
       grid-template-columns: repeat(4, 1fr);
     }
 
-    .skill-card,
-    .project-card {
+    .skill-card {
       position: relative;
+      min-height: 170px;
+      padding: 22px;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
       overflow: visible;
       transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease, background 0.32s ease;
       will-change: transform;
       contain: layout paint;
     }
 
-    .skill-card {
-      min-height: 170px;
-      padding: 22px;
-      border-radius: 26px;
-    }
-
-    .skill-card:hover,
-    .project-card:hover {
-      transform: translate3d(0, -16px, 0) scale(1.025);
+    .skill-card:hover {
+      transform: translate3d(0, -16px, 0) scale(1.035);
       z-index: 5;
       background: rgba(255, 255, 255, 0.1);
       border-color: rgba(0, 217, 255, 0.55);
       box-shadow:
         0 22px 38px rgba(0, 0, 0, 0.4),
         0 0 36px rgba(0, 217, 255, 0.38);
-    }
-
-    .skill-card:hover {
-      transform: translate3d(0, -16px, 0) scale(1.035);
     }
 
     .skill-icon {
@@ -533,8 +527,27 @@
     }
 
     .project-card {
+      position: relative;
       padding: 26px;
       border-radius: 28px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      overflow: visible;
+      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease, background 0.32s ease;
+      will-change: transform;
+      contain: layout paint;
+    }
+
+    .project-card:hover {
+      transform: translate3d(0, -16px, 0) scale(1.025);
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow:
+        0 22px 38px rgba(0, 0, 0, 0.4),
+        0 0 36px rgba(0, 217, 255, 0.38);
     }
 
     .project-type {
@@ -1301,51 +1314,6 @@
   </footer>
 
   <script>
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const canSmoothScroll = window.matchMedia("(hover: hover) and (pointer: fine)").matches && !prefersReducedMotion;
-
-    if (canSmoothScroll) {
-      let currentScroll = window.scrollY;
-      let targetScroll = window.scrollY;
-      let isScrolling = false;
-
-      const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
-
-      function smoothPageScroll() {
-        currentScroll += (targetScroll - currentScroll) * 0.16;
-
-        if (Math.abs(targetScroll - currentScroll) < 0.5) {
-          currentScroll = targetScroll;
-          isScrolling = false;
-        }
-
-        window.scrollTo(0, currentScroll);
-
-        if (isScrolling) {
-          requestAnimationFrame(smoothPageScroll);
-        }
-      }
-
-      window.addEventListener("wheel", (e) => {
-        if (e.ctrlKey || e.metaKey || e.shiftKey) return;
-
-        e.preventDefault();
-        targetScroll = Math.max(0, Math.min(maxScroll(), targetScroll + e.deltaY));
-
-        if (!isScrolling) {
-          isScrolling = true;
-          requestAnimationFrame(smoothPageScroll);
-        }
-      }, { passive: false });
-
-      window.addEventListener("scroll", () => {
-        if (!isScrolling) {
-          currentScroll = window.scrollY;
-          targetScroll = window.scrollY;
-        }
-      }, { passive: true });
-    }
-
     const cursor = document.querySelector(".cursor-water");
     const canUseCursor = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
