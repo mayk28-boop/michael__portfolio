@@ -237,37 +237,361 @@
       align-items: center;
     }
 
-    .tag {
+    .dnsc-alien-wrap {
+      position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--blue);
       margin-bottom: 22px;
-      font-size: 13px;
     }
 
-    .pulse {
-      width: 9px;
-      height: 9px;
-      background: var(--blue);
+    .dnsc-alien-btn {
+      position: relative;
+      isolation: isolate;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 217, 255, 0.45);
+      background:
+        linear-gradient(135deg, rgba(0, 217, 255, 0.16), rgba(80, 255, 220, 0.06)),
+        rgba(3, 8, 22, 0.72);
+      color: var(--blue);
+      cursor: pointer;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      box-shadow:
+        inset 0 0 18px rgba(0, 217, 255, 0.12),
+        0 0 22px rgba(0, 217, 255, 0.18);
+      transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        border-color 0.28s ease;
+    }
+
+    .dnsc-alien-btn::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: -2;
+      border-radius: inherit;
+      background:
+        conic-gradient(
+          from 180deg,
+          transparent,
+          rgba(0, 217, 255, 0.8),
+          rgba(117, 255, 220, 0.55),
+          transparent,
+          rgba(90, 87, 255, 0.45),
+          transparent
+        );
+      opacity: 0;
+      animation: alienOrbit 2.8s linear infinite;
+      transition: opacity 0.25s ease;
+    }
+
+    .dnsc-alien-btn::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      z-index: -1;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 25% 35%, rgba(255, 255, 255, 0.16), transparent 20%),
+        rgba(3, 8, 22, 0.88);
+    }
+
+    .dnsc-alien-btn:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(0, 217, 255, 0.78);
+      box-shadow:
+        inset 0 0 24px rgba(0, 217, 255, 0.16),
+        0 0 30px rgba(0, 217, 255, 0.32),
+        0 0 40px rgba(120, 255, 220, 0.12);
+    }
+
+    .dnsc-alien-btn:hover::before {
+      opacity: 1;
+    }
+
+    .dnsc-alien-btn.holding {
+      transform: translateY(-4px) scale(0.985);
+      box-shadow:
+        inset 0 0 26px rgba(0, 217, 255, 0.2),
+        0 0 38px rgba(0, 217, 255, 0.42),
+        0 0 55px rgba(117, 255, 220, 0.2);
+    }
+
+    .dnsc-alien-icon {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      display: inline-grid;
+      place-items: center;
       border-radius: 50%;
-      box-shadow: 0 0 18px var(--blue);
-      animation: pulse 1.4s infinite;
+      background:
+        radial-gradient(circle at 35% 30%, #b8fff6, #00d9ff 48%, #0047ff 100%);
+      box-shadow:
+        0 0 16px rgba(0, 217, 255, 0.75),
+        inset -2px -3px 8px rgba(0, 0, 0, 0.25);
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
+    .dnsc-alien-icon::before,
+    .dnsc-alien-icon::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 7px;
+      top: 6px;
+      border-radius: 50%;
+      background: #02101c;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+    }
+
+    .dnsc-alien-icon::before {
+      left: 5px;
+      transform: rotate(18deg);
+    }
+
+    .dnsc-alien-icon::after {
+      right: 5px;
+      transform: rotate(-18deg);
+    }
+
+    .dnsc-alien-text {
+      display: grid;
+      text-align: left;
+      line-height: 1.1;
+    }
+
+    .dnsc-alien-text strong {
+      font-size: 13px;
+      letter-spacing: 1.6px;
+    }
+
+    .dnsc-alien-text span {
+      margin-top: 3px;
+      color: var(--text-soft);
+      font-size: 10px;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    .hold-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #00d9ff, #7dffdf, #ffffff);
+      box-shadow: 0 0 14px rgba(0, 217, 255, 0.85);
+      transition: width 0.1s linear;
+    }
+
+    .dnsc-alien-btn.holding .hold-progress {
+      width: 100%;
+      transition: width 2.3s linear;
+    }
+
+    @keyframes alienOrbit {
+      from {
+        transform: rotate(0deg);
       }
 
-      50% {
-        transform: scale(1.7);
-        opacity: 0.4;
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .dnsc-options-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 21000;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .dnsc-options-overlay.show {
+      display: grid;
+      animation: overlayFade 0.28s ease forwards;
+    }
+
+    .dnsc-options-box {
+      position: relative;
+      width: min(420px, 92vw);
+      padding: 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(0, 217, 255, 0.35);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
+        rgba(5, 18, 35, 0.72);
+      backdrop-filter: blur(9px) saturate(1.35);
+      -webkit-backdrop-filter: blur(9px) saturate(1.35);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 0 42px rgba(0, 217, 255, 0.32);
+      animation: glassPop 0.42s cubic-bezier(0.16, 0.84, 0.26, 1) forwards;
+      overflow: hidden;
+    }
+
+    .dnsc-options-box::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.25), transparent 18%),
+        radial-gradient(circle at 80% 75%, rgba(0, 217, 255, 0.24), transparent 24%),
+        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      opacity: 0.75;
+      pointer-events: none;
+      animation: glassLightMove 5s ease-in-out infinite alternate;
+    }
+
+    .dnsc-options-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .dnsc-options-header {
+      margin-bottom: 18px;
+    }
+
+    .dnsc-options-header span {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .dnsc-options-header h3 {
+      margin-top: 7px;
+      font-size: 25px;
+      color: var(--white);
+    }
+
+    .dnsc-options-header p {
+      margin-top: 8px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .dnsc-option-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .dnsc-option-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 217, 255, 0.24);
+      color: var(--white);
+      text-decoration: none;
+      background: rgba(0, 217, 255, 0.08);
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .dnsc-option-link:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 217, 255, 0.62);
+      background: rgba(0, 217, 255, 0.14);
+      box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.28),
+        0 0 24px rgba(0, 217, 255, 0.26);
+    }
+
+    .dnsc-option-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.26), transparent 24%),
+        rgba(0, 217, 255, 0.13);
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .dnsc-option-text strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .dnsc-option-text small {
+      color: var(--text-soft);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .dnsc-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      background: rgba(3, 8, 22, 0.72);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+      transition: 0.25s ease;
+    }
+
+    .dnsc-close-btn:hover {
+      color: var(--blue);
+      transform: rotate(90deg) scale(1.08);
+      box-shadow: 0 0 22px rgba(0, 217, 255, 0.4);
+    }
+
+    @keyframes overlayFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes glassPop {
+      from {
+        opacity: 0;
+        transform: translateY(34px) scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes glassLightMove {
+      from {
+        transform: translate(-4%, -3%) rotate(0deg);
+      }
+
+      to {
+        transform: translate(5%, 4%) rotate(8deg);
       }
     }
 
@@ -275,58 +599,6 @@
       font-size: clamp(42px, 7vw, 86px);
       line-height: 0.95;
       margin-bottom: 20px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #fff, var(--blue), #6eeaff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 30px rgba(0, 217, 255, 0.18);
-    }
-
-    .hero h2 {
-      color: var(--muted);
-      font-weight: 500;
-      margin-bottom: 22px;
-      font-size: clamp(18px, 3vw, 25px);
-    }
-
-    .hero p {
-      max-width: 720px;
-      color: var(--text-soft);
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    .buttons {
-      margin-top: 30px;
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 13px 20px;
-      border-radius: 16px;
-      text-decoration: none;
-      color: var(--white);
-      border: 1px solid var(--border);
-      background: rgba(0, 217, 255, 0.08);
-      transition: 0.28s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-10px) scale(1.04);
-      background: rgba(0, 217, 255, 0.14);
-      border-color: rgba(0, 217, 255, 0.55);
-      box-shadow:
-        0 16px 28px rgba(0, 0, 0, 0.35),
-        0 0 34px rgba(0, 217, 255, 0.45);
-    }
-
-    .btn.primary {
-      background: linear-gradient(135deg, rgba(0, 217, 255, 0.35), rgba(0, 119, 255, 0.18));
     }
 
     .profile-card,
@@ -376,11 +648,7 @@
       background:
         radial-gradient(circle at var(--tap-x, 50%) var(--tap-y, 50%), rgba(0, 217, 255, 0.12), transparent 36%),
         rgba(0, 0, 0, 0.18);
-      transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease,
-        border-color 0.28s ease,
-        background 0.28s ease;
+      transition: 0.28s ease;
     }
 
     .id-card:hover {
@@ -412,21 +680,19 @@
       animation: waterSurfaceFlash 0.95s ease-out;
     }
 
-    .id-card small {
+    .id-card small,
+    .id-card h3,
+    .id-card p {
       position: relative;
       z-index: 3;
+    }
+
+    .id-card small {
       color: var(--blue);
     }
 
     .id-card h3 {
-      position: relative;
-      z-index: 3;
       margin: 6px 0;
-    }
-
-    .id-card p {
-      position: relative;
-      z-index: 3;
     }
 
     .id-water-drop {
@@ -753,13 +1019,6 @@
       text-decoration: none;
       transition: 0.28s ease;
       overflow: visible;
-    }
-
-    .icon-link svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-      flex-shrink: 0;
     }
 
     .icon-link::after,
@@ -1201,6 +1460,41 @@
 
   </div>
 
+  <div class="dnsc-options-overlay" id="dnscOptionsOverlay">
+    <div class="dnsc-options-box">
+      <button class="dnsc-close-btn" id="closeDnscOptions" aria-label="Close DNSC options">×</button>
+
+```
+  <div class="dnsc-options-content">
+    <div class="dnsc-options-header">
+      <span>[ DNSC PORTAL ACCESS ]</span>
+      <h3>Choose Destination</h3>
+      <p>Select where you want to go. These links will open in a new tab.</p>
+    </div>
+
+    <div class="dnsc-option-links">
+      <a class="dnsc-option-link" href="https://dnsc.edu.ph/" target="_blank" rel="noopener noreferrer">
+        <div class="dnsc-option-icon">🌐</div>
+        <div class="dnsc-option-text">
+          <strong>DNSC Official Website</strong>
+          <small>Visit the official Davao del Norte State College website.</small>
+        </div>
+      </a>
+
+      <a class="dnsc-option-link" href="https://www.facebook.com/officialdnsc/" target="_blank" rel="noopener noreferrer">
+        <div class="dnsc-option-icon">📘</div>
+        <div class="dnsc-option-text">
+          <strong>DNSC Facebook Page</strong>
+          <small>Open the official DNSC Facebook page.</small>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
   <div class="video-popup" id="videoPopup">
     <div class="video-popup-box">
       <button class="video-close-btn" id="closeVideoPopup" aria-label="Close video popup">×</button>
@@ -1253,12 +1547,20 @@
   <main class="container">
     <section class="hero" id="home">
       <div class="hero-text">
-        <div class="tag">
-          <span class="pulse"></span>
-          BSIS · Davao del Norte State College
-        </div>
+        <div class="dnsc-alien-wrap">
+          <button class="dnsc-alien-btn" id="dnscAlienButton" type="button">
+            <span class="dnsc-alien-icon"></span>
 
 ```
+        <span class="dnsc-alien-text">
+          <strong>DNSC ACCESS</strong>
+          <span>LONG PRESS 2–3 SEC</span>
+        </span>
+
+        <span class="hold-progress"></span>
+      </button>
+    </div>
+
     <h1>Hi, I’m <span class="gradient-text">Michael.</span></h1>
     <h2>Graphic Designer · Visual Creator · UI/UX Learner</h2>
 
@@ -1636,7 +1938,6 @@
       if (!digitalIdCard) return;
 
       const rect = digitalIdCard.getBoundingClientRect();
-
       const clientX = event.clientX ?? event.touches?.[0]?.clientX ?? rect.left + rect.width / 2;
       const clientY = event.clientY ?? event.touches?.[0]?.clientY ?? rect.top + rect.height / 2;
 
@@ -1675,6 +1976,60 @@
     }
 
     digitalIdCard?.addEventListener("click", createWaterRipple);
+
+    const dnscAlienButton = document.getElementById("dnscAlienButton");
+    const dnscOptionsOverlay = document.getElementById("dnscOptionsOverlay");
+    const closeDnscOptions = document.getElementById("closeDnscOptions");
+
+    let holdTimer = null;
+
+    function openDnscOptions() {
+      dnscAlienButton?.classList.remove("holding");
+      dnscOptionsOverlay?.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDnscPopup() {
+      dnscOptionsOverlay?.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    function startHold(e) {
+      e.preventDefault();
+
+      if (!dnscAlienButton) return;
+
+      dnscAlienButton.classList.add("holding");
+
+      clearTimeout(holdTimer);
+      holdTimer = setTimeout(() => {
+        openDnscOptions();
+      }, 2300);
+    }
+
+    function cancelHold() {
+      clearTimeout(holdTimer);
+      dnscAlienButton?.classList.remove("holding");
+    }
+
+    dnscAlienButton?.addEventListener("pointerdown", startHold);
+    dnscAlienButton?.addEventListener("pointerup", cancelHold);
+    dnscAlienButton?.addEventListener("pointerleave", cancelHold);
+    dnscAlienButton?.addEventListener("pointercancel", cancelHold);
+
+    closeDnscOptions?.addEventListener("click", closeDnscPopup);
+
+    dnscOptionsOverlay?.addEventListener("click", (e) => {
+      if (e.target === dnscOptionsOverlay) {
+        closeDnscPopup();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && dnscOptionsOverlay?.classList.contains("show")) {
+        closeDnscPopup();
+      }
+    });
   </script>
 
 </body>
