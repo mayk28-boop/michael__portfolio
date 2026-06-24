@@ -236,6 +236,53 @@
       align-items: center;
     }
 
+    .gradient-text {
+      color: var(--blue);
+      text-shadow: 0 0 24px rgba(0, 217, 255, 0.75);
+    }
+
+    .hero-text h2 {
+      color: var(--text-soft);
+      font-size: clamp(20px, 3vw, 30px);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .hero-text p {
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin-bottom: 26px;
+      max-width: 680px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 13px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      color: var(--white);
+      background: rgba(0, 217, 255, 0.07);
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.28s ease;
+    }
+
+    .btn.primary {
+      background: rgba(0, 217, 255, 0.16);
+      color: var(--blue);
+    }
+
+    .btn:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow: 0 0 26px rgba(0, 217, 255, 0.32);
+    }
+
     .dnsc-alien-wrap {
       position: relative;
       display: inline-flex;
@@ -263,42 +310,7 @@
       box-shadow:
         inset 0 0 18px rgba(0, 217, 255, 0.12),
         0 0 22px rgba(0, 217, 255, 0.18);
-      transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease,
-        border-color 0.28s ease;
-    }
-
-    .dnsc-alien-btn::before {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      z-index: -2;
-      border-radius: inherit;
-      background:
-        conic-gradient(
-          from 180deg,
-          transparent,
-          rgba(0, 217, 255, 0.8),
-          rgba(117, 255, 220, 0.55),
-          transparent,
-          rgba(90, 87, 255, 0.45),
-          transparent
-        );
-      opacity: 0;
-      animation: alienOrbit 2.8s linear infinite;
-      transition: opacity 0.25s ease;
-    }
-
-    .dnsc-alien-btn::after {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      z-index: -1;
-      border-radius: inherit;
-      background:
-        radial-gradient(circle at 25% 35%, rgba(255, 255, 255, 0.16), transparent 20%),
-        rgba(3, 8, 22, 0.88);
+      transition: 0.28s ease;
     }
 
     .dnsc-alien-btn:hover {
@@ -306,20 +318,14 @@
       border-color: rgba(0, 217, 255, 0.78);
       box-shadow:
         inset 0 0 24px rgba(0, 217, 255, 0.16),
-        0 0 30px rgba(0, 217, 255, 0.32),
-        0 0 40px rgba(120, 255, 220, 0.12);
-    }
-
-    .dnsc-alien-btn:hover::before {
-      opacity: 1;
+        0 0 30px rgba(0, 217, 255, 0.32);
     }
 
     .dnsc-alien-btn.holding {
       transform: translateY(-4px) scale(0.985);
       box-shadow:
         inset 0 0 26px rgba(0, 217, 255, 0.2),
-        0 0 38px rgba(0, 217, 255, 0.42),
-        0 0 55px rgba(117, 255, 220, 0.2);
+        0 0 38px rgba(0, 217, 255, 0.42);
     }
 
     .dnsc-alien-icon {
@@ -345,7 +351,6 @@
       top: 6px;
       border-radius: 50%;
       background: #02101c;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
     }
 
     .dnsc-alien-icon::before {
@@ -392,259 +397,6 @@
     .dnsc-alien-btn.holding .hold-progress {
       width: 100%;
       transition: width 2.3s linear;
-    }
-
-    @keyframes alienOrbit {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .dnsc-options-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 21000;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.38);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
-
-    .dnsc-options-overlay.show {
-      display: grid;
-      animation: overlayFade 0.28s ease forwards;
-    }
-
-    .dnsc-options-box {
-      position: relative;
-      width: min(420px, 92vw);
-      padding: 22px;
-      border-radius: 30px;
-      border: 1px solid rgba(0, 217, 255, 0.35);
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
-        rgba(5, 18, 35, 0.72);
-      backdrop-filter: blur(9px) saturate(1.35);
-      -webkit-backdrop-filter: blur(9px) saturate(1.35);
-      box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.48),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18),
-        0 0 42px rgba(0, 217, 255, 0.32);
-      animation: glassPop 0.42s cubic-bezier(0.16, 0.84, 0.26, 1) forwards;
-      overflow: hidden;
-    }
-
-    .dnsc-options-box::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.25), transparent 18%),
-        radial-gradient(circle at 80% 75%, rgba(0, 217, 255, 0.24), transparent 24%),
-        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-      opacity: 0.75;
-      pointer-events: none;
-      animation: glassLightMove 5s ease-in-out infinite alternate;
-    }
-
-    .dnsc-options-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .dnsc-options-header {
-      margin-bottom: 18px;
-    }
-
-    .dnsc-options-header span {
-      color: var(--blue);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .dnsc-options-header h3 {
-      margin-top: 7px;
-      font-size: 25px;
-      color: var(--white);
-    }
-
-    .dnsc-options-header p {
-      margin-top: 8px;
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .dnsc-option-links {
-      display: grid;
-      gap: 12px;
-    }
-
-    .dnsc-option-link {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 15px;
-      border-radius: 20px;
-      border: 1px solid rgba(0, 217, 255, 0.24);
-      color: var(--white);
-      text-decoration: none;
-      background: rgba(0, 217, 255, 0.08);
-      transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
-    }
-
-    .dnsc-option-link:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 217, 255, 0.62);
-      background: rgba(0, 217, 255, 0.14);
-      box-shadow:
-        0 12px 24px rgba(0, 0, 0, 0.28),
-        0 0 24px rgba(0, 217, 255, 0.26);
-    }
-
-    .dnsc-option-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.26), transparent 24%),
-        rgba(0, 217, 255, 0.13);
-      border: 1px solid rgba(0, 217, 255, 0.28);
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .dnsc-option-text strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .dnsc-option-text small {
-      color: var(--text-soft);
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .dnsc-close-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      z-index: 3;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      background: rgba(3, 8, 22, 0.72);
-      color: var(--white);
-      cursor: pointer;
-      font-size: 24px;
-      line-height: 1;
-      transition: 0.25s ease;
-    }
-
-    .dnsc-close-btn:hover {
-      color: var(--blue);
-      transform: rotate(90deg) scale(1.08);
-      box-shadow: 0 0 22px rgba(0, 217, 255, 0.4);
-    }
-
-    @keyframes overlayFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes glassPop {
-      from {
-        opacity: 0;
-        transform: translateY(34px) scale(0.92);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes glassLightMove {
-      from {
-        transform: translate(-4%, -3%) rotate(0deg);
-      }
-
-      to {
-        transform: translate(5%, 4%) rotate(8deg);
-      }
-    }
-
-    h1 {
-      font-size: clamp(42px, 7vw, 86px);
-      line-height: 0.95;
-      margin-bottom: 20px;
-    }
-
-    .gradient-text {
-      color: var(--blue);
-      text-shadow: 0 0 24px rgba(0, 217, 255, 0.75);
-    }
-
-    .hero-text h2 {
-      color: var(--text-soft);
-      font-size: clamp(20px, 3vw, 30px);
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .hero-text p {
-      color: var(--text-soft);
-      line-height: 1.8;
-      margin-bottom: 26px;
-      max-width: 680px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 13px 18px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      color: var(--white);
-      background: rgba(0, 217, 255, 0.07);
-      text-decoration: none;
-      font-weight: 700;
-      transition: 0.28s ease;
-    }
-
-    .btn.primary {
-      background: rgba(0, 217, 255, 0.16);
-      color: var(--blue);
-    }
-
-    .btn:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0, 217, 255, 0.55);
-      box-shadow: 0 0 26px rgba(0, 217, 255, 0.32);
     }
 
     .profile-card,
@@ -697,173 +449,12 @@
       transition: 0.28s ease;
     }
 
-    .id-card:hover {
-      border-color: rgba(0, 217, 255, 0.45);
-      box-shadow:
-        inset 0 0 22px rgba(0, 217, 255, 0.08),
-        0 0 22px rgba(0, 217, 255, 0.18);
-    }
-
-    .id-card.water-tap {
-      animation: idCardWaterTap 0.45s ease;
-    }
-
-    .id-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      z-index: -1;
-      background:
-        radial-gradient(circle at var(--tap-x, 50%) var(--tap-y, 50%), rgba(255, 255, 255, 0.28), transparent 9%),
-        radial-gradient(circle at var(--tap-x, 50%) var(--tap-y, 50%), rgba(0, 217, 255, 0.18), transparent 18%),
-        linear-gradient(120deg, transparent, rgba(0, 217, 255, 0.08), transparent);
-      opacity: 0;
-      transform: scale(0.86);
-      pointer-events: none;
-    }
-
-    .id-card.water-tap::before {
-      animation: waterSurfaceFlash 0.95s ease-out;
-    }
-
-    .id-card small,
-    .id-card h3,
-    .id-card p {
-      position: relative;
-      z-index: 3;
-    }
-
     .id-card small {
       color: var(--blue);
     }
 
     .id-card h3 {
       margin: 6px 0;
-    }
-
-    .id-water-drop {
-      position: absolute;
-      left: var(--drop-x);
-      top: var(--drop-y);
-      z-index: 2;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%) scale(0);
-      background:
-        radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.98), rgba(0, 217, 255, 0.78) 38%, rgba(0, 119, 255, 0.18) 72%, transparent 74%);
-      box-shadow:
-        0 0 18px rgba(0, 217, 255, 0.75),
-        inset -3px -4px 8px rgba(0, 0, 0, 0.18);
-      animation: waterDropPop 0.7s ease-out forwards;
-    }
-
-    .id-water-ripple {
-      position: absolute;
-      left: var(--drop-x);
-      top: var(--drop-y);
-      z-index: 1;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%) scale(0);
-      border: 2px solid rgba(150, 240, 255, 0.78);
-      box-shadow:
-        0 0 18px rgba(0, 217, 255, 0.48),
-        inset 0 0 16px rgba(255, 255, 255, 0.18);
-      filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.42));
-      animation: waterRippleCircle 1.35s cubic-bezier(0.16, 0.84, 0.26, 1) forwards;
-    }
-
-    .id-water-ripple.ripple-2 {
-      width: 38px;
-      height: 38px;
-      border-color: rgba(0, 217, 255, 0.55);
-      animation-delay: 0.11s;
-      animation-duration: 1.55s;
-    }
-
-    .id-water-ripple.ripple-3 {
-      width: 48px;
-      height: 48px;
-      border-color: rgba(255, 255, 255, 0.38);
-      animation-delay: 0.22s;
-      animation-duration: 1.75s;
-    }
-
-    .id-water-ripple.ripple-4 {
-      width: 58px;
-      height: 58px;
-      border-color: rgba(0, 119, 255, 0.34);
-      animation-delay: 0.34s;
-      animation-duration: 1.95s;
-    }
-
-    @keyframes waterDropPop {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0) translateY(-12px);
-      }
-
-      35% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.05) translateY(0);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.45) translateY(2px);
-      }
-    }
-
-    @keyframes waterRippleCircle {
-      0% {
-        opacity: 0.95;
-        transform: translate(-50%, -50%) scale(0.1);
-        filter: blur(0px) drop-shadow(0 0 10px rgba(0, 217, 255, 0.65));
-      }
-
-      45% {
-        opacity: 0.72;
-      }
-
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(9.5);
-        filter: blur(1.8px) drop-shadow(0 0 3px rgba(0, 217, 255, 0));
-      }
-    }
-
-    @keyframes waterSurfaceFlash {
-      0% {
-        opacity: 0;
-        transform: scale(0.82) rotate(0deg);
-      }
-
-      35% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0;
-        transform: scale(1.18) rotate(10deg);
-      }
-    }
-
-    @keyframes idCardWaterTap {
-      0% {
-        transform: scale(1);
-      }
-
-      38% {
-        transform: scale(0.985);
-      }
-
-      100% {
-        transform: scale(1);
-      }
     }
 
     .certificate-icon-btn {
@@ -923,10 +514,11 @@
       font-size: 12px;
     }
 
-    .certificate-popup {
+    .certificate-popup,
+    .video-popup,
+    .dnsc-options-overlay {
       position: fixed;
       inset: 0;
-      z-index: 22000;
       display: none;
       place-items: center;
       padding: 20px;
@@ -935,9 +527,23 @@
       -webkit-backdrop-filter: blur(12px);
     }
 
-    .certificate-popup.show {
+    .certificate-popup {
+      z-index: 22000;
+    }
+
+    .video-popup {
+      z-index: 20000;
+    }
+
+    .dnsc-options-overlay {
+      z-index: 21000;
+    }
+
+    .certificate-popup.show,
+    .video-popup.show,
+    .dnsc-options-overlay.show {
       display: grid;
-      animation: certificateOverlayFade 0.28s ease forwards;
+      animation: overlayFade 0.28s ease forwards;
     }
 
     .certificate-popup-box {
@@ -951,7 +557,7 @@
       box-shadow:
         0 28px 60px rgba(0, 0, 0, 0.58),
         0 0 45px rgba(0, 217, 255, 0.38);
-      animation: certificatePopupRise 0.42s ease forwards;
+      animation: popupRise 0.42s ease forwards;
       overflow: hidden;
     }
 
@@ -1004,11 +610,9 @@
       letter-spacing: 1px;
     }
 
-    .certificate-view-link:hover {
-      text-shadow: 0 0 16px var(--blue);
-    }
-
-    .certificate-close-btn {
+    .certificate-close-btn,
+    .video-close-btn,
+    .dnsc-close-btn {
       position: absolute;
       top: 14px;
       right: 14px;
@@ -1022,38 +626,149 @@
       cursor: pointer;
       font-size: 28px;
       line-height: 1;
-      box-shadow:
-        0 0 22px rgba(0, 217, 255, 0.42),
-        0 10px 22px rgba(0, 0, 0, 0.45);
       transition: 0.25s ease;
     }
 
-    .certificate-close-btn:hover {
+    .certificate-close-btn:hover,
+    .video-close-btn:hover,
+    .dnsc-close-btn:hover {
       color: var(--blue);
       transform: rotate(90deg) scale(1.08);
       box-shadow: 0 0 28px rgba(0, 217, 255, 0.6);
     }
 
-    @keyframes certificateOverlayFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
+    .video-popup-box {
+      position: relative;
+      width: min(430px, 92vw);
+      padding: 18px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--nav-bg);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.55),
+        0 0 45px rgba(0, 217, 255, 0.4);
+      animation: popupRise 0.42s ease forwards;
     }
 
-    @keyframes certificatePopupRise {
-      from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.92);
-      }
+    .video-popup-header {
+      padding: 8px 6px 14px;
+    }
 
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    .video-popup-header span {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .video-popup-header h3 {
+      margin-top: 6px;
+      font-size: 22px;
+      color: var(--white);
+    }
+
+    .video-popup video {
+      width: 100%;
+      max-height: 72vh;
+      aspect-ratio: 9 / 16;
+      object-fit: contain;
+      display: block;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      background: #000;
+    }
+
+    .dnsc-options-box {
+      position: relative;
+      width: min(420px, 92vw);
+      padding: 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(0, 217, 255, 0.35);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
+        rgba(5, 18, 35, 0.72);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.48),
+        0 0 42px rgba(0, 217, 255, 0.32);
+      animation: popupRise 0.42s ease forwards;
+      overflow: hidden;
+    }
+
+    .dnsc-options-header {
+      margin-bottom: 18px;
+    }
+
+    .dnsc-options-header span {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .dnsc-options-header h3 {
+      margin-top: 7px;
+      font-size: 25px;
+      color: var(--white);
+    }
+
+    .dnsc-options-header p {
+      margin-top: 8px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .dnsc-option-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .dnsc-option-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 217, 255, 0.24);
+      color: var(--white);
+      text-decoration: none;
+      background: rgba(0, 217, 255, 0.08);
+      transition: 0.25s ease;
+    }
+
+    .dnsc-option-link:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 217, 255, 0.62);
+      background: rgba(0, 217, 255, 0.14);
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.26);
+    }
+
+    .dnsc-option-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: rgba(0, 217, 255, 0.13);
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .dnsc-option-text strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .dnsc-option-text small {
+      color: var(--text-soft);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: 0.95;
+      margin-bottom: 20px;
     }
 
     .section-title {
@@ -1096,7 +811,8 @@
       transition: 0.32s ease;
     }
 
-    .skill-card:hover {
+    .skill-card:hover,
+    .project-card:hover {
       transform: translateY(-16px) scale(1.035);
       z-index: 5;
       background: rgba(255, 255, 255, 0.1);
@@ -1107,7 +823,6 @@
     }
 
     .skill-icon {
-      position: relative;
       width: 54px;
       height: 54px;
       display: grid;
@@ -1117,14 +832,7 @@
       border: 1px solid rgba(0, 217, 255, 0.28);
       margin-bottom: 18px;
       font-size: 25px;
-      overflow: visible;
       transition: 0.3s ease;
-    }
-
-    .skill-card:hover .skill-icon {
-      transform: translateY(-10px) scale(1.14);
-      background: rgba(0, 217, 255, 0.2);
-      box-shadow: 0 14px 28px rgba(0, 217, 255, 0.28);
     }
 
     .skill-card h3 {
@@ -1155,12 +863,6 @@
       transition: 0.28s ease;
     }
 
-    .video-sample-trigger:hover .sample-edit-btn {
-      transform: translateY(-4px);
-      background: rgba(0, 217, 255, 0.16);
-      box-shadow: 0 0 22px rgba(0, 217, 255, 0.35);
-    }
-
     .projects-grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -1170,16 +872,6 @@
       border-radius: 28px;
       overflow: visible;
       transition: 0.32s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-16px) scale(1.025);
-      z-index: 5;
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(0, 217, 255, 0.55);
-      box-shadow:
-        0 22px 38px rgba(0, 0, 0, 0.4),
-        0 0 36px rgba(0, 217, 255, 0.38);
     }
 
     .project-type {
@@ -1243,7 +935,6 @@
     }
 
     .icon-link {
-      position: relative;
       display: inline-flex;
       align-items: center;
       gap: 9px;
@@ -1254,37 +945,6 @@
       background: rgba(0, 217, 255, 0.07);
       text-decoration: none;
       transition: 0.28s ease;
-      overflow: visible;
-    }
-
-    .icon-link::after,
-    .skill-icon::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -14px;
-      width: 72%;
-      height: 12px;
-      border-radius: 999px;
-      transform: translateX(-50%) scaleX(0.75);
-      background: linear-gradient(
-        90deg,
-        #ff004c,
-        #ff8c00,
-        #ffee00,
-        #00ff85,
-        #00d9ff,
-        #7a5cff,
-        #ff00d4,
-        #ff004c
-      );
-      background-size: 300% 100%;
-      filter: blur(10px);
-      opacity: 0;
-      transition: 0.28s ease;
-      animation: rainbowGlow 1.8s linear infinite;
-      pointer-events: none;
-      z-index: -1;
     }
 
     .icon-link:hover {
@@ -1295,156 +955,6 @@
       box-shadow:
         0 16px 28px rgba(0, 0, 0, 0.35),
         0 0 34px rgba(0, 217, 255, 0.42);
-    }
-
-    .icon-link:hover::after,
-    .skill-card:hover .skill-icon::after {
-      opacity: 1;
-      transform: translateX(-50%) scaleX(1.12);
-    }
-
-    @keyframes rainbowGlow {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      100% {
-        background-position: 300% 50%;
-      }
-    }
-
-    .video-popup {
-      position: fixed;
-      inset: 0;
-      z-index: 20000;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .video-popup.show {
-      display: grid;
-      animation: videoOverlayFade 0.28s ease forwards;
-    }
-
-    .video-popup-box {
-      position: relative;
-      width: min(430px, 92vw);
-      padding: 18px;
-      border-radius: 30px;
-      border: 1px solid var(--border);
-      background: var(--nav-bg);
-      box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.55),
-        0 0 45px rgba(0, 217, 255, 0.4);
-      animation: videoPopupRise 0.42s ease forwards;
-    }
-
-    .video-popup-box::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -18px;
-      width: 72%;
-      height: 18px;
-      border-radius: 999px;
-      transform: translateX(-50%);
-      background: linear-gradient(
-        90deg,
-        #ff004c,
-        #ff8c00,
-        #ffee00,
-        #00ff85,
-        #00d9ff,
-        #7a5cff,
-        #ff00d4,
-        #ff004c
-      );
-      background-size: 300% 100%;
-      filter: blur(16px);
-      opacity: 0.9;
-      animation: rainbowGlow 1.7s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .video-popup-header {
-      padding: 8px 6px 14px;
-    }
-
-    .video-popup-header span {
-      color: var(--blue);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .video-popup-header h3 {
-      margin-top: 6px;
-      font-size: 22px;
-      color: var(--white);
-    }
-
-    .video-popup video {
-      width: 100%;
-      max-height: 72vh;
-      aspect-ratio: 9 / 16;
-      object-fit: contain;
-      display: block;
-      border-radius: 22px;
-      border: 1px solid rgba(0, 217, 255, 0.28);
-      background: #000;
-    }
-
-    .video-close-btn {
-      position: absolute;
-      top: -14px;
-      right: -14px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: rgba(4, 12, 28, 0.95);
-      color: var(--white);
-      cursor: pointer;
-      font-size: 28px;
-      line-height: 1;
-      box-shadow:
-        0 0 22px rgba(0, 217, 255, 0.42),
-        0 10px 22px rgba(0, 0, 0, 0.45);
-      transition: 0.25s ease;
-    }
-
-    .video-close-btn:hover {
-      color: var(--blue);
-      transform: rotate(90deg) scale(1.08);
-      box-shadow:
-        0 0 28px rgba(0, 217, 255, 0.6),
-        0 0 28px rgba(255, 0, 212, 0.25);
-    }
-
-    @keyframes videoOverlayFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes videoPopupRise {
-      from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.92);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
     }
 
     .theme-panel {
@@ -1488,9 +998,7 @@
     .theme-btn:hover {
       transform: translateX(-6px) scale(1.08);
       border-color: var(--blue);
-      box-shadow:
-        0 0 18px rgba(0, 217, 255, 0.45),
-        0 0 28px rgba(255, 0, 212, 0.2);
+      box-shadow: 0 0 18px rgba(0, 217, 255, 0.45);
     }
 
     .theme-btn.active-theme {
@@ -1525,7 +1033,7 @@
         0 24px 55px rgba(0, 0, 0, 0.45),
         0 0 38px rgba(0, 217, 255, 0.38);
       text-align: center;
-      animation: popupFloat 0.45s ease;
+      animation: popupRise 0.45s ease;
     }
 
     .popup-box h3 {
@@ -1559,25 +1067,8 @@
       min-width: 140px;
     }
 
-    .popup-box button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 22px rgba(0, 217, 255, 0.4);
-    }
-
     .back-btn {
       background: rgba(255, 255, 255, 0.08) !important;
-    }
-
-    @keyframes popupFloat {
-      from {
-        opacity: 0;
-        transform: translateY(25px) scale(0.95);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
     }
 
     footer {
@@ -1585,6 +1076,28 @@
       color: var(--muted);
       text-align: center;
       border-top: 1px solid rgba(0, 217, 255, 0.14);
+    }
+
+    @keyframes overlayFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes popupRise {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     @media (max-width: 900px) {
@@ -1842,7 +1355,7 @@
 
       <div class="profile-card">
         <img
-          src="assets/profile.jpg"
+          src="assets/profile.jpg.jpg"
           alt="Michael G. Navarro"
           class="profile-img"
         />
@@ -2195,57 +1708,6 @@
       }
     });
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && videoPopup?.classList.contains("show")) {
-        closeSampleVideo();
-      }
-    });
-
-    const digitalIdCard = document.getElementById("digitalIdCard");
-
-    function createWaterRipple(event) {
-      if (!digitalIdCard) return;
-
-      const rect = digitalIdCard.getBoundingClientRect();
-      const clientX = event.clientX ?? event.touches?.[0]?.clientX ?? rect.left + rect.width / 2;
-      const clientY = event.clientY ?? event.touches?.[0]?.clientY ?? rect.top + rect.height / 2;
-
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
-
-      digitalIdCard.style.setProperty("--tap-x", x + "px");
-      digitalIdCard.style.setProperty("--tap-y", y + "px");
-
-      digitalIdCard.classList.remove("water-tap");
-      void digitalIdCard.offsetWidth;
-      digitalIdCard.classList.add("water-tap");
-
-      const oldEffects = digitalIdCard.querySelectorAll(".id-water-drop, .id-water-ripple");
-      oldEffects.forEach((effect) => effect.remove());
-
-      const drop = document.createElement("span");
-      drop.className = "id-water-drop";
-      drop.style.setProperty("--drop-x", x + "px");
-      drop.style.setProperty("--drop-y", y + "px");
-      digitalIdCard.appendChild(drop);
-
-      for (let i = 1; i <= 4; i++) {
-        const ripple = document.createElement("span");
-        ripple.className = "id-water-ripple ripple-" + i;
-        ripple.style.setProperty("--drop-x", x + "px");
-        ripple.style.setProperty("--drop-y", y + "px");
-        digitalIdCard.appendChild(ripple);
-      }
-
-      setTimeout(() => {
-        drop.remove();
-        digitalIdCard.querySelectorAll(".id-water-ripple").forEach((ripple) => ripple.remove());
-        digitalIdCard.classList.remove("water-tap");
-      }, 2300);
-    }
-
-    digitalIdCard?.addEventListener("click", createWaterRipple);
-
     const dnscAlienButton = document.getElementById("dnscAlienButton");
     const dnscOptionsOverlay = document.getElementById("dnscOptionsOverlay");
     const closeDnscOptions = document.getElementById("closeDnscOptions");
@@ -2294,12 +1756,6 @@
       }
     });
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && dnscOptionsOverlay?.classList.contains("show")) {
-        closeDnscPopup();
-      }
-    });
-
     const openCertificatePopup = document.getElementById("openCertificatePopup");
     const certificatePopup = document.getElementById("certificatePopup");
     const closeCertificatePopup = document.getElementById("closeCertificatePopup");
@@ -2328,8 +1784,18 @@
     });
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && certificatePopup?.classList.contains("show")) {
-        closeCertificate();
+      if (e.key === "Escape") {
+        if (certificatePopup?.classList.contains("show")) {
+          closeCertificate();
+        }
+
+        if (videoPopup?.classList.contains("show")) {
+          closeSampleVideo();
+        }
+
+        if (dnscOptionsOverlay?.classList.contains("show")) {
+          closeDnscPopup();
+        }
       }
     });
   </script>
