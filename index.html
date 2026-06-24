@@ -62,14 +62,14 @@
     radial-gradient(circle at bottom right, rgba(0, 119, 255, 0.18), transparent 35%);
 }
 
-.live-bg span {
+.wave {
   position: absolute;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 217, 255, 0.25), transparent 70%);
-  filter: blur(18px);
-  animation: moveGlow 14s linear infinite;
+  width: 650px;
+  height: 650px;
+  border-radius: 43% 57% 60% 40%;
+  background: rgba(0, 217, 255, 0.18);
+  filter: blur(25px);
+  animation: floatWater 9s infinite linear;
 }
 
 .live-bg span:nth-child(1) {
@@ -78,18 +78,20 @@
   animation-duration: 13s;
 }
 
-.live-bg span:nth-child(2) {
-  left: 25%;
-  top: 75%;
-  animation-duration: 17s;
-  animation-delay: -3s;
+.wave:nth-child(2) {
+  bottom: -260px;
+  right: -190px;
+  animation-duration: 11s;
+  background: rgba(0, 119, 255, 0.22);
 }
 
-.live-bg span:nth-child(3) {
-  left: 55%;
-  top: 20%;
-  animation-duration: 15s;
-  animation-delay: -6s;
+.wave:nth-child(3) {
+  top: 35%;
+  left: 45%;
+  width: 520px;
+  height: 520px;
+  animation-duration: 13s;
+  background: rgba(0, 217, 255, 0.16);
 }
 
 .live-bg span:nth-child(4) {
