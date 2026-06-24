@@ -398,7 +398,6 @@
       top: 6px;
       border-radius: 50%;
       background: #02101c;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
     }
 
     .dnsc-alien-icon::before {
@@ -494,7 +493,6 @@
 
     .id-card {
       position: relative;
-      isolation: isolate;
       overflow: hidden;
       cursor: pointer;
       margin-top: 16px;
@@ -708,7 +706,8 @@
       border: 0;
       display: block;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.92);
+      object-fit: contain;
+      background: transparent;
     }
 
     .certificate-close-btn {
@@ -1440,11 +1439,11 @@
       </div>
 
       <div class="certificate-frame-wrap">
-        <iframe
-          src="assets/certificate.pdf"
+        <img
+          src="assets/profile.jpg.jpg"
           class="certificate-frame"
-          title="Michael Navarro Certificate"
-        ></iframe>
+          alt="Michael Navarro Certificate"
+        />
       </div>
     </div>
   </div>
@@ -1510,7 +1509,7 @@
 
       <div class="profile-card">
         <img
-          src="assets/profile.jpg.jpg"
+          src="assets/profile.jpg"
           alt="Michael G. Navarro"
           class="profile-img"
         />
