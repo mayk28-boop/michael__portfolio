@@ -522,6 +522,30 @@
       font-size: 14px;
     }
 
+    .video-sample-trigger {
+      cursor: pointer;
+    }
+
+    .sample-edit-btn {
+      margin-top: 14px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(0, 217, 255, 0.1);
+      color: var(--blue);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+    }
+
+    .video-sample-trigger:hover .sample-edit-btn {
+      transform: translateY(-4px);
+      background: rgba(0, 217, 255, 0.16);
+      box-shadow: 0 0 22px rgba(0, 217, 255, 0.35);
+    }
+
     .projects-grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -690,6 +714,140 @@
 
       100% {
         background-position: 300% 50%;
+      }
+    }
+
+    .video-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.72);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    .video-popup.show {
+      display: grid;
+      animation: videoOverlayFade 0.28s ease forwards;
+    }
+
+    .video-popup-box {
+      position: relative;
+      width: min(430px, 92vw);
+      padding: 18px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--nav-bg);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.55),
+        0 0 45px rgba(0, 217, 255, 0.4);
+      animation: videoPopupRise 0.42s ease forwards;
+    }
+
+    .video-popup-box::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -18px;
+      width: 72%;
+      height: 18px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: linear-gradient(
+        90deg,
+        #ff004c,
+        #ff8c00,
+        #ffee00,
+        #00ff85,
+        #00d9ff,
+        #7a5cff,
+        #ff00d4,
+        #ff004c
+      );
+      background-size: 300% 100%;
+      filter: blur(16px);
+      opacity: 0.9;
+      animation: rainbowGlow 1.7s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .video-popup-header {
+      padding: 8px 6px 14px;
+    }
+
+    .video-popup-header span {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .video-popup-header h3 {
+      margin-top: 6px;
+      font-size: 22px;
+      color: var(--white);
+    }
+
+    .video-popup video {
+      width: 100%;
+      max-height: 72vh;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      display: block;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      background: #000;
+    }
+
+    .video-close-btn {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(4, 12, 28, 0.95);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 1;
+      box-shadow:
+        0 0 22px rgba(0, 217, 255, 0.42),
+        0 10px 22px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .video-close-btn:hover {
+      color: var(--blue);
+      transform: rotate(90deg) scale(1.08);
+      box-shadow:
+        0 0 28px rgba(0, 217, 255, 0.6),
+        0 0 28px rgba(255, 0, 212, 0.25);
+    }
+
+    @keyframes videoOverlayFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes videoPopupRise {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
       }
     }
 
@@ -1002,6 +1160,22 @@
     </div>
   </div>
 
+  <div class="video-popup" id="videoPopup">
+    <div class="video-popup-box">
+      <button class="video-close-btn" id="closeVideoPopup" aria-label="Close video popup">×</button>
+
+      <div class="video-popup-header">
+        <span>[ SAMPLE SHORT EDIT ]</span>
+        <h3>Michael’s Video Editing Sample</h3>
+      </div>
+
+      <video id="sampleVideo" controls preload="metadata">
+        <source src="assets/sample-edit.mp4.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
   <div class="theme-panel" aria-label="Theme controls">
     <div class="theme-title">THEME</div>
     <button class="theme-btn active-theme" data-theme="default" title="Default Theme">🌙</button>
@@ -1079,7 +1253,7 @@
 
       <div class="glass-box">
         <p>
-          I am a third-year college student with a growing interest in graphic design,
+          I am a 4th year college student with a growing interest in graphic design,
           visual editing, and user interface design. I enjoy creating designs that are
           simple, clean, and attractive while making sure the message is easy to understand.
         </p>
@@ -1115,10 +1289,11 @@
           <p>Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card video-sample-trigger" id="openVideoSample">
           <div class="skill-icon">🎬</div>
           <h3>Video Editing</h3>
           <p>Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
+          <button class="sample-edit-btn" type="button">View Sample Edit</button>
         </div>
 
         <div class="skill-card">
@@ -1202,7 +1377,7 @@
           <a class="mini-link" href="#contact">[ REQUEST SAMPLE ]</a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" id="openVideoSampleProject">
           <div class="project-type">VIDEO EDITING · CREATIVE MEDIA</div>
           <h3>Short Video Edits</h3>
           <p>
@@ -1216,7 +1391,7 @@
             <span class="chip">Visual Flow</span>
           </div>
 
-          <a class="mini-link" href="#contact">[ CONTACT ME ]</a>
+          <a class="mini-link" href="javascript:void(0)">[ VIEW SAMPLE EDIT ]</a>
         </div>
 
         <div class="project-card">
@@ -1461,6 +1636,47 @@
       button.addEventListener("click", () => {
         applyTheme(button.dataset.theme);
       });
+    });
+
+    const openVideoSample = document.getElementById("openVideoSample");
+    const openVideoSampleProject = document.getElementById("openVideoSampleProject");
+    const videoPopup = document.getElementById("videoPopup");
+    const closeVideoPopup = document.getElementById("closeVideoPopup");
+    const sampleVideo = document.getElementById("sampleVideo");
+
+    function openSampleVideo() {
+      if (!videoPopup) return;
+
+      videoPopup.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeSampleVideo() {
+      if (!videoPopup) return;
+
+      videoPopup.classList.remove("show");
+      document.body.style.overflow = "";
+
+      if (sampleVideo) {
+        sampleVideo.pause();
+        sampleVideo.currentTime = 0;
+      }
+    }
+
+    openVideoSample?.addEventListener("click", openSampleVideo);
+    openVideoSampleProject?.addEventListener("click", openSampleVideo);
+    closeVideoPopup?.addEventListener("click", closeSampleVideo);
+
+    videoPopup?.addEventListener("click", (e) => {
+      if (e.target === videoPopup) {
+        closeSampleVideo();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && videoPopup?.classList.contains("show")) {
+        closeSampleVideo();
+      }
     });
   </script>
 </body>
