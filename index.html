@@ -137,24 +137,26 @@
   }
 }
 
-    .cursor-water {
-      position: fixed;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 217, 255, 0.9);
-      box-shadow: 0 0 25px rgba(0, 217, 255, 0.7);
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: 9999;
-      transition: width 0.25s, height 0.25s, background 0.25s;
-    }
-
-    .cursor-water.active {
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle, rgba(0, 217, 255, 0.2), transparent 70%);
-    }
+   .cursor-water {
+  position: fixed;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 217, 255, 0.9);
+  box-shadow: 0 0 25px rgba(0, 217, 255, 0.7);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 9999;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+  .cursor-water.active {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.25), transparent 70%);
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
 
     .container {
       width: min(1120px, 92%);
@@ -894,10 +896,17 @@
       cursor.style.top = e.clientY + "px";
     });
 
-    hoverItems.forEach((item) => {
-      item.addEventListener("mouseenter", () => {
-        cursor.classList.add("active");
-      });
+document.addEventListener("mousedown", () => {
+  cursor.classList.add("active");
+});
+
+document.addEventListener("mouseup", () => {
+  cursor.classList.remove("active");
+});
+
+document.addEventListener("mouseleave", () => {
+  cursor.classList.remove("active");
+});
 
       item.addEventListener("mouseleave", () => {
         cursor.classList.remove("active");
