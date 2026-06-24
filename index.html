@@ -11,6 +11,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html {
@@ -85,6 +86,28 @@
         );
     }
 
+    button,
+    a,
+    .skill-card,
+    .project-card,
+    .id-card,
+    .certificate-btn,
+    .settings-btn,
+    .dnsc-btn {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus,
+    a:focus {
+      outline: none;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 217, 255, 0.35);
+    }
+
     .bg-effects {
       position: fixed;
       inset: 0;
@@ -109,15 +132,43 @@
       will-change: transform;
     }
 
-    .s1 { top: -140px; left: -120px; }
-    .s2 { right: -150px; bottom: -160px; width: 520px; height: 520px; animation-duration: 26s; }
-    .s3 { top: 35%; left: 38%; width: 320px; height: 320px; animation-duration: 30s; }
+    .s1 {
+      top: -140px;
+      left: -120px;
+    }
+
+    .s2 {
+      right: -150px;
+      bottom: -160px;
+      width: 520px;
+      height: 520px;
+      animation-duration: 26s;
+    }
+
+    .s3 {
+      top: 35%;
+      left: 38%;
+      width: 320px;
+      height: 320px;
+      animation-duration: 30s;
+    }
 
     @keyframes smokeMove {
-      0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      40% { transform: translate3d(46px, -36px, 0) rotate(130deg) scale(1.08); }
-      70% { transform: translate3d(-36px, 46px, 0) rotate(250deg) scale(0.96); }
-      100% { transform: translate3d(0, 0, 0) rotate(360deg) scale(1.05); }
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+      }
+
+      40% {
+        transform: translate3d(46px, -36px, 0) rotate(130deg) scale(1.08);
+      }
+
+      70% {
+        transform: translate3d(-36px, 46px, 0) rotate(250deg) scale(0.96);
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0) rotate(360deg) scale(1.05);
+      }
     }
 
     .container {
@@ -200,11 +251,17 @@
       background: rgba(0, 217, 255, 0.08);
       cursor: pointer;
       font-size: 20px;
-      transition: 0.25s ease;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      transform: rotate(0deg);
     }
 
     .settings-btn:hover {
-      transform: translateY(-4px) rotate(35deg) scale(1.08);
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.38);
+    }
+
+    .settings-btn.open {
+      transform: rotate(135deg) scale(1.08);
+      border-color: var(--accent);
       box-shadow: 0 0 24px rgba(0, 217, 255, 0.38);
     }
 
@@ -297,13 +354,25 @@
     }
 
     @keyframes pop {
-      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     @keyframes glassMove {
-      from { transform: translate(-4%, -3%) rotate(0deg); }
-      to { transform: translate(5%, 4%) rotate(8deg); }
+      from {
+        transform: translate(-4%, -3%) rotate(0deg);
+      }
+
+      to {
+        transform: translate(5%, 4%) rotate(8deg);
+      }
     }
 
     section {
@@ -362,6 +431,7 @@
       background: rgba(0, 217, 255, 0.08);
       text-decoration: none;
       font-weight: 800;
+      cursor: pointer;
       transition: 0.25s ease;
     }
 
@@ -453,7 +523,9 @@
     }
 
     @keyframes orbit {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .profile-card,
@@ -658,7 +730,9 @@
     }
 
     @keyframes rainbow {
-      to { background-position: 300% 50%; }
+      to {
+        background-position: 300% 50%;
+      }
     }
 
     .sample-btn {
@@ -765,8 +839,13 @@
     }
 
     @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .modal {
@@ -950,7 +1029,9 @@
       .skill-card,
       .project-card,
       nav,
-      .settings-panel {
+      .settings-panel,
+      .modal,
+      .overlay {
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
       }
@@ -967,6 +1048,20 @@
     <div class="smoke s1"></div>
     <div class="smoke s2"></div>
     <div class="smoke s3"></div>
+  </div>
+
+  <div class="overlay" id="desktopOverlay">
+    <div class="modal">
+      <h3 data-i18n="desktopTitle">Better on Desktop</h3>
+      <p data-i18n="desktopText">
+        For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.
+      </p>
+
+      <div class="buttons">
+        <button class="btn primary" id="continueDesktop" type="button" data-i18n="continueAnyway">Continue Anyway</button>
+        <button class="btn" id="backDesktop" type="button" data-i18n="backBtn">Back</button>
+      </div>
+    </div>
   </div>
 
   <div class="overlay" id="videoOverlay">
@@ -1283,122 +1378,302 @@
   <script>
     const text = {
       en: {
-        navAbout: "ABOUT", navSkills: "SKILLS", navProjects: "PROJECTS", navContact: "CONTACT", status: "OPEN TO WORK",
+        desktopTitle: "Better on Desktop",
+        desktopText: "For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.",
+        continueAnyway: "Continue Anyway",
+        backBtn: "Back",
+        navAbout: "ABOUT",
+        navSkills: "SKILLS",
+        navProjects: "PROJECTS",
+        navContact: "CONTACT",
+        status: "OPEN TO WORK",
         heroTitle: "Hi, I’m <span class='gradient-text'>Michael.</span>",
         heroSub: "Graphic Designer · Visual Creator · UI/UX Learner",
         heroText: "Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean, modern, and eye-catching visual designs. My skills include photo editing, video editing, and basic network configuration. I’m always willing to learn new tools and improve my skills to create better and more professional outputs.",
-        viewProjects: "View Projects", getTouch: "Get In Touch", digitalId: "[ DIGITAL ID ]", idRole: "Graphic Designer · DNSC Student", activePortfolio: "ACTIVE — CREATIVE PORTFOLIO",
-        certificate: "Certificate", certificateSmall: "Tap to view achievement", certTitle: "Cybersecurity Essentials", certText: "Cisco Networking Academy · Davao Del Norte State College",
-        videoTitle: "Michael’s Video Editing Sample", videoText: "Sample short edit preview.",
-        aboutSpan: "[ ABOUT ]", aboutTitle: "Designing visuals that feel modern and professional.",
+        viewProjects: "View Projects",
+        getTouch: "Get In Touch",
+        digitalId: "[ DIGITAL ID ]",
+        idRole: "Graphic Designer · DNSC Student",
+        activePortfolio: "ACTIVE — CREATIVE PORTFOLIO",
+        certificate: "Certificate",
+        certificateSmall: "Tap to view achievement",
+        certTitle: "Cybersecurity Essentials",
+        certText: "Cisco Networking Academy · Davao Del Norte State College",
+        videoTitle: "Michael’s Video Editing Sample",
+        videoText: "Sample short edit preview.",
+        aboutSpan: "[ ABOUT ]",
+        aboutTitle: "Designing visuals that feel modern and professional.",
         aboutP1: "I am a 4th year college student with a growing interest in graphic design, visual editing, and user interface design. I enjoy creating designs that are simple, clean, and attractive while making sure the message is easy to understand.",
         aboutP2: "My creative work focuses on photo editing, video editing, layout design, and digital content creation. I also have experience using Figma, where I can create interface layouts and interactive prototypes for web or app design ideas. Aside from creative work, I also have basic knowledge in network configuration.",
-        skillsSpan: "[ SKILLS ]", skillsTitle: "Tools and skills I work with.",
-        s1Title: "Graphic Design", s1Text: "Creating clean, modern, and eye-catching visual layouts for digital content.",
-        s2Title: "Photo Editing", s2Text: "Enhancing images, improving colors, retouching, and preparing visuals for posting.",
-        s3Title: "Video Editing", s3Text: "Editing short videos, adding transitions, arranging clips, and improving visual flow.", sampleBtn: "View Sample Edit",
-        s4Title: "Figma Prototype", s4Text: "Designing UI layouts and creating clickable prototypes for web and app concepts.",
-        s5Title: "Basic Network Configuration", s5Text: "Setting up basic network connections, configurations, and connectivity settings.",
-        s6Title: "Creative Direction", s6Text: "Choosing colors, styles, spacing, and visual direction for a more polished output.",
-        s7Title: "Social Media Design", s7Text: "Creating posters, banners, thumbnails, and digital content for online platforms.",
-        s8Title: "Fast Learner", s8Text: "Willing to explore new design tools, trends, and techniques to improve my work.",
-        projectsSpan: "[ PROJECTS ]", projectsTitle: "Selected creative work.",
-        p1Type: "UI/UX DESIGN · FIGMA PROTOTYPE", p1Title: "Interactive Figma Prototype", p1Text: "A clickable prototype created in Figma to present a clean interface flow, screen layout, and user interaction concept.", viewPrototype: "[ VIEW PROTOTYPE ]",
-        p2Type: "GRAPHIC DESIGN · DIGITAL CONTENT", p2Title: "Social Media Poster Designs", p2Text: "Poster and layout designs focused on strong visuals, readable text, balanced spacing, and modern color combinations.", requestSample: "[ REQUEST SAMPLE ]",
-        p3Type: "VIDEO EDITING · CREATIVE MEDIA", p3Title: "Short Video Edits", p3Text: "Edited video content with smooth pacing, transitions, visual timing, and improved flow for more engaging presentation.", viewSample: "[ VIEW SAMPLE EDIT ]",
-        p4Type: "TECHNICAL SKILL · NETWORK SETUP", p4Title: "Basic Network Configuration", p4Text: "Practical experience in configuring basic network settings and connectivity setups with stable connection.", viewSkills: "[ VIEW SKILLS ]",
-        contactSpan: "[ CONTACT ]", contactTitle: "Let’s create something clean and creative.", contactText: "I am open to creative projects, school-related design work, portfolio collaborations, and opportunities where I can improve my skills in design, editing, and UI/UX prototyping.",
-        phone: "Phone:", location: "Location:", statusLabel: "Status:", statusValue: "Available for creative work",
+        skillsSpan: "[ SKILLS ]",
+        skillsTitle: "Tools and skills I work with.",
+        s1Title: "Graphic Design",
+        s1Text: "Creating clean, modern, and eye-catching visual layouts for digital content.",
+        s2Title: "Photo Editing",
+        s2Text: "Enhancing images, improving colors, retouching, and preparing visuals for posting.",
+        s3Title: "Video Editing",
+        s3Text: "Editing short videos, adding transitions, arranging clips, and improving visual flow.",
+        sampleBtn: "View Sample Edit",
+        s4Title: "Figma Prototype",
+        s4Text: "Designing UI layouts and creating clickable prototypes for web and app concepts.",
+        s5Title: "Basic Network Configuration",
+        s5Text: "Setting up basic network connections, configurations, and connectivity settings.",
+        s6Title: "Creative Direction",
+        s6Text: "Choosing colors, styles, spacing, and visual direction for a more polished output.",
+        s7Title: "Social Media Design",
+        s7Text: "Creating posters, banners, thumbnails, and digital content for online platforms.",
+        s8Title: "Fast Learner",
+        s8Text: "Willing to explore new design tools, trends, and techniques to improve my work.",
+        projectsSpan: "[ PROJECTS ]",
+        projectsTitle: "Selected creative work.",
+        p1Type: "UI/UX DESIGN · FIGMA PROTOTYPE",
+        p1Title: "Interactive Figma Prototype",
+        p1Text: "A clickable prototype created in Figma to present a clean interface flow, screen layout, and user interaction concept.",
+        viewPrototype: "[ VIEW PROTOTYPE ]",
+        p2Type: "GRAPHIC DESIGN · DIGITAL CONTENT",
+        p2Title: "Social Media Poster Designs",
+        p2Text: "Poster and layout designs focused on strong visuals, readable text, balanced spacing, and modern color combinations.",
+        requestSample: "[ REQUEST SAMPLE ]",
+        p3Type: "VIDEO EDITING · CREATIVE MEDIA",
+        p3Title: "Short Video Edits",
+        p3Text: "Edited video content with smooth pacing, transitions, visual timing, and improved flow for more engaging presentation.",
+        viewSample: "[ VIEW SAMPLE EDIT ]",
+        p4Type: "TECHNICAL SKILL · NETWORK SETUP",
+        p4Title: "Basic Network Configuration",
+        p4Text: "Practical experience in configuring basic network settings and connectivity setups with stable connection.",
+        viewSkills: "[ VIEW SKILLS ]",
+        contactSpan: "[ CONTACT ]",
+        contactTitle: "Let’s create something clean and creative.",
+        contactText: "I am open to creative projects, school-related design work, portfolio collaborations, and opportunities where I can improve my skills in design, editing, and UI/UX prototyping.",
+        phone: "Phone:",
+        location: "Location:",
+        statusLabel: "Status:",
+        statusValue: "Available for creative work",
         footer: "© 2026 Michael G. Navarro · Graphic Designer · Portfolio Online"
       },
 
       bisaya: {
-        navAbout: "MAHITUNGOD", navSkills: "KASANAYAN", navProjects: "PROYEKTO", navContact: "KONTAK", status: "OPEN SA TRABAHO",
+        desktopTitle: "Mas Nindot sa Desktop",
+        desktopText: "Para mas smooth ug mas komportable ang viewing experience, mas maayo tan-awon ni nga portfolio gamit desktop or laptop.",
+        continueAnyway: "Padayon Gihapon",
+        backBtn: "Balik",
+        navAbout: "MAHITUNGOD",
+        navSkills: "KASANAYAN",
+        navProjects: "PROYEKTO",
+        navContact: "KONTAK",
+        status: "OPEN SA TRABAHO",
         heroTitle: "Kumusta, ako si <span class='gradient-text'>Michael.</span>",
         heroSub: "Graphic Designer · Visual Creator · UI/UX Learner",
         heroText: "Kumusta, ako si Michael G. Navarro, usa ka Graphic Designer nga ganahan mohimo ug limpyo, moderno, ug nindot nga visual designs. Kabalo ko sa photo editing, video editing, ug basic network configuration. Andam ko kanunay makat-on ug bag-ong tools aron mas mo-improve akong outputs.",
-        viewProjects: "Tan-awa ang Proyekto", getTouch: "Kontaka Ko", digitalId: "[ DIGITAL ID ]", idRole: "Graphic Designer · DNSC Student", activePortfolio: "ACTIVE — CREATIVE PORTFOLIO",
-        certificate: "Certificate", certificateSmall: "Tap para makita ang achievement", certTitle: "Cybersecurity Essentials", certText: "Cisco Networking Academy · Davao Del Norte State College",
-        videoTitle: "Michael’s Video Editing Sample", videoText: "Sample short edit preview.",
-        aboutSpan: "[ MAHITUNGOD ]", aboutTitle: "Naghimo ug visual designs nga moderno ug professional tan-awon.",
+        viewProjects: "Tan-awa ang Proyekto",
+        getTouch: "Kontaka Ko",
+        digitalId: "[ DIGITAL ID ]",
+        idRole: "Graphic Designer · DNSC Student",
+        activePortfolio: "ACTIVE — CREATIVE PORTFOLIO",
+        certificate: "Certificate",
+        certificateSmall: "Tap para makita ang achievement",
+        certTitle: "Cybersecurity Essentials",
+        certText: "Cisco Networking Academy · Davao Del Norte State College",
+        videoTitle: "Michael’s Video Editing Sample",
+        videoText: "Sample short edit preview.",
+        aboutSpan: "[ MAHITUNGOD ]",
+        aboutTitle: "Naghimo ug visual designs nga moderno ug professional tan-awon.",
         aboutP1: "Ako usa ka 4th year college student nga interesado sa graphic design, visual editing, ug user interface design. Ganahan ko mohimo ug design nga simple, limpyo, ug dali masabtan.",
         aboutP2: "Ang akong creative work naka-focus sa photo editing, video editing, layout design, ug digital content creation. Naa pud koy experience sa Figma para makahimo ug UI layouts ug clickable prototypes. Naa pud koy basic knowledge sa network configuration.",
-        skillsSpan: "[ KASANAYAN ]", skillsTitle: "Mga tools ug skills nga akong ginagamit.",
-        s1Title: "Graphic Design", s1Text: "Paghimo ug limpyo, moderno, ug eye-catching nga visual layouts para sa digital content.",
-        s2Title: "Photo Editing", s2Text: "Pag-enhance sa images, pag-ayo sa colors, retouching, ug pagprepare sa visuals para posting.",
-        s3Title: "Video Editing", s3Text: "Pag-edit sa short videos, pagbutang transitions, pag-arrange sa clips, ug pagpa-nindot sa visual flow.", sampleBtn: "Tan-awa ang Sample Edit",
-        s4Title: "Figma Prototype", s4Text: "Paghimo ug UI layouts ug clickable prototypes para sa web ug app concepts.",
-        s5Title: "Basic Network Configuration", s5Text: "Pag-set up sa basic network connections, configurations, ug connectivity settings.",
-        s6Title: "Creative Direction", s6Text: "Pagpili sa colors, styles, spacing, ug visual direction para mas polished ang output.",
-        s7Title: "Social Media Design", s7Text: "Paghimo ug posters, banners, thumbnails, ug digital content para online platforms.",
-        s8Title: "Fast Learner", s8Text: "Andam makat-on ug bag-ong design tools, trends, ug techniques para mo-improve.",
-        projectsSpan: "[ PROYEKTO ]", projectsTitle: "Pipila sa akong creative works.",
-        p1Type: "UI/UX DESIGN · FIGMA PROTOTYPE", p1Title: "Interactive Figma Prototype", p1Text: "Usa ka clickable prototype nga gihimo sa Figma aron ipakita ang limpyo nga interface flow, screen layout, ug user interaction concept.", viewPrototype: "[ TAN-AWA ANG PROTOTYPE ]",
-        p2Type: "GRAPHIC DESIGN · DIGITAL CONTENT", p2Title: "Social Media Poster Designs", p2Text: "Mga poster ug layout designs nga naka-focus sa nindot nga visuals, klaro nga text, sakto nga spacing, ug modern color combinations.", requestSample: "[ PANGAYO SAMPLE ]",
-        p3Type: "VIDEO EDITING · CREATIVE MEDIA", p3Title: "Short Video Edits", p3Text: "Edited video content nga naay smooth pacing, transitions, visual timing, ug mas maayo nga flow.", viewSample: "[ TAN-AWA ANG SAMPLE EDIT ]",
-        p4Type: "TECHNICAL SKILL · NETWORK SETUP", p4Title: "Basic Network Configuration", p4Text: "Practical experience sa pag-configure sa basic network settings ug connectivity setups.", viewSkills: "[ TAN-AWA ANG SKILLS ]",
-        contactSpan: "[ KONTAK ]", contactTitle: "Maghimo ta ug limpyo ug creative nga output.", contactText: "Open ko sa creative projects, school-related design work, portfolio collaborations, ug opportunities nga makatabang mo-improve akong skills sa design, editing, ug UI/UX prototyping.",
-        phone: "Telepono:", location: "Lokasyon:", statusLabel: "Status:", statusValue: "Available para creative work",
+        skillsSpan: "[ KASANAYAN ]",
+        skillsTitle: "Mga tools ug skills nga akong ginagamit.",
+        s1Title: "Graphic Design",
+        s1Text: "Paghimo ug limpyo, moderno, ug eye-catching nga visual layouts para sa digital content.",
+        s2Title: "Photo Editing",
+        s2Text: "Pag-enhance sa images, pag-ayo sa colors, retouching, ug pagprepare sa visuals para posting.",
+        s3Title: "Video Editing",
+        s3Text: "Pag-edit sa short videos, pagbutang transitions, pag-arrange sa clips, ug pagpa-nindot sa visual flow.",
+        sampleBtn: "Tan-awa ang Sample Edit",
+        s4Title: "Figma Prototype",
+        s4Text: "Paghimo ug UI layouts ug clickable prototypes para sa web ug app concepts.",
+        s5Title: "Basic Network Configuration",
+        s5Text: "Pag-set up sa basic network connections, configurations, ug connectivity settings.",
+        s6Title: "Creative Direction",
+        s6Text: "Pagpili sa colors, styles, spacing, ug visual direction para mas polished ang output.",
+        s7Title: "Social Media Design",
+        s7Text: "Paghimo ug posters, banners, thumbnails, ug digital content para online platforms.",
+        s8Title: "Fast Learner",
+        s8Text: "Andam makat-on ug bag-ong design tools, trends, ug techniques para mo-improve.",
+        projectsSpan: "[ PROYEKTO ]",
+        projectsTitle: "Pipila sa akong creative works.",
+        p1Type: "UI/UX DESIGN · FIGMA PROTOTYPE",
+        p1Title: "Interactive Figma Prototype",
+        p1Text: "Usa ka clickable prototype nga gihimo sa Figma aron ipakita ang limpyo nga interface flow, screen layout, ug user interaction concept.",
+        viewPrototype: "[ TAN-AWA ANG PROTOTYPE ]",
+        p2Type: "GRAPHIC DESIGN · DIGITAL CONTENT",
+        p2Title: "Social Media Poster Designs",
+        p2Text: "Mga poster ug layout designs nga naka-focus sa nindot nga visuals, klaro nga text, sakto nga spacing, ug modern color combinations.",
+        requestSample: "[ PANGAYO SAMPLE ]",
+        p3Type: "VIDEO EDITING · CREATIVE MEDIA",
+        p3Title: "Short Video Edits",
+        p3Text: "Edited video content nga naay smooth pacing, transitions, visual timing, ug mas maayo nga flow.",
+        viewSample: "[ TAN-AWA ANG SAMPLE EDIT ]",
+        p4Type: "TECHNICAL SKILL · NETWORK SETUP",
+        p4Title: "Basic Network Configuration",
+        p4Text: "Practical experience sa pag-configure sa basic network settings ug connectivity setups.",
+        viewSkills: "[ TAN-AWA ANG SKILLS ]",
+        contactSpan: "[ KONTAK ]",
+        contactTitle: "Maghimo ta ug limpyo ug creative nga output.",
+        contactText: "Open ko sa creative projects, school-related design work, portfolio collaborations, ug opportunities nga makatabang mo-improve akong skills sa design, editing, ug UI/UX prototyping.",
+        phone: "Telepono:",
+        location: "Lokasyon:",
+        statusLabel: "Status:",
+        statusValue: "Available para creative work",
         footer: "© 2026 Michael G. Navarro · Graphic Designer · Portfolio Online"
       },
 
       tagalog: {
-        navAbout: "TUNGKOL", navSkills: "KASANAYAN", navProjects: "PROYEKTO", navContact: "KONTAK", status: "OPEN SA TRABAHO",
+        desktopTitle: "Mas Maganda sa Desktop",
+        desktopText: "Para sa mas smooth at mas komportableng viewing experience, mas magandang tingnan ang portfolio na ito gamit ang desktop o laptop.",
+        continueAnyway: "Magpatuloy Pa Rin",
+        backBtn: "Bumalik",
+        navAbout: "TUNGKOL",
+        navSkills: "KASANAYAN",
+        navProjects: "PROYEKTO",
+        navContact: "KONTAK",
+        status: "OPEN SA TRABAHO",
         heroTitle: "Hi, ako si <span class='gradient-text'>Michael.</span>",
         heroSub: "Graphic Designer · Visual Creator · UI/UX Learner",
         heroText: "Hi, ako si Michael G. Navarro, isang Graphic Designer na mahilig gumawa ng malinis, moderno, at kaakit-akit na visual designs. Kabilang sa aking skills ang photo editing, video editing, at basic network configuration. Lagi akong handang matuto ng bagong tools para mas mapaganda ang aking outputs.",
-        viewProjects: "Tingnan ang Projects", getTouch: "Makipag-ugnayan", digitalId: "[ DIGITAL ID ]", idRole: "Graphic Designer · DNSC Student", activePortfolio: "ACTIVE — CREATIVE PORTFOLIO",
-        certificate: "Sertipiko", certificateSmall: "I-tap para makita ang achievement", certTitle: "Cybersecurity Essentials", certText: "Cisco Networking Academy · Davao Del Norte State College",
-        videoTitle: "Michael’s Video Editing Sample", videoText: "Sample short edit preview.",
-        aboutSpan: "[ TUNGKOL ]", aboutTitle: "Gumagawa ng visuals na moderno at professional tingnan.",
+        viewProjects: "Tingnan ang Projects",
+        getTouch: "Makipag-ugnayan",
+        digitalId: "[ DIGITAL ID ]",
+        idRole: "Graphic Designer · DNSC Student",
+        activePortfolio: "ACTIVE — CREATIVE PORTFOLIO",
+        certificate: "Sertipiko",
+        certificateSmall: "I-tap para makita ang achievement",
+        certTitle: "Cybersecurity Essentials",
+        certText: "Cisco Networking Academy · Davao Del Norte State College",
+        videoTitle: "Michael’s Video Editing Sample",
+        videoText: "Sample short edit preview.",
+        aboutSpan: "[ TUNGKOL ]",
+        aboutTitle: "Gumagawa ng visuals na moderno at professional tingnan.",
         aboutP1: "Ako ay isang 4th year college student na may interes sa graphic design, visual editing, at user interface design. Gusto kong gumawa ng designs na simple, malinis, at madaling maintindihan.",
         aboutP2: "Nakatuon ang aking creative work sa photo editing, video editing, layout design, at digital content creation. May karanasan din ako sa Figma para gumawa ng UI layouts at clickable prototypes. May basic knowledge din ako sa network configuration.",
-        skillsSpan: "[ KASANAYAN ]", skillsTitle: "Mga tools at skills na ginagamit ko.",
-        s1Title: "Graphic Design", s1Text: "Paggawa ng malinis, moderno, at kaakit-akit na visual layouts para sa digital content.",
-        s2Title: "Photo Editing", s2Text: "Pag-enhance ng images, pag-ayos ng colors, retouching, at paghahanda ng visuals para sa posting.",
-        s3Title: "Video Editing", s3Text: "Pag-edit ng short videos, paglalagay ng transitions, pag-aayos ng clips, at pagpapaganda ng visual flow.", sampleBtn: "Tingnan ang Sample Edit",
-        s4Title: "Figma Prototype", s4Text: "Pag-design ng UI layouts at paggawa ng clickable prototypes para sa web at app concepts.",
-        s5Title: "Basic Network Configuration", s5Text: "Pag-set up ng basic network connections, configurations, at connectivity settings.",
-        s6Title: "Creative Direction", s6Text: "Pagpili ng colors, styles, spacing, at visual direction para mas polished ang output.",
-        s7Title: "Social Media Design", s7Text: "Paggawa ng posters, banners, thumbnails, at digital content para sa online platforms.",
-        s8Title: "Fast Learner", s8Text: "Handang matuto ng bagong design tools, trends, at techniques para mas gumaling.",
-        projectsSpan: "[ PROYEKTO ]", projectsTitle: "Mga piling creative works.",
-        p1Type: "UI/UX DESIGN · FIGMA PROTOTYPE", p1Title: "Interactive Figma Prototype", p1Text: "Isang clickable prototype na ginawa sa Figma upang ipakita ang malinaw na interface flow, screen layout, at user interaction concept.", viewPrototype: "[ TINGNAN ANG PROTOTYPE ]",
-        p2Type: "GRAPHIC DESIGN · DIGITAL CONTENT", p2Title: "Social Media Poster Designs", p2Text: "Koleksyon ng poster at layout designs na nakatuon sa magandang visuals, malinaw na text, balanseng spacing, at modern color combinations.", requestSample: "[ HUMINGI NG SAMPLE ]",
-        p3Type: "VIDEO EDITING · CREATIVE MEDIA", p3Title: "Short Video Edits", p3Text: "Edited video content na may smooth pacing, transitions, visual timing, at mas magandang flow.", viewSample: "[ TINGNAN ANG SAMPLE EDIT ]",
-        p4Type: "TECHNICAL SKILL · NETWORK SETUP", p4Title: "Basic Network Configuration", p4Text: "Practical experience sa pag-configure ng basic network settings at connectivity setups.", viewSkills: "[ TINGNAN ANG SKILLS ]",
-        contactSpan: "[ KONTAK ]", contactTitle: "Gumawa tayo ng malinis at creative na output.", contactText: "Open ako sa creative projects, school-related design work, portfolio collaborations, at opportunities kung saan mas mapapabuti ko ang aking skills sa design, editing, at UI/UX prototyping.",
-        phone: "Telepono:", location: "Lokasyon:", statusLabel: "Status:", statusValue: "Available para sa creative work",
+        skillsSpan: "[ KASANAYAN ]",
+        skillsTitle: "Mga tools at skills na ginagamit ko.",
+        s1Title: "Graphic Design",
+        s1Text: "Paggawa ng malinis, moderno, at kaakit-akit na visual layouts para sa digital content.",
+        s2Title: "Photo Editing",
+        s2Text: "Pag-enhance ng images, pag-ayos ng colors, retouching, at paghahanda ng visuals para sa posting.",
+        s3Title: "Video Editing",
+        s3Text: "Pag-edit ng short videos, paglalagay ng transitions, pag-aayos ng clips, at pagpapaganda ng visual flow.",
+        sampleBtn: "Tingnan ang Sample Edit",
+        s4Title: "Figma Prototype",
+        s4Text: "Pag-design ng UI layouts at paggawa ng clickable prototypes para sa web at app concepts.",
+        s5Title: "Basic Network Configuration",
+        s5Text: "Pag-set up ng basic network connections, configurations, at connectivity settings.",
+        s6Title: "Creative Direction",
+        s6Text: "Pagpili ng colors, styles, spacing, at visual direction para mas polished ang output.",
+        s7Title: "Social Media Design",
+        s7Text: "Paggawa ng posters, banners, thumbnails, at digital content para sa online platforms.",
+        s8Title: "Fast Learner",
+        s8Text: "Handang matuto ng bagong design tools, trends, at techniques para mas gumaling.",
+        projectsSpan: "[ PROYEKTO ]",
+        projectsTitle: "Mga piling creative works.",
+        p1Type: "UI/UX DESIGN · FIGMA PROTOTYPE",
+        p1Title: "Interactive Figma Prototype",
+        p1Text: "Isang clickable prototype na ginawa sa Figma upang ipakita ang malinaw na interface flow, screen layout, at user interaction concept.",
+        viewPrototype: "[ TINGNAN ANG PROTOTYPE ]",
+        p2Type: "GRAPHIC DESIGN · DIGITAL CONTENT",
+        p2Title: "Social Media Poster Designs",
+        p2Text: "Koleksyon ng poster at layout designs na nakatuon sa magandang visuals, malinaw na text, balanseng spacing, at modern color combinations.",
+        requestSample: "[ HUMINGI NG SAMPLE ]",
+        p3Type: "VIDEO EDITING · CREATIVE MEDIA",
+        p3Title: "Short Video Edits",
+        p3Text: "Edited video content na may smooth pacing, transitions, visual timing, at mas magandang flow.",
+        viewSample: "[ TINGNAN ANG SAMPLE EDIT ]",
+        p4Type: "TECHNICAL SKILL · NETWORK SETUP",
+        p4Title: "Basic Network Configuration",
+        p4Text: "Practical experience sa pag-configure ng basic network settings at connectivity setups.",
+        viewSkills: "[ TINGNAN ANG SKILLS ]",
+        contactSpan: "[ KONTAK ]",
+        contactTitle: "Gumawa tayo ng malinis at creative na output.",
+        contactText: "Open ako sa creative projects, school-related design work, portfolio collaborations, at opportunities kung saan mas mapapabuti ko ang aking skills sa design, editing, at UI/UX prototyping.",
+        phone: "Telepono:",
+        location: "Lokasyon:",
+        statusLabel: "Status:",
+        statusValue: "Available para sa creative work",
         footer: "© 2026 Michael G. Navarro · Graphic Designer · Portfolio Online"
       },
 
       japanese: {
-        navAbout: "紹介", navSkills: "スキル", navProjects: "作品", navContact: "連絡先", status: "仕事受付中",
+        desktopTitle: "デスクトップでの表示がおすすめです",
+        desktopText: "より快適でスムーズに見るために、このポートフォリオはデスクトップまたはノートパソコンでの閲覧がおすすめです。",
+        continueAnyway: "このまま続ける",
+        backBtn: "戻る",
+        navAbout: "紹介",
+        navSkills: "スキル",
+        navProjects: "作品",
+        navContact: "連絡先",
+        status: "仕事受付中",
         heroTitle: "こんにちは、<span class='gradient-text'>Michael</span>です。",
         heroSub: "グラフィックデザイナー · ビジュアルクリエイター · UI/UX 学習者",
         heroText: "こんにちは、Michael G. Navarroです。私は清潔で現代的、そして目を引くビジュアルデザインを作ることが好きなグラフィックデザイナーです。写真編集、動画編集、基本的なネットワーク設定のスキルがあります。",
-        viewProjects: "作品を見る", getTouch: "連絡する", digitalId: "[ デジタルID ]", idRole: "グラフィックデザイナー · DNSC 学生", activePortfolio: "ACTIVE — クリエイティブポートフォリオ",
-        certificate: "証明書", certificateSmall: "タップして実績を見る", certTitle: "Cybersecurity Essentials", certText: "Cisco Networking Academy · Davao Del Norte State College",
-        videoTitle: "Michaelの動画編集サンプル", videoText: "短い編集サンプルのプレビュー。",
-        aboutSpan: "[ 紹介 ]", aboutTitle: "現代的でプロフェッショナルなビジュアルを制作します。",
+        viewProjects: "作品を見る",
+        getTouch: "連絡する",
+        digitalId: "[ デジタルID ]",
+        idRole: "グラフィックデザイナー · DNSC 学生",
+        activePortfolio: "ACTIVE — クリエイティブポートフォリオ",
+        certificate: "証明書",
+        certificateSmall: "タップして実績を見る",
+        certTitle: "Cybersecurity Essentials",
+        certText: "Cisco Networking Academy · Davao Del Norte State College",
+        videoTitle: "Michaelの動画編集サンプル",
+        videoText: "短い編集サンプルのプレビュー。",
+        aboutSpan: "[ 紹介 ]",
+        aboutTitle: "現代的でプロフェッショナルなビジュアルを制作します。",
         aboutP1: "私はグラフィックデザイン、ビジュアル編集、ユーザーインターフェースデザインに興味を持つ大学4年生です。",
         aboutP2: "私の制作は、写真編集、動画編集、レイアウトデザイン、デジタルコンテンツ制作に焦点を当てています。FigmaでUIレイアウトやプロトタイプも作成できます。",
-        skillsSpan: "[ スキル ]", skillsTitle: "使用しているツールとスキル。",
-        s1Title: "グラフィックデザイン", s1Text: "デジタルコンテンツ向けに、清潔で現代的なビジュアルレイアウトを制作します。",
-        s2Title: "写真編集", s2Text: "画像の強化、色調整、レタッチ、投稿用ビジュアルの準備を行います。",
-        s3Title: "動画編集", s3Text: "短い動画の編集、トランジション追加、クリップ整理を行います。", sampleBtn: "サンプルを見る",
-        s4Title: "Figmaプロトタイプ", s4Text: "Webやアプリ向けのUIレイアウトとクリック可能なプロトタイプを作成します。",
-        s5Title: "基本的なネットワーク設定", s5Text: "基本的なネットワーク接続と設定を行います。",
-        s6Title: "クリエイティブ方向性", s6Text: "色、スタイル、余白、ビジュアル方向性を選びます。",
-        s7Title: "SNSデザイン", s7Text: "ポスター、バナー、サムネイル、デジタルコンテンツを制作します。",
-        s8Title: "学習意欲", s8Text: "新しいデザインツールや技術を学び、スキルを向上させます。",
-        projectsSpan: "[ 作品 ]", projectsTitle: "選ばれたクリエイティブ作品。",
-        p1Type: "UI/UXデザイン · FIGMAプロトタイプ", p1Title: "インタラクティブFigmaプロトタイプ", p1Text: "インターフェースフローとユーザー操作を示すクリック可能なFigmaプロトタイプです。", viewPrototype: "[ プロトタイプを見る ]",
-        p2Type: "グラフィックデザイン · デジタルコンテンツ", p2Title: "SNSポスターデザイン", p2Text: "読みやすい文字、バランスの良い余白、現代的な色に重点を置いたデザインです。", requestSample: "[ サンプルを依頼 ]",
-        p3Type: "動画編集 · クリエイティブメディア", p3Title: "短編動画編集", p3Text: "スムーズなテンポと自然な流れを重視した動画編集です。", viewSample: "[ サンプルを見る ]",
-        p4Type: "技術スキル · ネットワーク設定", p4Title: "基本的なネットワーク設定", p4Text: "基本的なネットワーク設定と接続環境の構成経験があります。", viewSkills: "[ スキルを見る ]",
-        contactSpan: "[ 連絡先 ]", contactTitle: "清潔でクリエイティブな作品を一緒に作りましょう。", contactText: "クリエイティブプロジェクト、学校関連のデザイン作業、ポートフォリオコラボレーションを歓迎しています。",
-        phone: "電話:", location: "場所:", statusLabel: "状態:", statusValue: "クリエイティブ作業に対応可能",
+        skillsSpan: "[ スキル ]",
+        skillsTitle: "使用しているツールとスキル。",
+        s1Title: "グラフィックデザイン",
+        s1Text: "デジタルコンテンツ向けに、清潔で現代的なビジュアルレイアウトを制作します。",
+        s2Title: "写真編集",
+        s2Text: "画像の強化、色調整、レタッチ、投稿用ビジュアルの準備を行います。",
+        s3Title: "動画編集",
+        s3Text: "短い動画の編集、トランジション追加、クリップ整理を行います。",
+        sampleBtn: "サンプルを見る",
+        s4Title: "Figmaプロトタイプ",
+        s4Text: "Webやアプリ向けのUIレイアウトとクリック可能なプロトタイプを作成します。",
+        s5Title: "基本的なネットワーク設定",
+        s5Text: "基本的なネットワーク接続と設定を行います。",
+        s6Title: "クリエイティブ方向性",
+        s6Text: "色、スタイル、余白、ビジュアル方向性を選びます。",
+        s7Title: "SNSデザイン",
+        s7Text: "ポスター、バナー、サムネイル、デジタルコンテンツを制作します。",
+        s8Title: "学習意欲",
+        s8Text: "新しいデザインツールや技術を学び、スキルを向上させます。",
+        projectsSpan: "[ 作品 ]",
+        projectsTitle: "選ばれたクリエイティブ作品。",
+        p1Type: "UI/UXデザイン · FIGMAプロトタイプ",
+        p1Title: "インタラクティブFigmaプロトタイプ",
+        p1Text: "インターフェースフローとユーザー操作を示すクリック可能なFigmaプロトタイプです。",
+        viewPrototype: "[ プロトタイプを見る ]",
+        p2Type: "グラフィックデザイン · デジタルコンテンツ",
+        p2Title: "SNSポスターデザイン",
+        p2Text: "読みやすい文字、バランスの良い余白、現代的な色に重点を置いたデザインです。",
+        requestSample: "[ サンプルを依頼 ]",
+        p3Type: "動画編集 · クリエイティブメディア",
+        p3Title: "短編動画編集",
+        p3Text: "スムーズなテンポと自然な流れを重視した動画編集です。",
+        viewSample: "[ サンプルを見る ]",
+        p4Type: "技術スキル · ネットワーク設定",
+        p4Title: "基本的なネットワーク設定",
+        p4Text: "基本的なネットワーク設定と接続環境の構成経験があります。",
+        viewSkills: "[ スキルを見る ]",
+        contactSpan: "[ 連絡先 ]",
+        contactTitle: "清潔でクリエイティブな作品を一緒に作りましょう。",
+        contactText: "クリエイティブプロジェクト、学校関連のデザイン作業、ポートフォリオコラボレーションを歓迎しています。",
+        phone: "電話:",
+        location: "場所:",
+        statusLabel: "状態:",
+        statusValue: "クリエイティブ作業に対応可能",
         footer: "© 2026 Michael G. Navarro · グラフィックデザイナー · オンラインポートフォリオ"
       }
     };
@@ -1411,11 +1686,13 @@
     settingsBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       settingsPanel.classList.toggle("show");
+      settingsBtn.classList.toggle("open", settingsPanel.classList.contains("show"));
     });
 
     document.addEventListener("click", (event) => {
       if (!settingsPanel.contains(event.target) && !settingsBtn.contains(event.target)) {
         settingsPanel.classList.remove("show");
+        settingsBtn.classList.remove("open");
       }
     });
 
@@ -1481,6 +1758,7 @@
     function openOverlay(id) {
       const overlay = document.getElementById(id);
       if (!overlay) return;
+
       overlay.classList.add("show");
       document.body.style.overflow = "hidden";
 
@@ -1493,6 +1771,7 @@
     function closeOverlay(id) {
       const overlay = document.getElementById(id);
       if (!overlay) return;
+
       overlay.classList.remove("show");
       document.body.style.overflow = "";
 
@@ -1519,14 +1798,51 @@
       });
     });
 
+    const desktopOverlay = document.getElementById("desktopOverlay");
+    const continueDesktop = document.getElementById("continueDesktop");
+    const backDesktop = document.getElementById("backDesktop");
+
+    function isMobileDevice() {
+      const smallScreen = window.innerWidth <= 900;
+      const touchDevice = navigator.maxTouchPoints > 0;
+      const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+
+      return smallScreen || touchDevice || coarsePointer;
+    }
+
+    window.addEventListener("load", () => {
+      if (isMobileDevice() && !sessionStorage.getItem("desktopNoticeClosed")) {
+        setTimeout(() => {
+          desktopOverlay.classList.add("show");
+          document.body.style.overflow = "hidden";
+        }, 450);
+      }
+    });
+
+    continueDesktop.addEventListener("click", () => {
+      desktopOverlay.classList.remove("show");
+      document.body.style.overflow = "";
+      sessionStorage.setItem("desktopNoticeClosed", "yes");
+    });
+
+    backDesktop.addEventListener("click", () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "https://www.google.com";
+      }
+    });
+
     const idCard = document.getElementById("idCard");
 
     idCard.addEventListener("click", (event) => {
       const rect = idCard.getBoundingClientRect();
       const ripple = document.createElement("span");
+
       ripple.className = "ripple";
       ripple.style.left = `${event.clientX - rect.left}px`;
       ripple.style.top = `${event.clientY - rect.top}px`;
+
       idCard.appendChild(ripple);
 
       setTimeout(() => ripple.remove(), 1300);
@@ -1560,9 +1876,17 @@
       if (event.key !== "Escape") return;
 
       settingsPanel.classList.remove("show");
+      settingsBtn.classList.remove("open");
+
       closeOverlay("videoOverlay");
       closeOverlay("certOverlay");
       closeOverlay("dnscOverlay");
+
+      if (desktopOverlay.classList.contains("show")) {
+        desktopOverlay.classList.remove("show");
+        document.body.style.overflow = "";
+        sessionStorage.setItem("desktopNoticeClosed", "yes");
+      }
     });
   </script>
 </body>
