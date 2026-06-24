@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -236,59 +237,6 @@
       align-items: center;
     }
 
-    h1 {
-      font-size: clamp(42px, 7vw, 86px);
-      line-height: 0.95;
-      margin-bottom: 20px;
-    }
-
-    .gradient-text {
-      color: var(--blue);
-      text-shadow: 0 0 24px rgba(0, 217, 255, 0.75);
-    }
-
-    .hero-text h2 {
-      color: var(--text-soft);
-      font-size: clamp(20px, 3vw, 30px);
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .hero-text p {
-      color: var(--text-soft);
-      line-height: 1.8;
-      margin-bottom: 26px;
-      max-width: 680px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 13px 18px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      color: var(--white);
-      background: rgba(0, 217, 255, 0.07);
-      text-decoration: none;
-      font-weight: 700;
-      transition: 0.28s ease;
-    }
-
-    .btn.primary {
-      background: rgba(0, 217, 255, 0.16);
-      color: var(--blue);
-    }
-
-    .btn:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0, 217, 255, 0.55);
-      box-shadow: 0 0 26px rgba(0, 217, 255, 0.32);
-    }
-
     .dnsc-alien-wrap {
       position: relative;
       display: inline-flex;
@@ -455,6 +403,245 @@
       to {
         transform: rotate(360deg);
       }
+    }
+
+    .dnsc-options-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 21000;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .dnsc-options-overlay.show {
+      display: grid;
+      animation: overlayFade 0.28s ease forwards;
+    }
+
+    .dnsc-options-box {
+      position: relative;
+      width: min(420px, 92vw);
+      padding: 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(0, 217, 255, 0.35);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
+        rgba(5, 18, 35, 0.72);
+      backdrop-filter: blur(9px) saturate(1.35);
+      -webkit-backdrop-filter: blur(9px) saturate(1.35);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 0 42px rgba(0, 217, 255, 0.32);
+      animation: glassPop 0.42s cubic-bezier(0.16, 0.84, 0.26, 1) forwards;
+      overflow: hidden;
+    }
+
+    .dnsc-options-box::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.25), transparent 18%),
+        radial-gradient(circle at 80% 75%, rgba(0, 217, 255, 0.24), transparent 24%),
+        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      opacity: 0.75;
+      pointer-events: none;
+      animation: glassLightMove 5s ease-in-out infinite alternate;
+    }
+
+    .dnsc-options-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .dnsc-options-header {
+      margin-bottom: 18px;
+    }
+
+    .dnsc-options-header span {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .dnsc-options-header h3 {
+      margin-top: 7px;
+      font-size: 25px;
+      color: var(--white);
+    }
+
+    .dnsc-options-header p {
+      margin-top: 8px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .dnsc-option-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .dnsc-option-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 217, 255, 0.24);
+      color: var(--white);
+      text-decoration: none;
+      background: rgba(0, 217, 255, 0.08);
+      transition: 0.25s ease;
+    }
+
+    .dnsc-option-link:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 217, 255, 0.62);
+      background: rgba(0, 217, 255, 0.14);
+      box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.28),
+        0 0 24px rgba(0, 217, 255, 0.26);
+    }
+
+    .dnsc-option-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.26), transparent 24%),
+        rgba(0, 217, 255, 0.13);
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .dnsc-option-text strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .dnsc-option-text small {
+      color: var(--text-soft);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .dnsc-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      background: rgba(3, 8, 22, 0.72);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+      transition: 0.25s ease;
+    }
+
+    .dnsc-close-btn:hover {
+      color: var(--blue);
+      transform: rotate(90deg) scale(1.08);
+      box-shadow: 0 0 22px rgba(0, 217, 255, 0.4);
+    }
+
+    @keyframes overlayFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes glassPop {
+      from {
+        opacity: 0;
+        transform: translateY(34px) scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes glassLightMove {
+      from {
+        transform: translate(-4%, -3%) rotate(0deg);
+      }
+
+      to {
+        transform: translate(5%, 4%) rotate(8deg);
+      }
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .gradient-text {
+      color: var(--blue);
+      text-shadow: 0 0 24px rgba(0, 217, 255, 0.75);
+    }
+
+    .hero-text h2 {
+      color: var(--text-soft);
+      font-size: clamp(20px, 3vw, 30px);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .hero-text p {
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin-bottom: 26px;
+      max-width: 680px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 13px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      color: var(--white);
+      background: rgba(0, 217, 255, 0.07);
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.28s ease;
+    }
+
+    .btn.primary {
+      background: rgba(0, 217, 255, 0.16);
+      color: var(--blue);
+    }
+
+    .btn:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow: 0 0 26px rgba(0, 217, 255, 0.32);
     }
 
     .profile-card,
@@ -906,708 +1093,145 @@
       }
     }
 
-    @keyframes glassLightMove {
-      from {
-        transform: translate(-4%, -3%) rotate(0deg);
-      }
-
-      to {
-        transform: translate(5%, 4%) rotate(8deg);
-      }
-    }
-
-    .dnsc-options-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 21000;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.38);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
-
-    .dnsc-options-overlay.show {
-      display: grid;
-      animation: overlayFade 0.28s ease forwards;
-    }
-
-    .dnsc-options-box {
+    .settings-wrap {
       position: relative;
-      width: min(420px, 92vw);
-      padding: 22px;
-      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .settings-btn {
+      width: 43px;
+      height: 43px;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.16), transparent 28%),
+        rgba(0, 217, 255, 0.08);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 20px;
+      display: grid;
+      place-items: center;
+      transition: 0.25s ease;
+      box-shadow: inset 0 0 15px rgba(0, 217, 255, 0.06);
+    }
+
+    .settings-btn:hover {
+      transform: translateY(-4px) rotate(35deg) scale(1.08);
+      border-color: rgba(0, 217, 255, 0.62);
+      box-shadow:
+        0 0 22px rgba(0, 217, 255, 0.36),
+        0 0 24px rgba(255, 0, 212, 0.12);
+    }
+
+    .settings-panel {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      z-index: 1000;
+      width: min(330px, 86vw);
+      display: none;
+      padding: 16px;
+      border-radius: 24px;
       border: 1px solid rgba(0, 217, 255, 0.35);
       background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
-        rgba(5, 18, 35, 0.72);
-      backdrop-filter: blur(9px) saturate(1.35);
-      -webkit-backdrop-filter: blur(9px) saturate(1.35);
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)),
+        rgba(5, 18, 35, 0.86);
+      backdrop-filter: blur(14px) saturate(1.25);
+      -webkit-backdrop-filter: blur(14px) saturate(1.25);
       box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.48),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18),
-        0 0 42px rgba(0, 217, 255, 0.32);
-      animation: glassPop 0.42s cubic-bezier(0.16, 0.84, 0.26, 1) forwards;
+        0 24px 46px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 32px rgba(0, 217, 255, 0.26);
+      animation: settingsPop 0.25s ease forwards;
       overflow: hidden;
     }
 
-    .dnsc-options-box::before {
+    .settings-panel.show {
+      display: block;
+    }
+
+    .settings-panel::before {
       content: "";
       position: absolute;
       inset: -40%;
       background:
-        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.25), transparent 18%),
-        radial-gradient(circle at 80% 75%, rgba(0, 217, 255, 0.24), transparent 24%),
-        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-      opacity: 0.75;
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 18%),
+        radial-gradient(circle at 90% 80%, rgba(0, 217, 255, 0.18), transparent 24%),
+        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.08), transparent);
       pointer-events: none;
       animation: glassLightMove 5s ease-in-out infinite alternate;
     }
 
-    .dnsc-options-content {
+    .settings-content {
       position: relative;
       z-index: 2;
     }
 
-    .dnsc-options-header {
-      margin-bottom: 18px;
-    }
-
-    .dnsc-options-header span {
+    .settings-content h4 {
       color: var(--blue);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .dnsc-options-header h3 {
-      margin-top: 7px;
-      font-size: 25px;
-      color: var(--white);
-    }
-
-    .dnsc-options-header p {
-      margin-top: 8px;
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .dnsc-option-links {
-      display: grid;
-      gap: 12px;
-    }
-
-    .dnsc-option-link {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 15px;
-      border-radius: 20px;
-      border: 1px solid rgba(0, 217, 255, 0.24);
-      color: var(--white);
-      text-decoration: none;
-      background: rgba(0, 217, 255, 0.08);
-      transition: 0.25s ease;
-    }
-
-    .dnsc-option-link:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 217, 255, 0.62);
-      background: rgba(0, 217, 255, 0.14);
-      box-shadow:
-        0 12px 24px rgba(0, 0, 0, 0.28),
-        0 0 24px rgba(0, 217, 255, 0.26);
-    }
-
-    .dnsc-option-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.26), transparent 24%),
-        rgba(0, 217, 255, 0.13);
-      border: 1px solid rgba(0, 217, 255, 0.28);
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .dnsc-option-text strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .dnsc-option-text small {
-      color: var(--text-soft);
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .dnsc-close-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      z-index: 3;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      background: rgba(3, 8, 22, 0.72);
-      color: var(--white);
-      cursor: pointer;
-      font-size: 24px;
-      line-height: 1;
-      transition: 0.25s ease;
-    }
-
-    .dnsc-close-btn:hover {
-      color: var(--blue);
-      transform: rotate(90deg) scale(1.08);
-      box-shadow: 0 0 22px rgba(0, 217, 255, 0.4);
-    }
-
-    @keyframes overlayFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes glassPop {
-      from {
-        opacity: 0;
-        transform: translateY(34px) scale(0.92);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .section-title {
-      margin-bottom: 28px;
-    }
-
-    .section-title span {
-      color: var(--blue);
-      letter-spacing: 2px;
       font-size: 13px;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
     }
 
-    .section-title h2 {
-      font-size: clamp(30px, 5vw, 52px);
-      margin-top: 8px;
+    .settings-section {
+      margin-top: 13px;
+      padding-top: 13px;
+      border-top: 1px solid rgba(0, 217, 255, 0.18);
     }
 
-    .glass-box {
-      border-radius: 30px;
-      padding: 28px;
-      line-height: 1.8;
+    .settings-label {
+      display: block;
       color: var(--text-soft);
-    }
-
-    .grid {
-      display: grid;
-      gap: 20px;
-    }
-
-    .skills-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .skill-card {
-      position: relative;
-      min-height: 170px;
-      padding: 22px;
-      border-radius: 26px;
-      overflow: visible;
-      transition: 0.32s ease;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-16px) scale(1.035);
-      z-index: 5;
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(0, 217, 255, 0.55);
-      box-shadow:
-        0 22px 38px rgba(0, 0, 0, 0.4),
-        0 0 36px rgba(0, 217, 255, 0.38);
-    }
-
-    .skill-icon {
-      position: relative;
-      width: 54px;
-      height: 54px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      background: rgba(0, 217, 255, 0.12);
-      border: 1px solid rgba(0, 217, 255, 0.28);
-      margin-bottom: 18px;
-      font-size: 25px;
-      overflow: visible;
-      transition: 0.3s ease;
-    }
-
-    .skill-card:hover .skill-icon {
-      transform: translateY(-10px) scale(1.14);
-      background: rgba(0, 217, 255, 0.2);
-      box-shadow: 0 14px 28px rgba(0, 217, 255, 0.28);
-    }
-
-    .skill-card h3 {
-      margin-bottom: 8px;
-    }
-
-    .skill-card p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .video-sample-trigger {
-      cursor: pointer;
-    }
-
-    .sample-edit-btn {
-      margin-top: 14px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(0, 217, 255, 0.1);
-      color: var(--blue);
-      cursor: pointer;
       font-size: 12px;
-      font-weight: 700;
+      margin-bottom: 9px;
       letter-spacing: 0.8px;
-      transition: 0.28s ease;
     }
 
-    .video-sample-trigger:hover .sample-edit-btn {
-      transform: translateY(-4px);
-      background: rgba(0, 217, 255, 0.16);
-      box-shadow: 0 0 22px rgba(0, 217, 255, 0.35);
-    }
-
-    .projects-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .project-card {
-      padding: 26px;
-      border-radius: 28px;
-      overflow: visible;
-      transition: 0.32s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-16px) scale(1.025);
-      z-index: 5;
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(0, 217, 255, 0.55);
-      box-shadow:
-        0 22px 38px rgba(0, 0, 0, 0.4),
-        0 0 36px rgba(0, 217, 255, 0.38);
-    }
-
-    .project-type {
-      color: var(--blue);
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    .project-card h3 {
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-
-    .project-card p {
-      color: var(--text-soft);
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-
-    .chips {
+    .settings-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 18px;
     }
 
-    .chip {
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 217, 255, 0.22);
-      color: var(--muted);
-      font-size: 12px;
-      background: rgba(0, 217, 255, 0.06);
-    }
-
-    .mini-link {
-      color: var(--blue);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .contact-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      align-items: center;
-    }
-
-    .contact-info p {
-      color: var(--text-soft);
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .icon-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .icon-link {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 13px 16px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      color: var(--white);
-      background: rgba(0, 217, 255, 0.07);
-      text-decoration: none;
-      transition: 0.28s ease;
-      overflow: visible;
-    }
-
-    .icon-link::after,
-    .skill-icon::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -14px;
-      width: 72%;
-      height: 12px;
-      border-radius: 999px;
-      transform: translateX(-50%) scaleX(0.75);
-      background: linear-gradient(
-        90deg,
-        #ff004c,
-        #ff8c00,
-        #ffee00,
-        #00ff85,
-        #00d9ff,
-        #7a5cff,
-        #ff00d4,
-        #ff004c
-      );
-      background-size: 300% 100%;
-      filter: blur(10px);
-      opacity: 0;
-      transition: 0.28s ease;
-      animation: rainbowGlow 1.8s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .icon-link:hover {
-      color: var(--blue);
-      transform: translateY(-12px) scale(1.08);
-      background: rgba(0, 217, 255, 0.14);
-      border-color: rgba(0, 217, 255, 0.55);
-      box-shadow:
-        0 16px 28px rgba(0, 0, 0, 0.35),
-        0 0 34px rgba(0, 217, 255, 0.42);
-    }
-
-    .icon-link:hover::after,
-    .skill-card:hover .skill-icon::after {
-      opacity: 1;
-      transform: translateX(-50%) scaleX(1.12);
-    }
-
-    @keyframes rainbowGlow {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      100% {
-        background-position: 300% 50%;
-      }
-    }
-
-    .video-popup {
-      position: fixed;
-      inset: 0;
-      z-index: 20000;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .video-popup.show {
-      display: grid;
-      animation: videoOverlayFade 0.28s ease forwards;
-    }
-
-    .video-popup-box {
-      position: relative;
-      width: min(430px, 92vw);
-      padding: 18px;
-      border-radius: 30px;
-      border: 1px solid var(--border);
-      background: var(--nav-bg);
-      box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.55),
-        0 0 45px rgba(0, 217, 255, 0.4);
-      animation: videoPopupRise 0.42s ease forwards;
-    }
-
-    .video-popup-box::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -18px;
-      width: 72%;
-      height: 18px;
-      border-radius: 999px;
-      transform: translateX(-50%);
-      background: linear-gradient(
-        90deg,
-        #ff004c,
-        #ff8c00,
-        #ffee00,
-        #00ff85,
-        #00d9ff,
-        #7a5cff,
-        #ff00d4,
-        #ff004c
-      );
-      background-size: 300% 100%;
-      filter: blur(16px);
-      opacity: 0.9;
-      animation: rainbowGlow 1.7s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .video-popup-header {
-      padding: 8px 6px 14px;
-    }
-
-    .video-popup-header span {
-      color: var(--blue);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .video-popup-header h3 {
-      margin-top: 6px;
-      font-size: 22px;
-      color: var(--white);
-    }
-
-    .video-popup video {
-      width: 100%;
-      max-height: 72vh;
-      aspect-ratio: 9 / 16;
-      object-fit: contain;
-      display: block;
-      border-radius: 22px;
-      border: 1px solid rgba(0, 217, 255, 0.28);
-      background: #000;
-    }
-
-    .video-close-btn {
-      position: absolute;
-      top: -14px;
-      right: -14px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: rgba(4, 12, 28, 0.95);
-      color: var(--white);
-      cursor: pointer;
-      font-size: 28px;
-      line-height: 1;
-      box-shadow:
-        0 0 22px rgba(0, 217, 255, 0.42),
-        0 10px 22px rgba(0, 0, 0, 0.45);
-      transition: 0.25s ease;
-    }
-
-    .video-close-btn:hover {
-      color: var(--blue);
-      transform: rotate(90deg) scale(1.08);
-      box-shadow:
-        0 0 28px rgba(0, 217, 255, 0.6),
-        0 0 28px rgba(255, 0, 212, 0.25);
-    }
-
-    @keyframes videoOverlayFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes videoPopupRise {
-      from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.92);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .theme-panel {
-      position: fixed;
-      right: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 300;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 12px;
-      border-radius: 22px;
-      border: 1px solid var(--border);
-      background: var(--nav-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: var(--shadow);
-    }
-
-    .theme-title {
-      font-size: 10px;
-      text-align: center;
-      color: var(--blue);
-      letter-spacing: 1.2px;
-      margin-bottom: 2px;
-    }
-
-    .theme-btn {
-      width: 42px;
-      height: 42px;
+    .theme-btn,
+    .lang-btn {
+      min-width: 48px;
+      min-height: 39px;
+      padding: 9px 10px;
       border-radius: 14px;
       border: 1px solid var(--border);
-      background: rgba(0, 217, 255, 0.09);
+      background: rgba(0, 217, 255, 0.08);
       color: var(--white);
       cursor: pointer;
-      font-size: 18px;
-      transition: 0.25s ease;
-    }
-
-    .theme-btn:hover {
-      transform: translateX(-6px) scale(1.08);
-      border-color: var(--blue);
-      box-shadow:
-        0 0 18px rgba(0, 217, 255, 0.45),
-        0 0 28px rgba(255, 0, 212, 0.2);
-    }
-
-    .theme-btn.active-theme {
-      border-color: var(--blue);
-      box-shadow: 0 0 18px rgba(0, 217, 255, 0.55);
-    }
-
-    .desktop-popup {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.58);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .desktop-popup.show {
-      display: grid;
-    }
-
-    .popup-box {
-      width: min(430px, 92vw);
-      padding: 26px;
-      border-radius: 28px;
-      border: 1px solid var(--border);
-      background: var(--nav-bg);
-      color: var(--white);
-      box-shadow:
-        0 24px 55px rgba(0, 0, 0, 0.45),
-        0 0 38px rgba(0, 217, 255, 0.38);
-      text-align: center;
-      animation: popupFloat 0.45s ease;
-    }
-
-    .popup-box h3 {
-      color: var(--blue);
-      margin-bottom: 12px;
-      font-size: 24px;
-    }
-
-    .popup-box p {
-      color: var(--text-soft);
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-
-    .popup-actions {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .popup-box button {
-      padding: 12px 18px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: rgba(0, 217, 255, 0.18);
-      color: var(--white);
-      cursor: pointer;
+      font-size: 13px;
       font-weight: 700;
       transition: 0.25s ease;
-      min-width: 140px;
     }
 
-    .popup-box button:hover {
+    .theme-btn:hover,
+    .lang-btn:hover {
       transform: translateY(-4px);
-      box-shadow: 0 0 22px rgba(0, 217, 255, 0.4);
+      border-color: rgba(0, 217, 255, 0.62);
+      box-shadow:
+        0 0 18px rgba(0, 217, 255, 0.35),
+        0 0 20px rgba(255, 0, 212, 0.12);
     }
 
-    .back-btn {
-      background: rgba(255, 255, 255, 0.08) !important;
+    .theme-btn.active-theme,
+    .lang-btn.active-lang {
+      color: var(--blue);
+      border-color: rgba(0, 217, 255, 0.72);
+      background: rgba(0, 217, 255, 0.16);
+      box-shadow: 0 0 18px rgba(0, 217, 255, 0.35);
     }
 
-    @keyframes popupFloat {
+    @keyframes settingsPop {
       from {
         opacity: 0;
-        transform: translateY(25px) scale(0.95);
+        transform: translateY(-8px) scale(0.96);
       }
 
       to {
@@ -1615,751 +1239,3 @@
         transform: translateY(0) scale(1);
       }
     }
-
-    footer {
-      padding: 28px 0;
-      color: var(--muted);
-      text-align: center;
-      border-top: 1px solid rgba(0, 217, 255, 0.14);
-    }
-
-    @media (max-width: 900px) {
-      .hero,
-      .contact-card {
-        grid-template-columns: 1fr;
-      }
-
-      .skills-grid,
-      .projects-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .theme-panel {
-        top: auto;
-        right: 14px;
-        bottom: 14px;
-        transform: none;
-        flex-direction: row;
-        border-radius: 18px;
-      }
-
-      .theme-title {
-        display: none;
-      }
-    }
-
-    @media (max-width: 560px) {
-      section {
-        padding: 65px 0;
-      }
-
-      .skills-grid,
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-card {
-        padding: 14px;
-      }
-
-      .buttons {
-        flex-direction: column;
-      }
-
-      .btn {
-        text-align: center;
-      }
-
-      .certificate-popup-box {
-        padding: 16px;
-      }
-
-      .certificate-frame-wrap {
-        height: 55vh;
-        padding: 7px;
-      }
-
-      .certificate-popup-header h3 {
-        font-size: 21px;
-      }
-
-      .smoke {
-        width: 180px;
-        height: 180px;
-        filter: none;
-        opacity: 0.3;
-        animation-duration: 34s;
-        mix-blend-mode: normal;
-      }
-
-      .smoke1 {
-        top: -55px;
-        left: -65px;
-      }
-
-      .smoke2 {
-        width: 220px;
-        height: 220px;
-        bottom: -70px;
-        right: -75px;
-      }
-
-      .smoke3,
-      .smoke4 {
-        display: none;
-      }
-
-      .profile-card,
-      .glass-box,
-      .skill-card,
-      .project-card,
-      nav,
-      .theme-panel {
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="desktop-popup" id="desktopPopup">
-    <div class="popup-box">
-      <h3>Better on Desktop</h3>
-      <p>
-        For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.
-      </p>
-
-      <div class="popup-actions">
-        <button id="continuePopup">Continue Anyway</button>
-        <button id="backPopup" class="back-btn">Back</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="dnsc-options-overlay" id="dnscOptionsOverlay">
-    <div class="dnsc-options-box">
-      <button class="dnsc-close-btn" id="closeDnscOptions" aria-label="Close DNSC options">×</button>
-
-      <div class="dnsc-options-content">
-        <div class="dnsc-options-header">
-          <span>[ DNSC PORTAL ACCESS ]</span>
-          <h3>Choose Destination</h3>
-          <p>Select where you want to go. These links will open in a new tab.</p>
-        </div>
-
-        <div class="dnsc-option-links">
-          <a class="dnsc-option-link" href="https://dnsc.edu.ph/" target="_blank" rel="noopener noreferrer">
-            <div class="dnsc-option-icon">🌐</div>
-            <div class="dnsc-option-text">
-              <strong>DNSC Official Website</strong>
-              <small>Visit the official Davao del Norte State College website.</small>
-            </div>
-          </a>
-
-          <a class="dnsc-option-link" href="https://www.facebook.com/officialdnsc/" target="_blank" rel="noopener noreferrer">
-            <div class="dnsc-option-icon">📘</div>
-            <div class="dnsc-option-text">
-              <strong>DNSC Facebook Page</strong>
-              <small>Open the official DNSC Facebook page.</small>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="video-popup" id="videoPopup">
-    <div class="video-popup-box">
-      <button class="video-close-btn" id="closeVideoPopup" aria-label="Close video popup">×</button>
-
-      <div class="video-popup-header">
-        <span>[ SAMPLE SHORT EDIT ]</span>
-        <h3>Michael’s Video Editing Sample</h3>
-      </div>
-
-      <video id="sampleVideo" controls preload="metadata" playsinline>
-        <source src="assets/sample-edit.mp4.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-  </div>
-
-  <div class="certificate-popup" id="certificatePopup">
-    <div class="certificate-popup-box">
-      <button class="certificate-close-btn" id="closeCertificatePopup" aria-label="Close certificate popup">×</button>
-
-      <div class="certificate-popup-header">
-        <span>[ CERTIFICATE ]</span>
-        <h3>Cybersecurity Essentials</h3>
-        <p>Cisco Networking Academy · Davao Del Norte State College</p>
-      </div>
-
-      <div class="certificate-frame-wrap">
-        <img
-          src="assets/profile.jpg.jpg"
-          class="certificate-frame"
-          alt="Michael Navarro Certificate"
-        />
-      </div>
-    </div>
-  </div>
-
-  <div class="theme-panel" aria-label="Theme controls">
-    <div class="theme-title">THEME</div>
-    <button class="theme-btn active-theme" data-theme="default" title="Default Theme">🌙</button>
-    <button class="theme-btn" data-theme="light" title="Light Theme">☀️</button>
-    <button class="theme-btn" data-theme="colorblind" title="Color Blind Friendly">👁️</button>
-  </div>
-
-  <div class="water-bg">
-    <div class="smoke smoke1"></div>
-    <div class="smoke smoke2"></div>
-    <div class="smoke smoke3"></div>
-    <div class="smoke smoke4"></div>
-  </div>
-
-  <nav>
-    <div class="logo">MICHAEL_</div>
-
-    <div class="nav-links">
-      <a href="#about">ABOUT</a>
-      <a href="#skills">SKILLS</a>
-      <a href="#projects">PROJECTS</a>
-      <a href="#contact">CONTACT</a>
-    </div>
-
-    <div class="status">OPEN TO WORK</div>
-  </nav>
-
-  <main class="container">
-    <section class="hero" id="home">
-      <div class="hero-text">
-        <div class="dnsc-alien-wrap">
-          <button class="dnsc-alien-btn" id="dnscAlienButton" type="button">
-            <span class="dnsc-alien-icon"></span>
-
-            <span class="dnsc-alien-text">
-              <strong>DNSC ACCESS</strong>
-              <span>LONG PRESS 2–3 SEC</span>
-            </span>
-
-            <span class="hold-progress"></span>
-          </button>
-        </div>
-
-        <h1>Hi, I’m <span class="gradient-text">Michael.</span></h1>
-        <h2>Graphic Designer · Visual Creator · UI/UX Learner</h2>
-
-        <p>
-          Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean,
-          modern, and eye-catching visual designs. My skills include photo editing,
-          video editing, and basic network configuration. I’m always willing to learn
-          new tools and improve my skills to create better and more professional outputs.
-        </p>
-
-        <div class="buttons">
-          <a class="btn primary" href="#projects">View Projects</a>
-          <a class="btn" href="#contact">Get In Touch</a>
-        </div>
-      </div>
-
-      <div class="profile-card">
-        <img
-          src="assets/profile.jpg"
-          alt="Michael G. Navarro"
-          class="profile-img"
-        />
-
-        <div class="id-card" id="digitalIdCard">
-          <small>[ DIGITAL ID ]</small>
-          <h3>Michael G. Navarro</h3>
-          <p>Graphic Designer · DNSC Student</p>
-          <p style="color: var(--blue); margin-top: 8px;">ACTIVE — CREATIVE PORTFOLIO</p>
-        </div>
-
-        <button class="certificate-icon-btn" id="openCertificatePopup" type="button">
-          <span class="certificate-icon">🏅</span>
-          <span class="certificate-text">
-            <strong>Certificate</strong>
-            <small>Tap to view achievement</small>
-          </span>
-        </button>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="section-title">
-        <span>[ ABOUT ]</span>
-        <h2>Designing visuals that feel modern and professional.</h2>
-      </div>
-
-      <div class="glass-box">
-        <p>
-          I am a 4th year college student with a growing interest in graphic design,
-          visual editing, and user interface design. I enjoy creating designs that are
-          simple, clean, and attractive while making sure the message is easy to understand.
-        </p>
-
-        <br />
-
-        <p>
-          My creative work focuses on photo editing, video editing, layout design,
-          and digital content creation. I also have experience using Figma, where I can
-          create interface layouts and interactive prototypes for web or app design ideas.
-          Aside from creative work, I also have basic knowledge in network configuration,
-          which helps me understand technical setups and system connectivity.
-        </p>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="section-title">
-        <span>[ SKILLS ]</span>
-        <h2>Tools and skills I work with.</h2>
-      </div>
-
-      <div class="grid skills-grid">
-        <div class="skill-card">
-          <div class="skill-icon">🎨</div>
-          <h3>Graphic Design</h3>
-          <p>Creating clean, modern, and eye-catching visual layouts for digital content.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">🖼️</div>
-          <h3>Photo Editing</h3>
-          <p>Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
-        </div>
-
-        <div class="skill-card video-sample-trigger" id="openVideoSample">
-          <div class="skill-icon">🎬</div>
-          <h3>Video Editing</h3>
-          <p>Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
-          <button class="sample-edit-btn" type="button">View Sample Edit</button>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">💎</div>
-          <h3>Figma Prototype</h3>
-          <p>Designing UI layouts and creating clickable prototypes for web and app concepts.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">🌐</div>
-          <h3>Basic Network Configuration</h3>
-          <p>Setting up basic network connections, configurations, and connectivity settings.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">✨</div>
-          <h3>Creative Direction</h3>
-          <p>Choosing colors, styles, spacing, and visual direction for a more polished output.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">📱</div>
-          <h3>Social Media Design</h3>
-          <p>Creating posters, banners, thumbnails, and digital content for online platforms.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">⚡</div>
-          <h3>Fast Learner</h3>
-          <p>Willing to explore new design tools, trends, and techniques to improve my work.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="section-title">
-        <span>[ PROJECTS ]</span>
-        <h2>Selected creative work.</h2>
-      </div>
-
-      <div class="grid projects-grid">
-        <div class="project-card">
-          <div class="project-type">UI/UX DESIGN · FIGMA PROTOTYPE</div>
-          <h3>Interactive Figma Prototype</h3>
-          <p>
-            A clickable prototype created in Figma to present a clean interface flow,
-            screen layout, and user interaction concept.
-          </p>
-
-          <div class="chips">
-            <span class="chip">Figma</span>
-            <span class="chip">UI Design</span>
-            <span class="chip">Prototype</span>
-            <span class="chip">Wireframe</span>
-          </div>
-
-          <a
-            class="mini-link"
-            href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=zMthvpgWqKfyunAp-1&starting-point-node-id=100%3A16"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            [ VIEW PROTOTYPE ]
-          </a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-type">GRAPHIC DESIGN · DIGITAL CONTENT</div>
-          <h3>Social Media Poster Designs</h3>
-          <p>
-            A collection of poster and layout designs focused on strong visuals,
-            readable text, balanced spacing, and modern color combinations.
-          </p>
-
-          <div class="chips">
-            <span class="chip">Poster Design</span>
-            <span class="chip">Layout</span>
-            <span class="chip">Branding</span>
-          </div>
-
-          <a class="mini-link" href="#contact">[ REQUEST SAMPLE ]</a>
-        </div>
-
-        <div class="project-card video-sample-trigger" id="openVideoSampleProject">
-          <div class="project-type">VIDEO EDITING · CREATIVE MEDIA</div>
-          <h3>Short Video Edits</h3>
-          <p>
-            Edited video content with smooth pacing, transitions, visual timing,
-            and improved flow for more engaging presentation.
-          </p>
-
-          <div class="chips">
-            <span class="chip">Video Editing</span>
-            <span class="chip">Transitions</span>
-            <span class="chip">Visual Flow</span>
-          </div>
-
-          <a class="mini-link" href="javascript:void(0)">[ VIEW SAMPLE EDIT ]</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-type">TECHNICAL SKILL · NETWORK SETUP</div>
-          <h3>Basic Network Configuration</h3>
-          <p>
-            Practical experience in configuring basic network settings and connectivity
-            setups, with attention to proper access and stable connection.
-          </p>
-
-          <div class="chips">
-            <span class="chip">Networking</span>
-            <span class="chip">Configuration</span>
-            <span class="chip">Technical Setup</span>
-          </div>
-
-          <a class="mini-link" href="#skills">[ VIEW SKILLS ]</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="section-title">
-        <span>[ CONTACT ]</span>
-        <h2>Let’s create something clean and creative.</h2>
-      </div>
-
-      <div class="glass-box contact-card">
-        <div class="contact-info">
-          <p>
-            I am open to creative projects, school-related design work, portfolio
-            collaborations, and opportunities where I can improve my skills in design,
-            editing, and UI/UX prototyping.
-          </p>
-
-          <div class="icon-links">
-            <a
-              class="icon-link"
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=navarro.michael@dnsc.edu.ph"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Gmail
-            </a>
-
-            <a class="icon-link" href="tel:+639158480061">Call</a>
-
-            <a
-              class="icon-link"
-              href="https://www.facebook.com/share/17sqYuH8bE/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Facebook
-            </a>
-
-            <a
-              class="icon-link"
-              href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=b9U4PNwgAzjz0mZn-1&starting-point-node-id=100%3A16"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Figma
-            </a>
-          </div>
-        </div>
-
-        <div>
-          <p><strong>Email:</strong> navarro.michael@dnsc.edu.ph</p>
-          <p><strong>Phone:</strong> 09158480061</p>
-          <p><strong>Facebook:</strong> Michael G. Navarro</p>
-          <p><strong>Location:</strong> Davao del Norte, Philippines</p>
-          <p><strong>Status:</strong> Available for creative work</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © 2026 Michael G. Navarro · Graphic Designer · Portfolio Online
-  </footer>
-
-  <script>
-    const popup = document.getElementById("desktopPopup");
-    const continuePopup = document.getElementById("continuePopup");
-    const backPopup = document.getElementById("backPopup");
-
-    function isMobileDevice() {
-      const smallScreen = window.innerWidth <= 900;
-      const touchDevice = navigator.maxTouchPoints > 0;
-      const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
-      return smallScreen || touchDevice || coarsePointer;
-    }
-
-    function showMobilePopup() {
-      if (popup && isMobileDevice()) {
-        popup.classList.add("show");
-      }
-    }
-
-    window.addEventListener("load", () => {
-      setTimeout(showMobilePopup, 400);
-    });
-
-    continuePopup?.addEventListener("click", () => {
-      popup.classList.remove("show");
-    });
-
-    backPopup?.addEventListener("click", () => {
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = "https://www.google.com";
-      }
-    });
-
-    const themeButtons = document.querySelectorAll(".theme-btn");
-
-    function applyTheme(theme) {
-      document.body.classList.remove("light-theme", "colorblind-theme");
-
-      if (theme === "light") {
-        document.body.classList.add("light-theme");
-      }
-
-      if (theme === "colorblind") {
-        document.body.classList.add("colorblind-theme");
-      }
-
-      themeButtons.forEach((btn) => {
-        btn.classList.toggle("active-theme", btn.dataset.theme === theme);
-      });
-
-      localStorage.setItem("portfolioTheme", theme);
-    }
-
-    const savedTheme = localStorage.getItem("portfolioTheme") || "default";
-    applyTheme(savedTheme);
-
-    themeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        applyTheme(button.dataset.theme);
-      });
-    });
-
-    const openVideoSample = document.getElementById("openVideoSample");
-    const openVideoSampleProject = document.getElementById("openVideoSampleProject");
-    const videoPopup = document.getElementById("videoPopup");
-    const closeVideoPopup = document.getElementById("closeVideoPopup");
-    const sampleVideo = document.getElementById("sampleVideo");
-
-    function openSampleVideo() {
-      if (!videoPopup) return;
-
-      videoPopup.classList.add("show");
-      document.body.style.overflow = "hidden";
-
-      if (sampleVideo) {
-        sampleVideo.load();
-      }
-    }
-
-    function closeSampleVideo() {
-      if (!videoPopup) return;
-
-      videoPopup.classList.remove("show");
-      document.body.style.overflow = "";
-
-      if (sampleVideo) {
-        sampleVideo.pause();
-        sampleVideo.currentTime = 0;
-      }
-    }
-
-    openVideoSample?.addEventListener("click", openSampleVideo);
-    openVideoSampleProject?.addEventListener("click", openSampleVideo);
-    closeVideoPopup?.addEventListener("click", closeSampleVideo);
-
-    videoPopup?.addEventListener("click", (e) => {
-      if (e.target === videoPopup) {
-        closeSampleVideo();
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && videoPopup?.classList.contains("show")) {
-        closeSampleVideo();
-      }
-    });
-
-    const digitalIdCard = document.getElementById("digitalIdCard");
-
-    function createWaterRipple(event) {
-      if (!digitalIdCard) return;
-
-      const rect = digitalIdCard.getBoundingClientRect();
-      const clientX = event.clientX ?? event.touches?.[0]?.clientX ?? rect.left + rect.width / 2;
-      const clientY = event.clientY ?? event.touches?.[0]?.clientY ?? rect.top + rect.height / 2;
-
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
-
-      digitalIdCard.style.setProperty("--tap-x", x + "px");
-      digitalIdCard.style.setProperty("--tap-y", y + "px");
-
-      digitalIdCard.classList.remove("water-tap");
-      void digitalIdCard.offsetWidth;
-      digitalIdCard.classList.add("water-tap");
-
-      const oldEffects = digitalIdCard.querySelectorAll(".id-water-drop, .id-water-ripple");
-      oldEffects.forEach((effect) => effect.remove());
-
-      const drop = document.createElement("span");
-      drop.className = "id-water-drop";
-      drop.style.setProperty("--drop-x", x + "px");
-      drop.style.setProperty("--drop-y", y + "px");
-      digitalIdCard.appendChild(drop);
-
-      for (let i = 1; i <= 4; i++) {
-        const ripple = document.createElement("span");
-        ripple.className = "id-water-ripple ripple-" + i;
-        ripple.style.setProperty("--drop-x", x + "px");
-        ripple.style.setProperty("--drop-y", y + "px");
-        digitalIdCard.appendChild(ripple);
-      }
-
-      setTimeout(() => {
-        drop.remove();
-        digitalIdCard.querySelectorAll(".id-water-ripple").forEach((ripple) => ripple.remove());
-        digitalIdCard.classList.remove("water-tap");
-      }, 2300);
-    }
-
-    digitalIdCard?.addEventListener("click", createWaterRipple);
-
-    const dnscAlienButton = document.getElementById("dnscAlienButton");
-    const dnscOptionsOverlay = document.getElementById("dnscOptionsOverlay");
-    const closeDnscOptions = document.getElementById("closeDnscOptions");
-
-    let holdTimer = null;
-
-    function openDnscOptions() {
-      dnscAlienButton?.classList.remove("holding");
-      dnscOptionsOverlay?.classList.add("show");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeDnscPopup() {
-      dnscOptionsOverlay?.classList.remove("show");
-      document.body.style.overflow = "";
-    }
-
-    function startHold(e) {
-      e.preventDefault();
-
-      if (!dnscAlienButton) return;
-
-      dnscAlienButton.classList.add("holding");
-
-      clearTimeout(holdTimer);
-      holdTimer = setTimeout(() => {
-        openDnscOptions();
-      }, 2300);
-    }
-
-    function cancelHold() {
-      clearTimeout(holdTimer);
-      dnscAlienButton?.classList.remove("holding");
-    }
-
-    dnscAlienButton?.addEventListener("pointerdown", startHold);
-    dnscAlienButton?.addEventListener("pointerup", cancelHold);
-    dnscAlienButton?.addEventListener("pointerleave", cancelHold);
-    dnscAlienButton?.addEventListener("pointercancel", cancelHold);
-
-    closeDnscOptions?.addEventListener("click", closeDnscPopup);
-
-    dnscOptionsOverlay?.addEventListener("click", (e) => {
-      if (e.target === dnscOptionsOverlay) {
-        closeDnscPopup();
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && dnscOptionsOverlay?.classList.contains("show")) {
-        closeDnscPopup();
-      }
-    });
-
-    const openCertificatePopup = document.getElementById("openCertificatePopup");
-    const certificatePopup = document.getElementById("certificatePopup");
-    const closeCertificatePopup = document.getElementById("closeCertificatePopup");
-
-    function openCertificate() {
-      if (!certificatePopup) return;
-
-      certificatePopup.classList.add("show");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeCertificate() {
-      if (!certificatePopup) return;
-
-      certificatePopup.classList.remove("show");
-      document.body.style.overflow = "";
-    }
-
-    openCertificatePopup?.addEventListener("click", openCertificate);
-    closeCertificatePopup?.addEventListener("click", closeCertificate);
-
-    certificatePopup?.addEventListener("click", (e) => {
-      if (e.target === certificatePopup) {
-        closeCertificate();
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && certificatePopup?.classList.contains("show")) {
-        closeCertificate();
-      }
-    });
-  </script>
-</body>
-</html>
