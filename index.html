@@ -113,27 +113,27 @@
 
     @keyframes smokeWave {
       0% {
-        transform: translate(0, 0) rotate(0deg) scale(1);
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
         border-radius: 45% 55% 60% 40%;
       }
 
       25% {
-        transform: translate(80px, -60px) rotate(90deg) scale(1.15);
+        transform: translate3d(80px, -60px, 0) rotate(90deg) scale(1.15);
         border-radius: 60% 40% 45% 55%;
       }
 
       50% {
-        transform: translate(-70px, 80px) rotate(180deg) scale(0.95);
+        transform: translate3d(-70px, 80px, 0) rotate(180deg) scale(0.95);
         border-radius: 35% 65% 55% 45%;
       }
 
       75% {
-        transform: translate(60px, 70px) rotate(270deg) scale(1.2);
+        transform: translate3d(60px, 70px, 0) rotate(270deg) scale(1.2);
         border-radius: 55% 45% 35% 65%;
       }
 
       100% {
-        transform: translate(0, 0) rotate(360deg) scale(1);
+        transform: translate3d(0, 0, 0) rotate(360deg) scale(1);
         border-radius: 45% 55% 60% 40%;
       }
     }
@@ -146,10 +146,11 @@
       border: 1px solid rgba(0, 217, 255, 0.9);
       box-shadow: 0 0 25px rgba(0, 217, 255, 0.7);
       pointer-events: none;
-      transform: translate(-50%, -50%) scale(0);
+      transform: translate3d(-50%, -50%, 0) scale(0);
       z-index: 9999;
       opacity: 0;
-      transition: 0.2s ease;
+      transition: width 0.18s ease, height 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+      will-change: transform, left, top;
     }
 
     .cursor-water.active {
@@ -157,7 +158,6 @@
       height: 60px;
       background: radial-gradient(circle, rgba(0, 217, 255, 0.25), transparent 70%);
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
     }
 
     .container {
@@ -306,40 +306,21 @@
       color: var(--white);
       border: 1px solid var(--border);
       background: rgba(0, 217, 255, 0.08);
-      overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .btn::before,
-    .skill-card::before,
-    .project-card::before,
-    .icon-link::before {
-      content: "";
-      position: absolute;
-      inset: auto auto -80% -50%;
-      width: 220%;
-      height: 120%;
-      background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(0, 217, 255, 0.35),
-        rgba(255, 255, 255, 0.2),
-        transparent
-      );
-      transform: rotate(8deg);
-      transition: 0.55s ease;
-    }
-
-    .btn:hover::before,
-    .skill-card:hover::before,
-    .project-card:hover::before,
-    .icon-link:hover::before {
-      bottom: 120%;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+      will-change: transform;
     }
 
     .btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 25px rgba(0, 217, 255, 0.45);
+      transform: translate3d(0, -10px, 0) scale(1.04);
+      background: rgba(0, 217, 255, 0.14);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow:
+        0 16px 28px rgba(0, 0, 0, 0.35),
+        0 0 34px rgba(0, 217, 255, 0.45);
+    }
+
+    .btn:active {
+      transform: translate3d(0, -4px, 0) scale(0.98);
     }
 
     .btn.primary {
@@ -355,6 +336,16 @@
       backdrop-filter: blur(18px);
       box-shadow: var(--shadow);
       overflow: hidden;
+      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+      will-change: transform;
+    }
+
+    .profile-card:hover {
+      transform: translate3d(0, -12px, 0) scale(1.02);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow:
+        0 22px 40px rgba(0, 0, 0, 0.38),
+        0 0 38px rgba(0, 217, 255, 0.35);
     }
 
     .profile-card::after {
@@ -439,13 +430,19 @@
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.07);
       backdrop-filter: blur(14px);
-      overflow: hidden;
-      transition: 0.35s ease;
+      overflow: visible;
+      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease, background 0.32s ease;
+      will-change: transform;
     }
 
     .skill-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 0 32px rgba(0, 217, 255, 0.35);
+      transform: translate3d(0, -16px, 0) scale(1.035);
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow:
+        0 22px 38px rgba(0, 0, 0, 0.4),
+        0 0 36px rgba(0, 217, 255, 0.38);
     }
 
     .skill-icon {
@@ -460,6 +457,14 @@
       margin-bottom: 18px;
       font-size: 25px;
       overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      will-change: transform;
+    }
+
+    .skill-card:hover .skill-icon {
+      transform: translate3d(0, -10px, 0) scale(1.14);
+      background: rgba(0, 217, 255, 0.2);
+      box-shadow: 0 14px 28px rgba(0, 217, 255, 0.28);
     }
 
     .skill-card h3 {
@@ -483,13 +488,19 @@
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.07);
       backdrop-filter: blur(18px);
-      overflow: hidden;
-      transition: 0.35s ease;
+      overflow: visible;
+      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease, background 0.32s ease;
+      will-change: transform;
     }
 
     .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 32px rgba(0, 217, 255, 0.35);
+      transform: translate3d(0, -16px, 0) scale(1.025);
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow:
+        0 22px 38px rgba(0, 0, 0, 0.4),
+        0 0 36px rgba(0, 217, 255, 0.38);
     }
 
     .project-type {
@@ -554,20 +565,28 @@
 
     .icon-link {
       position: relative;
-      overflow: hidden;
       padding: 13px 16px;
       border-radius: 16px;
       border: 1px solid var(--border);
       color: var(--white);
       background: rgba(0, 217, 255, 0.07);
       text-decoration: none;
-      transition: 0.3s;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+      will-change: transform;
     }
 
     .icon-link:hover {
       color: var(--blue);
-      transform: translateY(-5px);
-      box-shadow: 0 0 24px rgba(0, 217, 255, 0.38);
+      transform: translate3d(0, -10px, 0) scale(1.07);
+      background: rgba(0, 217, 255, 0.14);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow:
+        0 16px 28px rgba(0, 0, 0, 0.35),
+        0 0 34px rgba(0, 217, 255, 0.42);
+    }
+
+    .icon-link:active {
+      transform: translate3d(0, -4px, 0) scale(0.98);
     }
 
     footer {
@@ -665,11 +684,33 @@
         backdrop-filter: none;
       }
 
+      .btn:hover,
+      .icon-link:hover,
       .skill-card:hover,
       .project-card:hover,
-      .btn:hover,
-      .icon-link:hover {
+      .profile-card:hover {
         transform: none;
+      }
+
+      .btn:active,
+      .icon-link:active {
+        transform: translate3d(0, -6px, 0) scale(1.03);
+        box-shadow:
+          0 14px 24px rgba(0, 0, 0, 0.32),
+          0 0 28px rgba(0, 217, 255, 0.38);
+      }
+
+      .skill-card:active,
+      .project-card:active,
+      .profile-card:active {
+        transform: translate3d(0, -10px, 0) scale(1.02);
+        box-shadow:
+          0 18px 30px rgba(0, 0, 0, 0.35),
+          0 0 30px rgba(0, 217, 255, 0.34);
+      }
+
+      .skill-card:active .skill-icon {
+        transform: translate3d(0, -8px, 0) scale(1.1);
       }
     }
   </style>
@@ -945,23 +986,46 @@
 
   <script>
     const cursor = document.querySelector(".cursor-water");
+    const canUseCursor = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-    document.addEventListener("mousemove", (e) => {
-      cursor.style.left = e.clientX + "px";
-      cursor.style.top = e.clientY + "px";
-    });
+    if (cursor && canUseCursor) {
+      let targetX = window.innerWidth / 2;
+      let targetY = window.innerHeight / 2;
+      let currentX = targetX;
+      let currentY = targetY;
 
-    document.addEventListener("mousedown", () => {
-      cursor.classList.add("active");
-    });
+      document.addEventListener("mousemove", (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      }, { passive: true });
 
-    document.addEventListener("mouseup", () => {
-      cursor.classList.remove("active");
-    });
+      function smoothCursor() {
+        currentX += (targetX - currentX) * 0.22;
+        currentY += (targetY - currentY) * 0.22;
 
-    document.addEventListener("mouseleave", () => {
-      cursor.classList.remove("active");
-    });
+        cursor.style.left = currentX + "px";
+        cursor.style.top = currentY + "px";
+        cursor.style.transform = "translate3d(-50%, -50%, 0) scale(1)";
+
+        requestAnimationFrame(smoothCursor);
+      }
+
+      smoothCursor();
+
+      document.addEventListener("mousedown", () => {
+        cursor.classList.add("active");
+      });
+
+      document.addEventListener("mouseup", () => {
+        cursor.classList.remove("active");
+      });
+
+      document.addEventListener("mouseleave", () => {
+        cursor.classList.remove("active");
+      });
+    } else if (cursor) {
+      cursor.style.display = "none";
+    }
 
     const cards = document.querySelectorAll(".profile-card, .skill-card, .project-card");
 
@@ -973,7 +1037,7 @@
 
         card.style.setProperty("--x", x + "%");
         card.style.setProperty("--y", y + "%");
-      });
+      }, { passive: true });
     });
   </script>
 </body>
