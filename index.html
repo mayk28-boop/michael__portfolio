@@ -2568,5 +2568,74 @@
       }
     });
   </script>
+  <script>
+  /* DNSC ACCESS FIX
+     Problem fixed:
+     - After long press, the DNSC popup will stay open.
+     - Releasing the press will NOT close/popout the popup.
+     - DNSC popup closes ONLY when the user clicks the X button.
+  */
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const dnscOverlay = document.getElementById("dnscOverlay");
+    const dnscBtn = document.getElementById("dnscBtn");
+
+    if (!dnscOverlay || !dnscBtn) return;
+
+    /* Prevent DNSC popup from closing when user releases press
+       or taps outside the modal frame */
+    ["pointerdown", "pointerup", "click", "touchstart", "touchend"].forEach(function (eventName) {
+      dnscOverlay.addEventListener(
+        eventName,
+        function (event) {
+          const closeBtn = event.target.closest("[data-close='dnscOverlay']");
+
+          if (!closeBtn) {
+            event.stopPropagation();
+          }
+        },
+        true
+      );
+    });
+    
+    const dnscCloseBtn = dnscOverlay.querySelector("[data-close='dnscOverlay']");
+
+    if (dnscCloseBtn) {
+      dnscCloseBtn.addEventListener(
+        "click",
+        function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          dnscOverlay.classList.add("closing");
+
+          window.setTimeout(function () {
+            dnscOverlay.classList.remove("show", "closing");
+            document.body.style.overflow = "";
+
+            dnscBtn.classList.remove("holding", "ready");
+
+            const smallText = dnscBtn.querySelector("small");
+            if (smallText) {
+              smallText.textContent = "LONG PRESS 1–3 SEC";
+              smallText.classList.remove("hold-text-ready");
+            }
+
+            const holdbar = dnscBtn.querySelector(".holdbar");
+            if (holdbar) {
+              holdbar.style.transition = "none";
+              holdbar.style.width = "0";
+
+              requestAnimationFrame(function () {
+                holdbar.style.transition = "";
+              });
+            }
+          }, 180);
+        },
+        true
+      );
+    }
+  });
+</script>
 </body>
 </html>
