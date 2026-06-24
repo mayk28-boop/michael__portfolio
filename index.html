@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -109,7 +110,6 @@
       opacity: 0.58;
       animation: smokeWave 18s ease-in-out infinite alternate;
       mix-blend-mode: screen;
-      will-change: transform;
     }
 
     .smoke1 {
@@ -148,50 +148,23 @@
     @keyframes smokeWave {
       0% {
         transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-        border-radius: 45% 55% 60% 40%;
       }
 
       25% {
         transform: translate3d(45px, -35px, 0) rotate(70deg) scale(1.08);
-        border-radius: 60% 40% 45% 55%;
       }
 
       50% {
         transform: translate3d(-40px, 45px, 0) rotate(150deg) scale(0.96);
-        border-radius: 35% 65% 55% 45%;
       }
 
       75% {
         transform: translate3d(38px, 42px, 0) rotate(230deg) scale(1.1);
-        border-radius: 55% 45% 35% 65%;
       }
 
       100% {
         transform: translate3d(0, 0, 0) rotate(360deg) scale(1);
-        border-radius: 45% 55% 60% 40%;
       }
-    }
-
-    .cursor-water {
-      position: fixed;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 217, 255, 0.9);
-      box-shadow: 0 0 25px rgba(0, 217, 255, 0.7);
-      pointer-events: none;
-      transform: translate3d(-50%, -50%, 0) scale(0);
-      z-index: 9999;
-      opacity: 0;
-      transition: width 0.18s ease, height 0.18s ease, opacity 0.18s ease, background 0.18s ease;
-      will-change: transform, left, top;
-    }
-
-    .cursor-water.active {
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle, rgba(0, 217, 255, 0.25), transparent 70%);
-      opacity: 1;
     }
 
     .container {
@@ -333,7 +306,6 @@
     }
 
     .btn {
-      position: relative;
       display: inline-block;
       padding: 13px 20px;
       border-radius: 16px;
@@ -341,12 +313,11 @@
       color: var(--white);
       border: 1px solid var(--border);
       background: rgba(0, 217, 255, 0.08);
-      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, border-color 0.28s ease;
-      will-change: transform;
+      transition: 0.28s ease;
     }
 
     .btn:hover {
-      transform: translate3d(0, -10px, 0) scale(1.04);
+      transform: translateY(-10px) scale(1.04);
       background: rgba(0, 217, 255, 0.14);
       border-color: rgba(0, 217, 255, 0.55);
       box-shadow:
@@ -370,34 +341,18 @@
     }
 
     .profile-card {
-      position: relative;
       padding: 22px;
       border-radius: 34px;
       overflow: hidden;
-      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
-      will-change: transform;
+      transition: 0.32s ease;
     }
 
     .profile-card:hover {
-      transform: translate3d(0, -12px, 0) scale(1.02);
+      transform: translateY(-12px) scale(1.02);
       border-color: rgba(0, 217, 255, 0.55);
       box-shadow:
         0 22px 40px rgba(0, 0, 0, 0.38),
         0 0 38px rgba(0, 217, 255, 0.35);
-    }
-
-    .profile-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 217, 255, 0.25), transparent 32%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-
-    .profile-card:hover::after {
-      opacity: 1;
     }
 
     .profile-img {
@@ -462,12 +417,11 @@
       padding: 22px;
       border-radius: 26px;
       overflow: visible;
-      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease, background 0.32s ease;
-      will-change: transform;
+      transition: 0.32s ease;
     }
 
     .skill-card:hover {
-      transform: translate3d(0, -16px, 0) scale(1.035);
+      transform: translateY(-16px) scale(1.035);
       z-index: 5;
       background: rgba(255, 255, 255, 0.1);
       border-color: rgba(0, 217, 255, 0.55);
@@ -488,12 +442,11 @@
       margin-bottom: 18px;
       font-size: 25px;
       overflow: visible;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      will-change: transform;
+      transition: 0.3s ease;
     }
 
     .skill-card:hover .skill-icon {
-      transform: translate3d(0, -10px, 0) scale(1.14);
+      transform: translateY(-10px) scale(1.14);
       background: rgba(0, 217, 255, 0.2);
       box-shadow: 0 14px 28px rgba(0, 217, 255, 0.28);
     }
@@ -523,7 +476,7 @@
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.8px;
-      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+      transition: 0.28s ease;
     }
 
     .video-sample-trigger:hover .sample-edit-btn {
@@ -537,16 +490,14 @@
     }
 
     .project-card {
-      position: relative;
       padding: 26px;
       border-radius: 28px;
       overflow: visible;
-      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease, background 0.32s ease;
-      will-change: transform;
+      transition: 0.32s ease;
     }
 
     .project-card:hover {
-      transform: translate3d(0, -16px, 0) scale(1.025);
+      transform: translateY(-16px) scale(1.025);
       z-index: 5;
       background: rgba(255, 255, 255, 0.1);
       border-color: rgba(0, 217, 255, 0.55);
@@ -626,8 +577,7 @@
       color: var(--white);
       background: rgba(0, 217, 255, 0.07);
       text-decoration: none;
-      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, border-color 0.28s ease, color 0.28s ease;
-      will-change: transform;
+      transition: 0.28s ease;
       overflow: visible;
     }
 
@@ -662,7 +612,7 @@
       background-size: 300% 100%;
       filter: blur(10px);
       opacity: 0;
-      transition: opacity 0.28s ease, transform 0.28s ease;
+      transition: 0.28s ease;
       animation: rainbowGlow 1.8s linear infinite;
       pointer-events: none;
       z-index: -1;
@@ -670,7 +620,7 @@
 
     .icon-link:hover {
       color: var(--blue);
-      transform: translate3d(0, -12px, 0) scale(1.08);
+      transform: translateY(-12px) scale(1.08);
       background: rgba(0, 217, 255, 0.14);
       border-color: rgba(0, 217, 255, 0.55);
       box-shadow:
@@ -795,7 +745,7 @@
       box-shadow:
         0 0 22px rgba(0, 217, 255, 0.42),
         0 10px 22px rgba(0, 0, 0, 0.45);
-      transition: transform 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+      transition: 0.25s ease;
     }
 
     .video-close-btn:hover {
@@ -863,7 +813,7 @@
       color: var(--white);
       cursor: pointer;
       font-size: 18px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      transition: 0.25s ease;
     }
 
     .theme-btn:hover {
@@ -968,17 +918,6 @@
       border-top: 1px solid rgba(0, 217, 255, 0.14);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
-      }
-    }
-
     @media (max-width: 900px) {
       .hero,
       .contact-card {
@@ -1006,10 +945,6 @@
       .theme-title {
         display: none;
       }
-
-      .theme-btn:hover {
-        transform: translateY(-5px) scale(1.05);
-      }
     }
 
     @media (max-width: 560px) {
@@ -1032,10 +967,6 @@
 
       .btn {
         text-align: center;
-      }
-
-      .cursor-water {
-        display: none;
       }
 
       .smoke {
@@ -1073,24 +1004,12 @@
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
       }
-
-      .btn:hover,
-      .skill-card:hover,
-      .project-card:hover,
-      .profile-card:hover {
-        transform: none;
-      }
-
-      .icon-link:hover {
-        transform: translate3d(0, -8px, 0) scale(1.04);
-      }
     }
   </style>
+
 </head>
 
 <body>
-  <div class="cursor-water"></div>
-
   <div class="desktop-popup" id="desktopPopup">
     <div class="popup-box">
       <h3>Better on Desktop</h3>
@@ -1098,27 +1017,33 @@
         For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.
       </p>
 
-      <div class="popup-actions">
-        <button id="continuePopup">Continue Anyway</button>
-        <button id="backPopup" class="back-btn">Back</button>
-      </div>
-    </div>
+```
+  <div class="popup-actions">
+    <button id="continuePopup">Continue Anyway</button>
+    <button id="backPopup" class="back-btn">Back</button>
+  </div>
+</div>
+```
+
   </div>
 
   <div class="video-popup" id="videoPopup">
     <div class="video-popup-box">
       <button class="video-close-btn" id="closeVideoPopup" aria-label="Close video popup">×</button>
 
-      <div class="video-popup-header">
-        <span>[ SAMPLE SHORT EDIT ]</span>
-        <h3>Michael’s Video Editing Sample</h3>
-      </div>
+```
+  <div class="video-popup-header">
+    <span>[ SAMPLE SHORT EDIT ]</span>
+    <h3>Michael’s Video Editing Sample</h3>
+  </div>
 
-      <video id="sampleVideo" controls preload="metadata" playsinline>
-        <source src="assets/sample-edit.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
+  <video id="sampleVideo" controls preload="metadata" playsinline>
+    <source src="assets/sample-edit.mp4.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+```
+
   </div>
 
   <div class="theme-panel" aria-label="Theme controls">
@@ -1138,14 +1063,17 @@
   <nav>
     <div class="logo">MICHAEL_</div>
 
-    <div class="nav-links">
-      <a href="#about">ABOUT</a>
-      <a href="#skills">SKILLS</a>
-      <a href="#projects">PROJECTS</a>
-      <a href="#contact">CONTACT</a>
-    </div>
+```
+<div class="nav-links">
+  <a href="#about">ABOUT</a>
+  <a href="#skills">SKILLS</a>
+  <a href="#projects">PROJECTS</a>
+  <a href="#contact">CONTACT</a>
+</div>
 
-    <div class="status">OPEN TO WORK</div>
+<div class="status">OPEN TO WORK</div>
+```
+
   </nav>
 
   <main class="container">
@@ -1156,277 +1084,264 @@
           BSIS · Davao del Norte State College
         </div>
 
-        <h1>Hi, I’m <span class="gradient-text">Michael.</span></h1>
-        <h2>Graphic Designer · Visual Creator · UI/UX Learner</h2>
+```
+    <h1>Hi, I’m <span class="gradient-text">Michael.</span></h1>
+    <h2>Graphic Designer · Visual Creator · UI/UX Learner</h2>
 
-        <p>
-          Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean,
-          modern, and eye-catching visual designs. My skills include photo editing,
-          video editing, and basic network configuration. I’m always willing to learn
-          new tools and improve my skills to create better and more professional outputs.
-        </p>
+    <p>
+      Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean,
+      modern, and eye-catching visual designs. My skills include photo editing,
+      video editing, and basic network configuration. I’m always willing to learn
+      new tools and improve my skills to create better and more professional outputs.
+    </p>
 
-        <div class="buttons">
-          <a class="btn primary" href="#projects">View Projects</a>
-          <a class="btn" href="#contact">Get In Touch</a>
-        </div>
+    <div class="buttons">
+      <a class="btn primary" href="#projects">View Projects</a>
+      <a class="btn" href="#contact">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <img
+      src="assets/profile.jpg"
+      alt="Michael G. Navarro"
+      class="profile-img"
+    />
+
+    <div class="id-card">
+      <small>[ DIGITAL ID ]</small>
+      <h3>Michael G. Navarro</h3>
+      <p>Graphic Designer · DNSC Student</p>
+      <p style="color: var(--blue); margin-top: 8px;">ACTIVE — CREATIVE PORTFOLIO</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-title">
+    <span>[ ABOUT ]</span>
+    <h2>Designing visuals that feel modern and professional.</h2>
+  </div>
+
+  <div class="glass-box">
+    <p>
+      I am a 4th year college student with a growing interest in graphic design,
+      visual editing, and user interface design. I enjoy creating designs that are
+      simple, clean, and attractive while making sure the message is easy to understand.
+    </p>
+
+    <br />
+
+    <p>
+      My creative work focuses on photo editing, video editing, layout design,
+      and digital content creation. I also have experience using Figma, where I can
+      create interface layouts and interactive prototypes for web or app design ideas.
+      Aside from creative work, I also have basic knowledge in network configuration,
+      which helps me understand technical setups and system connectivity.
+    </p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-title">
+    <span>[ SKILLS ]</span>
+    <h2>Tools and skills I work with.</h2>
+  </div>
+
+  <div class="grid skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🎨</div>
+      <h3>Graphic Design</h3>
+      <p>Creating clean, modern, and eye-catching visual layouts for digital content.</p>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🖼️</div>
+      <h3>Photo Editing</h3>
+      <p>Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
+    </div>
+
+    <div class="skill-card video-sample-trigger" id="openVideoSample">
+      <div class="skill-icon">🎬</div>
+      <h3>Video Editing</h3>
+      <p>Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
+      <button class="sample-edit-btn" type="button">View Sample Edit</button>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">💎</div>
+      <h3>Figma Prototype</h3>
+      <p>Designing UI layouts and creating clickable prototypes for web and app concepts.</p>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <h3>Basic Network Configuration</h3>
+      <p>Setting up basic network connections, configurations, and connectivity settings.</p>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">✨</div>
+      <h3>Creative Direction</h3>
+      <p>Choosing colors, styles, spacing, and visual direction for a more polished output.</p>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">📱</div>
+      <h3>Social Media Design</h3>
+      <p>Creating posters, banners, thumbnails, and digital content for online platforms.</p>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <h3>Fast Learner</h3>
+      <p>Willing to explore new design tools, trends, and techniques to improve my work.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-title">
+    <span>[ PROJECTS ]</span>
+    <h2>Selected creative work.</h2>
+  </div>
+
+  <div class="grid projects-grid">
+    <div class="project-card">
+      <div class="project-type">UI/UX DESIGN · FIGMA PROTOTYPE</div>
+      <h3>Interactive Figma Prototype</h3>
+      <p>
+        A clickable prototype created in Figma to present a clean interface flow,
+        screen layout, and user interaction concept.
+      </p>
+
+      <div class="chips">
+        <span class="chip">Figma</span>
+        <span class="chip">UI Design</span>
+        <span class="chip">Prototype</span>
+        <span class="chip">Wireframe</span>
       </div>
 
-      <div class="profile-card">
-        <img
-          src="assets/profile.jpg"
-          alt="Michael G. Navarro"
-          class="profile-img"
-          loading="eager"
-          decoding="async"
-        />
+      <a
+        class="mini-link"
+        href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=zMthvpgWqKfyunAp-1&starting-point-node-id=100%3A16"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        [ VIEW PROTOTYPE ]
+      </a>
+    </div>
 
-        <div class="id-card">
-          <small>[ DIGITAL ID ]</small>
-          <h3>Michael G. Navarro</h3>
-          <p>Graphic Designer · DNSC Student</p>
-          <p style="color: var(--blue); margin-top: 8px;">ACTIVE — CREATIVE PORTFOLIO</p>
-        </div>
-      </div>
-    </section>
+    <div class="project-card">
+      <div class="project-type">GRAPHIC DESIGN · DIGITAL CONTENT</div>
+      <h3>Social Media Poster Designs</h3>
+      <p>
+        A collection of poster and layout designs focused on strong visuals,
+        readable text, balanced spacing, and modern color combinations.
+      </p>
 
-    <section id="about">
-      <div class="section-title">
-        <span>[ ABOUT ]</span>
-        <h2>Designing visuals that feel modern and professional.</h2>
-      </div>
-
-      <div class="glass-box">
-        <p>
-          I am a 4th year college student with a growing interest in graphic design,
-          visual editing, and user interface design. I enjoy creating designs that are
-          simple, clean, and attractive while making sure the message is easy to understand.
-        </p>
-
-        <br />
-
-        <p>
-          My creative work focuses on photo editing, video editing, layout design,
-          and digital content creation. I also have experience using Figma, where I can
-          create interface layouts and interactive prototypes for web or app design ideas.
-          Aside from creative work, I also have basic knowledge in network configuration,
-          which helps me understand technical setups and system connectivity.
-        </p>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="section-title">
-        <span>[ SKILLS ]</span>
-        <h2>Tools and skills I work with.</h2>
+      <div class="chips">
+        <span class="chip">Poster Design</span>
+        <span class="chip">Layout</span>
+        <span class="chip">Branding</span>
       </div>
 
-      <div class="grid skills-grid">
-        <div class="skill-card">
-          <div class="skill-icon">🎨</div>
-          <h3>Graphic Design</h3>
-          <p>Creating clean, modern, and eye-catching visual layouts for digital content.</p>
-        </div>
+      <a class="mini-link" href="#contact">[ REQUEST SAMPLE ]</a>
+    </div>
 
-        <div class="skill-card">
-          <div class="skill-icon">🖼️</div>
-          <h3>Photo Editing</h3>
-          <p>Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
-        </div>
+    <div class="project-card video-sample-trigger" id="openVideoSampleProject">
+      <div class="project-type">VIDEO EDITING · CREATIVE MEDIA</div>
+      <h3>Short Video Edits</h3>
+      <p>
+        Edited video content with smooth pacing, transitions, visual timing,
+        and improved flow for more engaging presentation.
+      </p>
 
-        <div class="skill-card video-sample-trigger" id="openVideoSample">
-          <div class="skill-icon">🎬</div>
-          <h3>Video Editing</h3>
-          <p>Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
-          <button class="sample-edit-btn" type="button">View Sample Edit</button>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">💎</div>
-          <h3>Figma Prototype</h3>
-          <p>Designing UI layouts and creating clickable prototypes for web and app concepts.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">🌐</div>
-          <h3>Basic Network Configuration</h3>
-          <p>Setting up basic network connections, configurations, and connectivity settings.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">✨</div>
-          <h3>Creative Direction</h3>
-          <p>Choosing colors, styles, spacing, and visual direction for a more polished output.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">📱</div>
-          <h3>Social Media Design</h3>
-          <p>Creating posters, banners, thumbnails, and digital content for online platforms.</p>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">⚡</div>
-          <h3>Fast Learner</h3>
-          <p>Willing to explore new design tools, trends, and techniques to improve my work.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="section-title">
-        <span>[ PROJECTS ]</span>
-        <h2>Selected creative work.</h2>
+      <div class="chips">
+        <span class="chip">Video Editing</span>
+        <span class="chip">Transitions</span>
+        <span class="chip">Visual Flow</span>
       </div>
 
-      <div class="grid projects-grid">
-        <div class="project-card">
-          <div class="project-type">UI/UX DESIGN · FIGMA PROTOTYPE</div>
-          <h3>Interactive Figma Prototype</h3>
-          <p>
-            A clickable prototype created in Figma to present a clean interface flow,
-            screen layout, and user interaction concept.
-          </p>
+      <a class="mini-link" href="javascript:void(0)">[ VIEW SAMPLE EDIT ]</a>
+    </div>
 
-          <div class="chips">
-            <span class="chip">Figma</span>
-            <span class="chip">UI Design</span>
-            <span class="chip">Prototype</span>
-            <span class="chip">Wireframe</span>
-          </div>
+    <div class="project-card">
+      <div class="project-type">TECHNICAL SKILL · NETWORK SETUP</div>
+      <h3>Basic Network Configuration</h3>
+      <p>
+        Practical experience in configuring basic network settings and connectivity
+        setups, with attention to proper access and stable connection.
+      </p>
 
-          <a
-            class="mini-link"
-            href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=zMthvpgWqKfyunAp-1&starting-point-node-id=100%3A16"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            [ VIEW PROTOTYPE ]
-          </a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-type">GRAPHIC DESIGN · DIGITAL CONTENT</div>
-          <h3>Social Media Poster Designs</h3>
-          <p>
-            A collection of poster and layout designs focused on strong visuals,
-            readable text, balanced spacing, and modern color combinations.
-          </p>
-
-          <div class="chips">
-            <span class="chip">Poster Design</span>
-            <span class="chip">Layout</span>
-            <span class="chip">Branding</span>
-          </div>
-
-          <a class="mini-link" href="#contact">[ REQUEST SAMPLE ]</a>
-        </div>
-
-        <div class="project-card video-sample-trigger" id="openVideoSampleProject">
-          <div class="project-type">VIDEO EDITING · CREATIVE MEDIA</div>
-          <h3>Short Video Edits</h3>
-          <p>
-            Edited video content with smooth pacing, transitions, visual timing,
-            and improved flow for more engaging presentation.
-          </p>
-
-          <div class="chips">
-            <span class="chip">Video Editing</span>
-            <span class="chip">Transitions</span>
-            <span class="chip">Visual Flow</span>
-          </div>
-
-          <a class="mini-link" href="javascript:void(0)">[ VIEW SAMPLE EDIT ]</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-type">TECHNICAL SKILL · NETWORK SETUP</div>
-          <h3>Basic Network Configuration</h3>
-          <p>
-            Practical experience in configuring basic network settings and connectivity
-            setups, with attention to proper access and stable connection.
-          </p>
-
-          <div class="chips">
-            <span class="chip">Networking</span>
-            <span class="chip">Configuration</span>
-            <span class="chip">Technical Setup</span>
-          </div>
-
-          <a class="mini-link" href="#skills">[ VIEW SKILLS ]</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="section-title">
-        <span>[ CONTACT ]</span>
-        <h2>Let’s create something clean and creative.</h2>
+      <div class="chips">
+        <span class="chip">Networking</span>
+        <span class="chip">Configuration</span>
+        <span class="chip">Technical Setup</span>
       </div>
 
-      <div class="glass-box contact-card">
-        <div class="contact-info">
-          <p>
-            I am open to creative projects, school-related design work, portfolio
-            collaborations, and opportunities where I can improve my skills in design,
-            editing, and UI/UX prototyping.
-          </p>
+      <a class="mini-link" href="#skills">[ VIEW SKILLS ]</a>
+    </div>
+  </div>
+</section>
 
-          <div class="icon-links">
-            <a
-              class="icon-link"
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=navarro.michael@dnsc.edu.ph"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/>
-              </svg>
-              Gmail
-            </a>
+<section id="contact">
+  <div class="section-title">
+    <span>[ CONTACT ]</span>
+    <h2>Let’s create something clean and creative.</h2>
+  </div>
 
-            <a class="icon-link" href="tel:+639158480061">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/>
-              </svg>
-              Call
-            </a>
+  <div class="glass-box contact-card">
+    <div class="contact-info">
+      <p>
+        I am open to creative projects, school-related design work, portfolio
+        collaborations, and opportunities where I can improve my skills in design,
+        editing, and UI/UX prototyping.
+      </p>
 
-            <a
-              class="icon-link"
-              href="https://www.facebook.com/share/17sqYuH8bE/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.25c-1.24 0-1.63.77-1.63 1.56v1.9h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.08 22 12.06Z"/>
-              </svg>
-              Facebook
-            </a>
+      <div class="icon-links">
+        <a
+          class="icon-link"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=navarro.michael@dnsc.edu.ph"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Gmail
+        </a>
 
-            <a
-              class="icon-link"
-              href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=b9U4PNwgAzjz0mZn-1&starting-point-node-id=100%3A16"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8 24a4 4 0 0 0 4-4v-4H8a4 4 0 0 0 0 8Zm0-10h4V8H8a3 3 0 0 0 0 6Zm0-8h4V0H8a3 3 0 0 0 0 6Zm6 0h2a3 3 0 0 0 0-6h-2v6Zm2 8a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"/>
-              </svg>
-              Figma
-            </a>
-          </div>
-        </div>
+        <a class="icon-link" href="tel:+639158480061">Call</a>
 
-        <div>
-          <p><strong>Email:</strong> navarro.michael@dnsc.edu.ph</p>
-          <p><strong>Phone:</strong> 09158480061</p>
-          <p><strong>Facebook:</strong> Michael G. Navarro</p>
-          <p><strong>Location:</strong> Davao del Norte, Philippines</p>
-          <p><strong>Status:</strong> Available for creative work</p>
-        </div>
+        <a
+          class="icon-link"
+          href="https://www.facebook.com/share/17sqYuH8bE/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Facebook
+        </a>
+
+        <a
+          class="icon-link"
+          href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=b9U4PNwgAzjz0mZn-1&starting-point-node-id=100%3A16"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Figma
+        </a>
       </div>
-    </section>
+    </div>
+
+    <div>
+      <p><strong>Email:</strong> navarro.michael@dnsc.edu.ph</p>
+      <p><strong>Phone:</strong> 09158480061</p>
+      <p><strong>Facebook:</strong> Michael G. Navarro</p>
+      <p><strong>Location:</strong> Davao del Norte, Philippines</p>
+      <p><strong>Status:</strong> Available for creative work</p>
+    </div>
+  </div>
+</section>
+```
+
   </main>
 
   <footer>
@@ -1434,72 +1349,6 @@
   </footer>
 
   <script>
-    const cursor = document.querySelector(".cursor-water");
-    const canUseCursor = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-    if (cursor && canUseCursor) {
-      let targetX = window.innerWidth / 2;
-      let targetY = window.innerHeight / 2;
-      let currentX = targetX;
-      let currentY = targetY;
-
-      document.addEventListener("mousemove", (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-      }, { passive: true });
-
-      function smoothCursor() {
-        currentX += (targetX - currentX) * 0.22;
-        currentY += (targetY - currentY) * 0.22;
-
-        cursor.style.left = currentX + "px";
-        cursor.style.top = currentY + "px";
-        cursor.style.transform = "translate3d(-50%, -50%, 0) scale(1)";
-
-        requestAnimationFrame(smoothCursor);
-      }
-
-      smoothCursor();
-
-      document.addEventListener("mousedown", () => {
-        cursor.classList.add("active");
-      });
-
-      document.addEventListener("mouseup", () => {
-        cursor.classList.remove("active");
-      });
-
-      document.addEventListener("mouseleave", () => {
-        cursor.classList.remove("active");
-      });
-    } else if (cursor) {
-      cursor.style.display = "none";
-    }
-
-    const cards = document.querySelectorAll(".profile-card, .skill-card, .project-card");
-
-    cards.forEach((card) => {
-      let rafId = null;
-      let latestEvent = null;
-
-      card.addEventListener("mousemove", (e) => {
-        latestEvent = e;
-
-        if (rafId) return;
-
-        rafId = requestAnimationFrame(() => {
-          const rect = card.getBoundingClientRect();
-          const x = ((latestEvent.clientX - rect.left) / rect.width) * 100;
-          const y = ((latestEvent.clientY - rect.top) / rect.height) * 100;
-
-          card.style.setProperty("--x", x + "%");
-          card.style.setProperty("--y", y + "%");
-
-          rafId = null;
-        });
-      }, { passive: true });
-    });
-
     const popup = document.getElementById("desktopPopup");
     const continuePopup = document.getElementById("continuePopup");
     const backPopup = document.getElementById("backPopup");
@@ -1526,31 +1375,10 @@
     });
 
     backPopup?.addEventListener("click", () => {
-      const previousPage = document.referrer;
-
-      if (previousPage && previousPage !== window.location.href) {
-        window.location.href = previousPage;
-        return;
-      }
-
       if (window.history.length > 1) {
         window.history.back();
-
-        setTimeout(() => {
-          if (document.visibilityState !== "hidden") {
-            window.location.href = "https://www.google.com";
-          }
-        }, 700);
-
-        return;
-      }
-
-      window.location.href = "https://www.google.com";
-    });
-
-    popup?.addEventListener("click", (e) => {
-      if (e.target === popup) {
-        popup.classList.add("show");
+      } else {
+        window.location.href = "https://www.google.com";
       }
     });
 
@@ -1628,5 +1456,6 @@
       }
     });
   </script>
+
 </body>
 </html>
