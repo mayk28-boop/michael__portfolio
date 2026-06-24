@@ -75,6 +75,7 @@
       opacity: 0.85;
       animation: smokeWave 12s ease-in-out infinite alternate;
       mix-blend-mode: screen;
+      will-change: transform;
     }
 
     .smoke1 {
@@ -630,32 +631,45 @@
       }
 
       .smoke {
-        width: 260px;
-        height: 260px;
-        filter: blur(8px);
-        opacity: 0.45;
-        animation-duration: 22s;
+        width: 180px;
+        height: 180px;
+        filter: none;
+        opacity: 0.34;
+        animation-duration: 32s;
         mix-blend-mode: normal;
+        will-change: transform;
       }
 
       .smoke1 {
-        top: -80px;
-        left: -90px;
+        top: -55px;
+        left: -65px;
       }
 
       .smoke2 {
-        width: 320px;
-        height: 320px;
-        bottom: -100px;
-        right: -110px;
+        width: 220px;
+        height: 220px;
+        bottom: -70px;
+        right: -75px;
       }
 
-      .smoke3 {
-        display: none;
-      }
-
+      .smoke3,
       .smoke4 {
         display: none;
+      }
+
+      .profile-card,
+      .glass-box,
+      .skill-card,
+      .project-card,
+      nav {
+        backdrop-filter: none;
+      }
+
+      .skill-card:hover,
+      .project-card:hover,
+      .btn:hover,
+      .icon-link:hover {
+        transform: none;
       }
     }
   </style>
