@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Michael G. Navarro | Graphic Designer</title>
 
   <style>
@@ -23,11 +24,10 @@
       --blue2: #0077ff;
       --white: #eefaff;
       --muted: #9bb6c7;
-      --glass: rgba(255, 255, 255, 0.08);
       --border: rgba(0, 217, 255, 0.28);
       --shadow: 0 0 35px rgba(0, 217, 255, 0.25);
       --card-bg: rgba(255, 255, 255, 0.07);
-      --nav-bg: rgba(4, 12, 28, 0.65);
+      --nav-bg: rgba(4, 12, 28, 0.72);
       --text-soft: #c7d9e5;
     }
 
@@ -37,11 +37,10 @@
       --blue2: #00a6d6;
       --white: #071827;
       --muted: #425466;
-      --glass: rgba(255, 255, 255, 0.75);
       --border: rgba(0, 119, 204, 0.25);
       --shadow: 0 0 28px rgba(0, 119, 204, 0.15);
       --card-bg: rgba(255, 255, 255, 0.78);
-      --nav-bg: rgba(255, 255, 255, 0.75);
+      --nav-bg: rgba(255, 255, 255, 0.82);
       --text-soft: #24384a;
     }
 
@@ -51,7 +50,6 @@
       --blue2: #648fff;
       --white: #f7f7f7;
       --muted: #d0d0d0;
-      --glass: rgba(255, 255, 255, 0.09);
       --border: rgba(255, 176, 0, 0.45);
       --shadow: 0 0 35px rgba(255, 176, 0, 0.25);
       --card-bg: rgba(255, 255, 255, 0.08);
@@ -61,14 +59,12 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
+      color: var(--white);
+      overflow-x: hidden;
       background:
         radial-gradient(circle at top left, rgba(0, 217, 255, 0.22), transparent 35%),
         radial-gradient(circle at bottom right, rgba(0, 119, 255, 0.2), transparent 35%),
         var(--bg);
-      color: var(--white);
-      overflow-x: hidden;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
       transition: background 0.35s ease, color 0.35s ease;
     }
 
@@ -76,6 +72,8 @@
       content: "";
       position: fixed;
       inset: 0;
+      z-index: -2;
+      pointer-events: none;
       background:
         linear-gradient(120deg, transparent, rgba(0, 217, 255, 0.05), transparent),
         repeating-linear-gradient(
@@ -85,8 +83,6 @@
           transparent 1px,
           transparent 80px
         );
-      pointer-events: none;
-      z-index: -2;
     }
 
     .water-bg {
@@ -215,8 +211,8 @@
       padding: 14px 18px;
       border: 1px solid var(--border);
       background: var(--nav-bg);
-      -webkit-backdrop-filter: blur(14px);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-radius: 24px;
       box-shadow: var(--shadow);
     }
@@ -358,27 +354,28 @@
         0 0 34px rgba(0, 217, 255, 0.45);
     }
 
-    .btn:active {
-      transform: translate3d(0, -4px, 0) scale(0.98);
-    }
-
     .btn.primary {
       background: linear-gradient(135deg, rgba(0, 217, 255, 0.35), rgba(0, 119, 255, 0.18));
+    }
+
+    .profile-card,
+    .glass-box,
+    .skill-card,
+    .project-card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
     }
 
     .profile-card {
       position: relative;
       padding: 22px;
       border-radius: 34px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow);
       overflow: hidden;
       transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
       will-change: transform;
-      contain: layout paint;
     }
 
     .profile-card:hover {
@@ -409,7 +406,6 @@
       object-fit: cover;
       border-radius: 28px;
       border: 1px solid rgba(255, 255, 255, 0.18);
-      filter: saturate(1.08) contrast(1.03);
       display: block;
     }
 
@@ -445,12 +441,7 @@
     }
 
     .glass-box {
-      border: 1px solid var(--border);
       border-radius: 30px;
-      background: var(--card-bg);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow);
       padding: 28px;
       line-height: 1.8;
       color: var(--text-soft);
@@ -470,14 +461,10 @@
       min-height: 170px;
       padding: 22px;
       border-radius: 26px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
       overflow: visible;
       transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease, background 0.32s ease;
       will-change: transform;
-      contain: layout paint;
+      cursor: default;
     }
 
     .skill-card:hover {
@@ -554,14 +541,9 @@
       position: relative;
       padding: 26px;
       border-radius: 28px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
       overflow: visible;
       transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease, background 0.32s ease;
       will-change: transform;
-      contain: layout paint;
     }
 
     .project-card:hover {
@@ -703,10 +685,6 @@
       transform: translateX(-50%) scaleX(1.12);
     }
 
-    .icon-link:active {
-      transform: translate3d(0, -4px, 0) scale(0.98);
-    }
-
     @keyframes rainbowGlow {
       0% {
         background-position: 0% 50%;
@@ -725,8 +703,8 @@
       place-items: center;
       padding: 20px;
       background: rgba(0, 0, 0, 0.72);
-      -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .video-popup.show {
@@ -864,8 +842,8 @@
       border-radius: 22px;
       border: 1px solid var(--border);
       background: var(--nav-bg);
-      -webkit-backdrop-filter: blur(14px);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
     }
 
@@ -910,8 +888,8 @@
       place-items: center;
       padding: 20px;
       background: rgba(0, 0, 0, 0.58);
-      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .desktop-popup.show {
@@ -989,17 +967,6 @@
       color: var(--muted);
       text-align: center;
       border-top: 1px solid rgba(0, 217, 255, 0.14);
-    }
-
-    .reveal {
-      opacity: 1;
-      transform: translateY(0);
-      transition: 0.8s ease;
-    }
-
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1104,8 +1071,8 @@
       .project-card,
       nav,
       .theme-panel {
-        -webkit-backdrop-filter: none;
         backdrop-filter: none;
+        -webkit-backdrop-filter: none;
       }
 
       .btn:hover,
@@ -1117,27 +1084,6 @@
 
       .icon-link:hover {
         transform: translate3d(0, -8px, 0) scale(1.04);
-      }
-
-      .btn:active,
-      .icon-link:active {
-        transform: translate3d(0, -6px, 0) scale(1.03);
-        box-shadow:
-          0 14px 24px rgba(0, 0, 0, 0.32),
-          0 0 28px rgba(0, 217, 255, 0.38);
-      }
-
-      .skill-card:active,
-      .project-card:active,
-      .profile-card:active {
-        transform: translate3d(0, -10px, 0) scale(1.02);
-        box-shadow:
-          0 18px 30px rgba(0, 0, 0, 0.35),
-          0 0 30px rgba(0, 217, 255, 0.34);
-      }
-
-      .skill-card:active .skill-icon {
-        transform: translate3d(0, -8px, 0) scale(1.1);
       }
     }
   </style>
@@ -1169,7 +1115,8 @@
         <h3>Michael’s Video Editing Sample</h3>
       </div>
 
-      <video id="sampleVideo" controls preload="metadata">
+      <video id="sampleVideo" controls preload="metadata" playsinline>
+        <source src="https://raw.githubusercontent.com/mayk28-boop/michael_portfolio/main/assets/sample-edit.mp4.mp4" type="video/mp4" />
         <source src="assets/sample-edit.mp4.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -1205,7 +1152,7 @@
 
   <main class="container">
     <section class="hero" id="home">
-      <div class="hero-text reveal">
+      <div class="hero-text">
         <div class="tag">
           <span class="pulse"></span>
           BSIS · Davao del Norte State College
@@ -1227,7 +1174,7 @@
         </div>
       </div>
 
-      <div class="profile-card reveal">
+      <div class="profile-card">
         <img
           src="assets/profile.jpg"
           alt="Michael G. Navarro"
@@ -1245,7 +1192,7 @@
       </div>
     </section>
 
-    <section id="about" class="reveal">
+    <section id="about">
       <div class="section-title">
         <span>[ ABOUT ]</span>
         <h2>Designing visuals that feel modern and professional.</h2>
@@ -1270,7 +1217,7 @@
       </div>
     </section>
 
-    <section id="skills" class="reveal">
+    <section id="skills">
       <div class="section-title">
         <span>[ SKILLS ]</span>
         <h2>Tools and skills I work with.</h2>
@@ -1328,7 +1275,7 @@
       </div>
     </section>
 
-    <section id="projects" class="reveal">
+    <section id="projects">
       <div class="section-title">
         <span>[ PROJECTS ]</span>
         <h2>Selected creative work.</h2>
@@ -1377,7 +1324,7 @@
           <a class="mini-link" href="#contact">[ REQUEST SAMPLE ]</a>
         </div>
 
-        <div class="project-card" id="openVideoSampleProject">
+        <div class="project-card video-sample-trigger" id="openVideoSampleProject">
           <div class="project-type">VIDEO EDITING · CREATIVE MEDIA</div>
           <h3>Short Video Edits</h3>
           <p>
@@ -1413,7 +1360,7 @@
       </div>
     </section>
 
-    <section id="contact" class="reveal">
+    <section id="contact">
       <div class="section-title">
         <span>[ CONTACT ]</span>
         <h2>Let’s create something clean and creative.</h2>
@@ -1649,6 +1596,10 @@
 
       videoPopup.classList.add("show");
       document.body.style.overflow = "hidden";
+
+      if (sampleVideo) {
+        sampleVideo.load();
+      }
     }
 
     function closeSampleVideo() {
