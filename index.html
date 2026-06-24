@@ -963,7 +963,7 @@
     <div class="popup-box">
       <h3>Better on Desktop</h3>
       <p>
-        For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop rather than a mobile phone.
+        For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.
       </p>
 
       <div class="popup-actions">
@@ -1327,25 +1327,32 @@
     const continuePopup = document.getElementById("continuePopup");
     const backPopup = document.getElementById("backPopup");
 
-    const isDesktopOrLaptop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const popupAlreadyShown = localStorage.getItem("desktopPopupShown");
-
-    if (!isDesktopOrLaptop && !popupAlreadyShown) {
-      setTimeout(() => {
-        popup.classList.add("show");
-      }, 700);
+    function isMobileDevice() {
+      const smallScreen = window.innerWidth <= 900;
+      const touchDevice = navigator.maxTouchPoints > 0;
+      const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+      return smallScreen || touchDevice || coarsePointer;
     }
+
+    function showMobilePopup() {
+      if (popup && isMobileDevice()) {
+        popup.classList.add("show");
+      }
+    }
+
+    window.addEventListener("load", () => {
+      setTimeout(showMobilePopup, 400);
+    });
 
     continuePopup.addEventListener("click", () => {
       popup.classList.remove("show");
-      localStorage.setItem("desktopPopupShown", "true");
     });
 
     backPopup.addEventListener("click", () => {
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        window.location.href = "about:blank";
+        window.location.replace("about:blank");
       }
     });
 
