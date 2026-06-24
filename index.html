@@ -1040,6 +1040,548 @@
         height: 55vh;
       }
     }
+
+
+    /* =========================================================
+       ULTRA GLASS + RAINBOW EFFECT UPGRADE
+       Paste-ready enhancement for Michael G. Navarro Portfolio
+       ========================================================= */
+
+    :root {
+      --glass-strong: rgba(6, 18, 40, 0.52);
+      --glass-soft: rgba(255, 255, 255, 0.075);
+      --glass-line: rgba(255, 255, 255, 0.20);
+      --neon-pink: #ff2bd6;
+      --neon-yellow: #fff200;
+      --neon-green: #00ff9d;
+      --neon-violet: #8b5cff;
+      --rainbow: linear-gradient(90deg, #ff004c, #ff8c00, #ffee00, #00ff85, #00d9ff, #7a5cff, #ff00d4, #ff004c);
+      --premium-shadow: 0 30px 90px rgba(0, 0, 0, 0.48), 0 0 60px rgba(0, 217, 255, 0.24), inset 0 1px 0 rgba(255,255,255,0.16);
+    }
+
+    body.light {
+      --glass-strong: rgba(255, 255, 255, 0.62);
+      --glass-soft: rgba(255, 255, 255, 0.42);
+      --glass-line: rgba(0, 119, 204, 0.22);
+      --premium-shadow: 0 30px 90px rgba(0, 80, 130, 0.18), 0 0 55px rgba(0, 119, 204, 0.14), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    body.colorblind {
+      --glass-strong: rgba(18, 18, 18, 0.56);
+      --glass-soft: rgba(255, 255, 255, 0.07);
+      --glass-line: rgba(255, 176, 0, 0.22);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(0, 217, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 75% 15%, rgba(255, 43, 214, 0.13), transparent 24%),
+        radial-gradient(circle at 20% 85%, rgba(0, 255, 157, 0.11), transparent 28%);
+      transition: background 0.18s linear;
+    }
+
+    .bg-effects::before,
+    .bg-effects::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      opacity: 0.32;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .bg-effects::before {
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255, 0, 212, 0.24), transparent 18%),
+        radial-gradient(circle at 84% 14%, rgba(0, 217, 255, 0.28), transparent 22%),
+        radial-gradient(circle at 40% 88%, rgba(0, 255, 133, 0.18), transparent 20%);
+      filter: blur(18px);
+      animation: auroraFlow 17s ease-in-out infinite alternate;
+    }
+
+    .bg-effects::after {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.55) 0 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(0,217,255,0.45) 0 1px, transparent 1.7px);
+      background-size: 92px 92px, 137px 137px;
+      animation: starDrift 24s linear infinite;
+      opacity: 0.18;
+    }
+
+    @keyframes auroraFlow {
+      from { transform: translate3d(-2%, -1%, 0) rotate(0deg) scale(1); }
+      to { transform: translate3d(4%, 3%, 0) rotate(8deg) scale(1.08); }
+    }
+
+    @keyframes starDrift {
+      to { transform: translate3d(70px, 110px, 0); }
+    }
+
+    nav,
+    .profile-card,
+    .glass-box,
+    .skill-card,
+    .project-card,
+    .settings-panel,
+    .modal,
+    .certificate-btn,
+    .dnsc-link,
+    .icon-link,
+    .id-card,
+    .btn,
+    .sample-btn {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    nav,
+    .profile-card,
+    .glass-box,
+    .skill-card,
+    .project-card,
+    .settings-panel,
+    .modal {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.13), rgba(255,255,255,0.035)),
+        var(--glass-strong);
+      border: 1px solid var(--glass-line);
+      backdrop-filter: blur(24px) saturate(165%);
+      -webkit-backdrop-filter: blur(24px) saturate(165%);
+      box-shadow: var(--premium-shadow);
+    }
+
+    nav::before,
+    .profile-card::before,
+    .glass-box::before,
+    .skill-card::before,
+    .project-card::before,
+    .settings-panel::before,
+    .modal::before,
+    .certificate-btn::before,
+    .dnsc-link::before,
+    .icon-link::before,
+    .id-card::before,
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 42%, transparent 58%),
+        radial-gradient(circle at 20% 0%, rgba(255,255,255,0.20), transparent 30%);
+      transform: translateX(-120%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+      z-index: -1;
+    }
+
+    nav:hover::before,
+    .profile-card:hover::before,
+    .glass-box:hover::before,
+    .skill-card:hover::before,
+    .project-card:hover::before,
+    .settings-panel.show::before,
+    .modal::before,
+    .certificate-btn:hover::before,
+    .dnsc-link:hover::before,
+    .icon-link:hover::before,
+    .id-card:hover::before,
+    .btn:hover::before {
+      opacity: 1;
+      animation: shineSweep 1.3s ease forwards;
+    }
+
+    @keyframes shineSweep {
+      to { transform: translateX(120%); }
+    }
+
+    .logo,
+    .gradient-text,
+    .section-title span,
+    .project-type,
+    .modal h3,
+    .settings-content h4 {
+      background: linear-gradient(90deg, var(--accent), #ffffff, #ff2bd6, var(--accent));
+      background-size: 240% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: textGlowFlow 4.5s ease-in-out infinite;
+      text-shadow: none;
+    }
+
+    @keyframes textGlowFlow {
+      0%, 100% { background-position: 0% 50%; filter: drop-shadow(0 0 10px rgba(0,217,255,0.35)); }
+      50% { background-position: 100% 50%; filter: drop-shadow(0 0 18px rgba(255,43,214,0.28)); }
+    }
+
+    .skill-card,
+    .project-card,
+    .profile-card,
+    .glass-box {
+      transform-style: preserve-3d;
+      will-change: transform, box-shadow;
+    }
+
+    .skill-card:hover,
+    .project-card:hover,
+    .profile-card:hover,
+    .glass-box:hover {
+      transform: translateY(-14px) scale(1.012);
+      border-color: rgba(255,255,255,0.30);
+      box-shadow:
+        0 28px 60px rgba(0,0,0,0.36),
+        0 0 42px rgba(0,217,255,0.30),
+        0 0 70px rgba(255,0,212,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+    }
+
+    .skill-card::after,
+    .project-card::after,
+    .profile-card::after,
+    .glass-box::after,
+    .settings-panel::after,
+    .modal::after,
+    .cert-frame::after,
+    .certificate-btn::after,
+    .dnsc-link::after,
+    .btn::after,
+    .id-card::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -18px;
+      width: 72%;
+      height: 22px;
+      border-radius: 999px;
+      transform: translateX(-50%) scaleX(0.76);
+      background: var(--rainbow);
+      background-size: 300% 100%;
+      filter: blur(18px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: -2;
+      animation: rainbow 1.65s linear infinite;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .skill-card:hover::after,
+    .project-card:hover::after,
+    .profile-card:hover::after,
+    .glass-box:hover::after,
+    .settings-panel.show::after,
+    .modal::after,
+    .certificate-btn:hover::after,
+    .dnsc-link:hover::after,
+    .btn:hover::after,
+    .id-card:hover::after {
+      opacity: 0.92;
+      transform: translateX(-50%) scaleX(1.08);
+    }
+
+    .skill-icon,
+    .cert-icon,
+    .alien {
+      box-shadow:
+        0 0 18px rgba(0, 217, 255, 0.42),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+      animation: iconFloat 3.2s ease-in-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .skill-card:hover .skill-icon,
+    .certificate-btn:hover .cert-icon,
+    .dnsc-btn:hover .alien,
+    .dnsc-btn.holding .alien {
+      animation: iconPulse 0.95s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: translateY(-7px) scale(1.08) rotate(0deg); }
+      50% { transform: translateY(-10px) scale(1.18) rotate(7deg); }
+    }
+
+    .settings-btn {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03)),
+        rgba(0, 217, 255, 0.08);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+
+    .settings-btn.open {
+      transform: rotate(180deg) scale(1.1);
+    }
+
+    .settings-panel {
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-14px) scale(0.92);
+      pointer-events: none;
+      transition: opacity 0.28s cubic-bezier(.2,.9,.2,1), transform 0.28s cubic-bezier(.2,.9,.2,1), visibility 0.28s ease;
+      animation: none;
+    }
+
+    .settings-panel.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      display: block;
+    }
+
+    .theme-btn,
+    .lang-btn,
+    .sample-btn,
+    .btn,
+    .dnsc-btn,
+    .certificate-btn,
+    .icon-link,
+    .dnsc-link,
+    .close-btn {
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    button,
+    a,
+    .skill-card,
+    .project-card,
+    .id-card,
+    .certificate-btn,
+    .settings-btn,
+    .dnsc-btn,
+    .icon-link,
+    .dnsc-link {
+      -webkit-tap-highlight-color: transparent !important;
+      outline: none !important;
+    }
+
+    .theme-btn:hover,
+    .lang-btn:hover,
+    .theme-btn.active,
+    .lang-btn.active,
+    .sample-btn:hover {
+      transform: translateY(-4px) scale(1.04);
+      background: linear-gradient(135deg, rgba(0,217,255,0.18), rgba(255,43,214,0.10));
+      box-shadow: 0 0 22px rgba(0, 217, 255, 0.30), 0 0 36px rgba(255, 43, 214, 0.12);
+    }
+
+    .overlay {
+      display: grid;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 100%, rgba(255, 0, 212, 0.18), transparent 30%),
+        radial-gradient(circle at 50% 0%, rgba(0, 217, 255, 0.20), transparent 34%),
+        rgba(0, 0, 0, 0.46);
+      backdrop-filter: blur(18px) saturate(155%);
+      -webkit-backdrop-filter: blur(18px) saturate(155%);
+      transition: opacity 0.28s ease, visibility 0.28s ease;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      animation: overlayEntrance 0.34s ease both;
+    }
+
+    .overlay.closing {
+      animation: overlayExit 0.24s ease both;
+    }
+
+    @keyframes overlayEntrance {
+      from { opacity: 0; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); }
+      to { opacity: 1; backdrop-filter: blur(18px) saturate(155%); -webkit-backdrop-filter: blur(18px) saturate(155%); }
+    }
+
+    @keyframes overlayExit {
+      to { opacity: 0; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); }
+    }
+
+    .modal {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.045)),
+        rgba(5, 17, 36, 0.48);
+      border: 1px solid rgba(255,255,255,0.20);
+      backdrop-filter: blur(28px) saturate(175%);
+      -webkit-backdrop-filter: blur(28px) saturate(175%);
+      animation: modalMegaPop 0.46s cubic-bezier(.16,1,.3,1) both;
+      overflow: visible;
+    }
+
+    .modal::before {
+      z-index: -1;
+      opacity: 0.75;
+      animation: glassMove 4.2s ease-in-out infinite alternate;
+    }
+
+    .modal::after {
+      bottom: -26px;
+      width: 86%;
+      height: 30px;
+      opacity: 0.95;
+      filter: blur(20px);
+    }
+
+    .modal.wide::after {
+      width: 62%;
+    }
+
+    @keyframes modalMegaPop {
+      0% { opacity: 0; transform: translateY(28px) scale(0.86) rotateX(10deg); filter: blur(6px); }
+      65% { transform: translateY(-5px) scale(1.018) rotateX(0deg); filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    .overlay.closing .modal {
+      animation: modalMegaOut 0.22s ease both;
+    }
+
+    @keyframes modalMegaOut {
+      to { opacity: 0; transform: translateY(16px) scale(0.94); filter: blur(4px); }
+    }
+
+    .close-btn {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .close-btn:hover {
+      transform: rotate(135deg) scale(1.12);
+      background: rgba(255, 43, 214, 0.13);
+      box-shadow: 0 0 26px rgba(0,217,255,0.45), 0 0 36px rgba(255,43,214,0.22);
+    }
+
+    .cert-frame,
+    .video-box video,
+    .dnsc-link,
+    .certificate-btn,
+    .icon-link,
+    .btn,
+    .sample-btn,
+    .id-card {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.13), rgba(255,255,255,0.035)),
+        rgba(0, 217, 255, 0.055);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+    }
+
+    .cert-frame {
+      overflow: visible;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 0 38px rgba(0,217,255,0.14);
+    }
+
+    .cert-frame::after,
+    .video-box::after {
+      opacity: 0.9;
+      bottom: -20px;
+      width: 62%;
+      height: 25px;
+    }
+
+    .dnsc-btn {
+      box-shadow: 0 0 22px rgba(0,217,255,0.16), inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .dnsc-btn::before {
+      opacity: 0.22;
+      filter: blur(0.2px);
+      background: conic-gradient(from 180deg, #00d9ff, #7dffdf, #ffee00, #ff00d4, #7a5cff, #00d9ff);
+    }
+
+    .dnsc-btn:hover::before,
+    .dnsc-btn.holding::before {
+      opacity: 1;
+    }
+
+    .holdbar {
+      height: 3px;
+      background: var(--rainbow);
+      background-size: 300% 100%;
+      animation: rainbow 1.5s linear infinite;
+    }
+
+    .ripple {
+      display: none !important;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+      filter: blur(4px);
+      transition: opacity 0.72s cubic-bezier(.2,.9,.2,1), transform 0.72s cubic-bezier(.2,.9,.2,1), filter 0.72s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .magnetic-pop {
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    @media (max-width: 560px) {
+      .profile-card,
+      .glass-box,
+      .skill-card,
+      .project-card,
+      nav,
+      .settings-panel,
+      .modal,
+      .overlay,
+      .cert-frame,
+      .video-box video,
+      .dnsc-link,
+      .certificate-btn,
+      .icon-link,
+      .btn,
+      .sample-btn,
+      .id-card {
+        backdrop-filter: blur(14px) saturate(145%) !important;
+        -webkit-backdrop-filter: blur(14px) saturate(145%) !important;
+      }
+
+      .overlay {
+        padding: 16px;
+      }
+
+      .modal::after {
+        width: 78%;
+        height: 20px;
+        bottom: -18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -1772,14 +2314,22 @@
       const overlay = document.getElementById(id);
       if (!overlay) return;
 
-      overlay.classList.remove("show");
-      document.body.style.overflow = "";
+      overlay.classList.add("closing");
 
       if (id === "videoOverlay") {
         const video = document.getElementById("sampleVideo");
-        video.pause();
-        video.currentTime = 0;
+        if (video) {
+          video.pause();
+          video.currentTime = 0;
+        }
       }
+
+      setTimeout(() => {
+        overlay.classList.remove("show", "closing");
+        if (!document.querySelector(".overlay.show")) {
+          document.body.style.overflow = "";
+        }
+      }, 230);
     }
 
     document.getElementById("openCert").addEventListener("click", () => openOverlay("certOverlay"));
@@ -1888,6 +2438,50 @@
         sessionStorage.setItem("desktopNoticeClosed", "yes");
       }
     });
+
+
+    /* Ultra interaction upgrades: smooth close, reveal animation, mouse glow, no ugly tap frame */
+    (() => {
+      const root = document.documentElement;
+      const hoverables = document.querySelectorAll(".btn, .certificate-btn, .dnsc-link, .icon-link, .theme-btn, .lang-btn, .sample-btn, .settings-btn, .dnsc-btn");
+
+      window.addEventListener("pointermove", (event) => {
+        const x = Math.round((event.clientX / window.innerWidth) * 100);
+        const y = Math.round((event.clientY / window.innerHeight) * 100);
+        document.body.style.setProperty("--mx", `${x}%`);
+        document.body.style.setProperty("--my", `${y}%`);
+      }, { passive: true });
+
+      hoverables.forEach((el) => {
+        el.classList.add("magnetic-pop");
+        el.addEventListener("pointerdown", () => el.style.transform = "scale(0.96)");
+        el.addEventListener("pointerup", () => el.style.transform = "");
+        el.addEventListener("pointerleave", () => el.style.transform = "");
+        el.addEventListener("blur", () => el.style.transform = "");
+      });
+
+      const revealTargets = document.querySelectorAll("section, .skill-card, .project-card, .profile-card, .glass-box");
+      revealTargets.forEach((el) => el.classList.add("reveal"));
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealTargets.forEach((el) => revealObserver.observe(el));
+
+
+      document.addEventListener("scroll", () => {
+        if (!settingsPanel || !settingsBtn) return;
+        settingsPanel.classList.remove("show");
+        settingsBtn.classList.remove("open");
+      }, { passive: true });
+    })();
+
   </script>
 </body>
 </html>
