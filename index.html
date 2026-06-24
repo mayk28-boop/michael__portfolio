@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -601,6 +600,53 @@
       margin-bottom: 20px;
     }
 
+    .gradient-text {
+      color: var(--blue);
+      text-shadow: 0 0 24px rgba(0, 217, 255, 0.75);
+    }
+
+    .hero-text h2 {
+      color: var(--text-soft);
+      font-size: clamp(20px, 3vw, 30px);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .hero-text p {
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin-bottom: 26px;
+      max-width: 680px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 13px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      color: var(--white);
+      background: rgba(0, 217, 255, 0.07);
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.28s ease;
+    }
+
+    .btn.primary {
+      background: rgba(0, 217, 255, 0.16);
+      color: var(--blue);
+    }
+
+    .btn:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 217, 255, 0.55);
+      box-shadow: 0 0 26px rgba(0, 217, 255, 0.32);
+    }
+
     .profile-card,
     .glass-box,
     .skill-card,
@@ -817,6 +863,196 @@
 
       100% {
         transform: scale(1);
+      }
+    }
+
+    .certificate-icon-btn {
+      width: 100%;
+      margin-top: 14px;
+      padding: 14px 15px;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 217, 255, 0.24);
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.14), transparent 28%),
+        rgba(0, 217, 255, 0.08);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      cursor: pointer;
+      text-align: left;
+      transition: 0.28s ease;
+      box-shadow: inset 0 0 18px rgba(0, 217, 255, 0.06);
+    }
+
+    .certificate-icon-btn:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(0, 217, 255, 0.55);
+      background: rgba(0, 217, 255, 0.14);
+      box-shadow:
+        0 16px 28px rgba(0, 0, 0, 0.32),
+        0 0 30px rgba(0, 217, 255, 0.32);
+    }
+
+    .certificate-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 16px;
+      font-size: 23px;
+      background:
+        radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.28), transparent 25%),
+        rgba(0, 217, 255, 0.13);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      box-shadow: 0 0 18px rgba(0, 217, 255, 0.18);
+    }
+
+    .certificate-text strong {
+      display: block;
+      color: var(--blue);
+      font-size: 14px;
+      letter-spacing: 0.8px;
+    }
+
+    .certificate-text small {
+      display: block;
+      margin-top: 4px;
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+
+    .certificate-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 22000;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.74);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .certificate-popup.show {
+      display: grid;
+      animation: certificateOverlayFade 0.28s ease forwards;
+    }
+
+    .certificate-popup-box {
+      position: relative;
+      width: min(920px, 94vw);
+      max-height: 92vh;
+      padding: 20px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--nav-bg);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.58),
+        0 0 45px rgba(0, 217, 255, 0.38);
+      animation: certificatePopupRise 0.42s ease forwards;
+      overflow: hidden;
+    }
+
+    .certificate-popup-header {
+      padding: 6px 8px 16px;
+    }
+
+    .certificate-popup-header span {
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .certificate-popup-header h3 {
+      margin-top: 7px;
+      font-size: 25px;
+      color: var(--white);
+    }
+
+    .certificate-popup-header p {
+      margin-top: 7px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .certificate-frame-wrap {
+      width: 100%;
+      height: min(62vh, 620px);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 217, 255, 0.28);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .certificate-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #ffffff;
+    }
+
+    .certificate-view-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .certificate-view-link:hover {
+      text-shadow: 0 0 16px var(--blue);
+    }
+
+    .certificate-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(4, 12, 28, 0.95);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 1;
+      box-shadow:
+        0 0 22px rgba(0, 217, 255, 0.42),
+        0 10px 22px rgba(0, 0, 0, 0.45);
+      transition: 0.25s ease;
+    }
+
+    .certificate-close-btn:hover {
+      color: var(--blue);
+      transform: rotate(90deg) scale(1.08);
+      box-shadow: 0 0 28px rgba(0, 217, 255, 0.6);
+    }
+
+    @keyframes certificateOverlayFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes certificatePopupRise {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
       }
     }
 
@@ -1402,6 +1638,18 @@
         text-align: center;
       }
 
+      .certificate-popup-box {
+        padding: 16px;
+      }
+
+      .certificate-frame-wrap {
+        height: 55vh;
+      }
+
+      .certificate-popup-header h3 {
+        font-size: 21px;
+      }
+
       .smoke {
         width: 180px;
         height: 180px;
@@ -1439,7 +1687,6 @@
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -1450,68 +1697,88 @@
         For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.
       </p>
 
-```
-  <div class="popup-actions">
-    <button id="continuePopup">Continue Anyway</button>
-    <button id="backPopup" class="back-btn">Back</button>
-  </div>
-</div>
-```
-
+      <div class="popup-actions">
+        <button id="continuePopup">Continue Anyway</button>
+        <button id="backPopup" class="back-btn">Back</button>
+      </div>
+    </div>
   </div>
 
   <div class="dnsc-options-overlay" id="dnscOptionsOverlay">
     <div class="dnsc-options-box">
       <button class="dnsc-close-btn" id="closeDnscOptions" aria-label="Close DNSC options">×</button>
 
-```
-  <div class="dnsc-options-content">
-    <div class="dnsc-options-header">
-      <span>[ DNSC PORTAL ACCESS ]</span>
-      <h3>Choose Destination</h3>
-      <p>Select where you want to go. These links will open in a new tab.</p>
-    </div>
-
-    <div class="dnsc-option-links">
-      <a class="dnsc-option-link" href="https://dnsc.edu.ph/" target="_blank" rel="noopener noreferrer">
-        <div class="dnsc-option-icon">🌐</div>
-        <div class="dnsc-option-text">
-          <strong>DNSC Official Website</strong>
-          <small>Visit the official Davao del Norte State College website.</small>
+      <div class="dnsc-options-content">
+        <div class="dnsc-options-header">
+          <span>[ DNSC PORTAL ACCESS ]</span>
+          <h3>Choose Destination</h3>
+          <p>Select where you want to go. These links will open in a new tab.</p>
         </div>
-      </a>
 
-      <a class="dnsc-option-link" href="https://www.facebook.com/officialdnsc/" target="_blank" rel="noopener noreferrer">
-        <div class="dnsc-option-icon">📘</div>
-        <div class="dnsc-option-text">
-          <strong>DNSC Facebook Page</strong>
-          <small>Open the official DNSC Facebook page.</small>
+        <div class="dnsc-option-links">
+          <a class="dnsc-option-link" href="https://dnsc.edu.ph/" target="_blank" rel="noopener noreferrer">
+            <div class="dnsc-option-icon">🌐</div>
+            <div class="dnsc-option-text">
+              <strong>DNSC Official Website</strong>
+              <small>Visit the official Davao del Norte State College website.</small>
+            </div>
+          </a>
+
+          <a class="dnsc-option-link" href="https://www.facebook.com/officialdnsc/" target="_blank" rel="noopener noreferrer">
+            <div class="dnsc-option-icon">📘</div>
+            <div class="dnsc-option-text">
+              <strong>DNSC Facebook Page</strong>
+              <small>Open the official DNSC Facebook page.</small>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
     </div>
-  </div>
-</div>
-```
-
   </div>
 
   <div class="video-popup" id="videoPopup">
     <div class="video-popup-box">
       <button class="video-close-btn" id="closeVideoPopup" aria-label="Close video popup">×</button>
 
-```
-  <div class="video-popup-header">
-    <span>[ SAMPLE SHORT EDIT ]</span>
-    <h3>Michael’s Video Editing Sample</h3>
+      <div class="video-popup-header">
+        <span>[ SAMPLE SHORT EDIT ]</span>
+        <h3>Michael’s Video Editing Sample</h3>
+      </div>
+
+      <video id="sampleVideo" controls preload="metadata" playsinline>
+        <source src="assets/sample-edit.mp4.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
 
-  <video id="sampleVideo" controls preload="metadata" playsinline>
-    <source src="assets/sample-edit.mp4.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div>
-```
+  <div class="certificate-popup" id="certificatePopup">
+    <div class="certificate-popup-box">
+      <button class="certificate-close-btn" id="closeCertificatePopup" aria-label="Close certificate popup">×</button>
 
+      <div class="certificate-popup-header">
+        <span>[ CERTIFICATE ]</span>
+        <h3>Cybersecurity Essentials</h3>
+        <p>Cisco Networking Academy · Davao Del Norte State College</p>
+      </div>
+
+      <div class="certificate-frame-wrap">
+        <iframe
+          src="assets/certificate.pdf"
+          class="certificate-frame"
+          title="Michael Navarro Certificate"
+        ></iframe>
+      </div>
+
+      <a
+        class="certificate-view-link"
+        href="assets/certificate.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        [ OPEN FULL CERTIFICATE ]
+      </a>
+    </div>
   </div>
 
   <div class="theme-panel" aria-label="Theme controls">
@@ -1531,17 +1798,14 @@
   <nav>
     <div class="logo">MICHAEL_</div>
 
-```
-<div class="nav-links">
-  <a href="#about">ABOUT</a>
-  <a href="#skills">SKILLS</a>
-  <a href="#projects">PROJECTS</a>
-  <a href="#contact">CONTACT</a>
-</div>
+    <div class="nav-links">
+      <a href="#about">ABOUT</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#contact">CONTACT</a>
+    </div>
 
-<div class="status">OPEN TO WORK</div>
-```
-
+    <div class="status">OPEN TO WORK</div>
   </nav>
 
   <main class="container">
@@ -1551,273 +1815,278 @@
           <button class="dnsc-alien-btn" id="dnscAlienButton" type="button">
             <span class="dnsc-alien-icon"></span>
 
-```
-        <span class="dnsc-alien-text">
-          <strong>DNSC ACCESS</strong>
-          <span>LONG PRESS 2–3 SEC</span>
-        </span>
+            <span class="dnsc-alien-text">
+              <strong>DNSC ACCESS</strong>
+              <span>LONG PRESS 2–3 SEC</span>
+            </span>
 
-        <span class="hold-progress"></span>
-      </button>
-    </div>
+            <span class="hold-progress"></span>
+          </button>
+        </div>
 
-    <h1>Hi, I’m <span class="gradient-text">Michael.</span></h1>
-    <h2>Graphic Designer · Visual Creator · UI/UX Learner</h2>
+        <h1>Hi, I’m <span class="gradient-text">Michael.</span></h1>
+        <h2>Graphic Designer · Visual Creator · UI/UX Learner</h2>
 
-    <p>
-      Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean,
-      modern, and eye-catching visual designs. My skills include photo editing,
-      video editing, and basic network configuration. I’m always willing to learn
-      new tools and improve my skills to create better and more professional outputs.
-    </p>
+        <p>
+          Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean,
+          modern, and eye-catching visual designs. My skills include photo editing,
+          video editing, and basic network configuration. I’m always willing to learn
+          new tools and improve my skills to create better and more professional outputs.
+        </p>
 
-    <div class="buttons">
-      <a class="btn primary" href="#projects">View Projects</a>
-      <a class="btn" href="#contact">Get In Touch</a>
-    </div>
-  </div>
-
-  <div class="profile-card">
-    <img
-      src="assets/profile.jpg"
-      alt="Michael G. Navarro"
-      class="profile-img"
-    />
-
-    <div class="id-card" id="digitalIdCard">
-      <small>[ DIGITAL ID ]</small>
-      <h3>Michael G. Navarro</h3>
-      <p>Graphic Designer · DNSC Student</p>
-      <p style="color: var(--blue); margin-top: 8px;">ACTIVE — CREATIVE PORTFOLIO</p>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="section-title">
-    <span>[ ABOUT ]</span>
-    <h2>Designing visuals that feel modern and professional.</h2>
-  </div>
-
-  <div class="glass-box">
-    <p>
-      I am a 4th year college student with a growing interest in graphic design,
-      visual editing, and user interface design. I enjoy creating designs that are
-      simple, clean, and attractive while making sure the message is easy to understand.
-    </p>
-
-    <br />
-
-    <p>
-      My creative work focuses on photo editing, video editing, layout design,
-      and digital content creation. I also have experience using Figma, where I can
-      create interface layouts and interactive prototypes for web or app design ideas.
-      Aside from creative work, I also have basic knowledge in network configuration,
-      which helps me understand technical setups and system connectivity.
-    </p>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="section-title">
-    <span>[ SKILLS ]</span>
-    <h2>Tools and skills I work with.</h2>
-  </div>
-
-  <div class="grid skills-grid">
-    <div class="skill-card">
-      <div class="skill-icon">🎨</div>
-      <h3>Graphic Design</h3>
-      <p>Creating clean, modern, and eye-catching visual layouts for digital content.</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-icon">🖼️</div>
-      <h3>Photo Editing</h3>
-      <p>Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
-    </div>
-
-    <div class="skill-card video-sample-trigger" id="openVideoSample">
-      <div class="skill-icon">🎬</div>
-      <h3>Video Editing</h3>
-      <p>Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
-      <button class="sample-edit-btn" type="button">View Sample Edit</button>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-icon">💎</div>
-      <h3>Figma Prototype</h3>
-      <p>Designing UI layouts and creating clickable prototypes for web and app concepts.</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-icon">🌐</div>
-      <h3>Basic Network Configuration</h3>
-      <p>Setting up basic network connections, configurations, and connectivity settings.</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-icon">✨</div>
-      <h3>Creative Direction</h3>
-      <p>Choosing colors, styles, spacing, and visual direction for a more polished output.</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-icon">📱</div>
-      <h3>Social Media Design</h3>
-      <p>Creating posters, banners, thumbnails, and digital content for online platforms.</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-icon">⚡</div>
-      <h3>Fast Learner</h3>
-      <p>Willing to explore new design tools, trends, and techniques to improve my work.</p>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="section-title">
-    <span>[ PROJECTS ]</span>
-    <h2>Selected creative work.</h2>
-  </div>
-
-  <div class="grid projects-grid">
-    <div class="project-card">
-      <div class="project-type">UI/UX DESIGN · FIGMA PROTOTYPE</div>
-      <h3>Interactive Figma Prototype</h3>
-      <p>
-        A clickable prototype created in Figma to present a clean interface flow,
-        screen layout, and user interaction concept.
-      </p>
-
-      <div class="chips">
-        <span class="chip">Figma</span>
-        <span class="chip">UI Design</span>
-        <span class="chip">Prototype</span>
-        <span class="chip">Wireframe</span>
+        <div class="buttons">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="#contact">Get In Touch</a>
+        </div>
       </div>
 
-      <a
-        class="mini-link"
-        href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=zMthvpgWqKfyunAp-1&starting-point-node-id=100%3A16"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        [ VIEW PROTOTYPE ]
-      </a>
-    </div>
+      <div class="profile-card">
+        <img
+          src="assets/profile.jpg"
+          alt="Michael G. Navarro"
+          class="profile-img"
+        />
 
-    <div class="project-card">
-      <div class="project-type">GRAPHIC DESIGN · DIGITAL CONTENT</div>
-      <h3>Social Media Poster Designs</h3>
-      <p>
-        A collection of poster and layout designs focused on strong visuals,
-        readable text, balanced spacing, and modern color combinations.
-      </p>
+        <div class="id-card" id="digitalIdCard">
+          <small>[ DIGITAL ID ]</small>
+          <h3>Michael G. Navarro</h3>
+          <p>Graphic Designer · DNSC Student</p>
+          <p style="color: var(--blue); margin-top: 8px;">ACTIVE — CREATIVE PORTFOLIO</p>
+        </div>
 
-      <div class="chips">
-        <span class="chip">Poster Design</span>
-        <span class="chip">Layout</span>
-        <span class="chip">Branding</span>
+        <button class="certificate-icon-btn" id="openCertificatePopup" type="button">
+          <span class="certificate-icon">🏅</span>
+          <span class="certificate-text">
+            <strong>Certificate</strong>
+            <small>Tap to view achievement</small>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-title">
+        <span>[ ABOUT ]</span>
+        <h2>Designing visuals that feel modern and professional.</h2>
       </div>
 
-      <a class="mini-link" href="#contact">[ REQUEST SAMPLE ]</a>
-    </div>
+      <div class="glass-box">
+        <p>
+          I am a 4th year college student with a growing interest in graphic design,
+          visual editing, and user interface design. I enjoy creating designs that are
+          simple, clean, and attractive while making sure the message is easy to understand.
+        </p>
 
-    <div class="project-card video-sample-trigger" id="openVideoSampleProject">
-      <div class="project-type">VIDEO EDITING · CREATIVE MEDIA</div>
-      <h3>Short Video Edits</h3>
-      <p>
-        Edited video content with smooth pacing, transitions, visual timing,
-        and improved flow for more engaging presentation.
-      </p>
+        <br />
 
-      <div class="chips">
-        <span class="chip">Video Editing</span>
-        <span class="chip">Transitions</span>
-        <span class="chip">Visual Flow</span>
+        <p>
+          My creative work focuses on photo editing, video editing, layout design,
+          and digital content creation. I also have experience using Figma, where I can
+          create interface layouts and interactive prototypes for web or app design ideas.
+          Aside from creative work, I also have basic knowledge in network configuration,
+          which helps me understand technical setups and system connectivity.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-title">
+        <span>[ SKILLS ]</span>
+        <h2>Tools and skills I work with.</h2>
       </div>
 
-      <a class="mini-link" href="javascript:void(0)">[ VIEW SAMPLE EDIT ]</a>
-    </div>
+      <div class="grid skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">🎨</div>
+          <h3>Graphic Design</h3>
+          <p>Creating clean, modern, and eye-catching visual layouts for digital content.</p>
+        </div>
 
-    <div class="project-card">
-      <div class="project-type">TECHNICAL SKILL · NETWORK SETUP</div>
-      <h3>Basic Network Configuration</h3>
-      <p>
-        Practical experience in configuring basic network settings and connectivity
-        setups, with attention to proper access and stable connection.
-      </p>
+        <div class="skill-card">
+          <div class="skill-icon">🖼️</div>
+          <h3>Photo Editing</h3>
+          <p>Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
+        </div>
 
-      <div class="chips">
-        <span class="chip">Networking</span>
-        <span class="chip">Configuration</span>
-        <span class="chip">Technical Setup</span>
+        <div class="skill-card video-sample-trigger" id="openVideoSample">
+          <div class="skill-icon">🎬</div>
+          <h3>Video Editing</h3>
+          <p>Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
+          <button class="sample-edit-btn" type="button">View Sample Edit</button>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">💎</div>
+          <h3>Figma Prototype</h3>
+          <p>Designing UI layouts and creating clickable prototypes for web and app concepts.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🌐</div>
+          <h3>Basic Network Configuration</h3>
+          <p>Setting up basic network connections, configurations, and connectivity settings.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">✨</div>
+          <h3>Creative Direction</h3>
+          <p>Choosing colors, styles, spacing, and visual direction for a more polished output.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">📱</div>
+          <h3>Social Media Design</h3>
+          <p>Creating posters, banners, thumbnails, and digital content for online platforms.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">⚡</div>
+          <h3>Fast Learner</h3>
+          <p>Willing to explore new design tools, trends, and techniques to improve my work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-title">
+        <span>[ PROJECTS ]</span>
+        <h2>Selected creative work.</h2>
       </div>
 
-      <a class="mini-link" href="#skills">[ VIEW SKILLS ]</a>
-    </div>
-  </div>
-</section>
+      <div class="grid projects-grid">
+        <div class="project-card">
+          <div class="project-type">UI/UX DESIGN · FIGMA PROTOTYPE</div>
+          <h3>Interactive Figma Prototype</h3>
+          <p>
+            A clickable prototype created in Figma to present a clean interface flow,
+            screen layout, and user interaction concept.
+          </p>
 
-<section id="contact">
-  <div class="section-title">
-    <span>[ CONTACT ]</span>
-    <h2>Let’s create something clean and creative.</h2>
-  </div>
+          <div class="chips">
+            <span class="chip">Figma</span>
+            <span class="chip">UI Design</span>
+            <span class="chip">Prototype</span>
+            <span class="chip">Wireframe</span>
+          </div>
 
-  <div class="glass-box contact-card">
-    <div class="contact-info">
-      <p>
-        I am open to creative projects, school-related design work, portfolio
-        collaborations, and opportunities where I can improve my skills in design,
-        editing, and UI/UX prototyping.
-      </p>
+          <a
+            class="mini-link"
+            href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=zMthvpgWqKfyunAp-1&starting-point-node-id=100%3A16"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [ VIEW PROTOTYPE ]
+          </a>
+        </div>
 
-      <div class="icon-links">
-        <a
-          class="icon-link"
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=navarro.michael@dnsc.edu.ph"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Gmail
-        </a>
+        <div class="project-card">
+          <div class="project-type">GRAPHIC DESIGN · DIGITAL CONTENT</div>
+          <h3>Social Media Poster Designs</h3>
+          <p>
+            A collection of poster and layout designs focused on strong visuals,
+            readable text, balanced spacing, and modern color combinations.
+          </p>
 
-        <a class="icon-link" href="tel:+639158480061">Call</a>
+          <div class="chips">
+            <span class="chip">Poster Design</span>
+            <span class="chip">Layout</span>
+            <span class="chip">Branding</span>
+          </div>
 
-        <a
-          class="icon-link"
-          href="https://www.facebook.com/share/17sqYuH8bE/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Facebook
-        </a>
+          <a class="mini-link" href="#contact">[ REQUEST SAMPLE ]</a>
+        </div>
 
-        <a
-          class="icon-link"
-          href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=b9U4PNwgAzjz0mZn-1&starting-point-node-id=100%3A16"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Figma
-        </a>
+        <div class="project-card video-sample-trigger" id="openVideoSampleProject">
+          <div class="project-type">VIDEO EDITING · CREATIVE MEDIA</div>
+          <h3>Short Video Edits</h3>
+          <p>
+            Edited video content with smooth pacing, transitions, visual timing,
+            and improved flow for more engaging presentation.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Video Editing</span>
+            <span class="chip">Transitions</span>
+            <span class="chip">Visual Flow</span>
+          </div>
+
+          <a class="mini-link" href="javascript:void(0)">[ VIEW SAMPLE EDIT ]</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-type">TECHNICAL SKILL · NETWORK SETUP</div>
+          <h3>Basic Network Configuration</h3>
+          <p>
+            Practical experience in configuring basic network settings and connectivity
+            setups, with attention to proper access and stable connection.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Networking</span>
+            <span class="chip">Configuration</span>
+            <span class="chip">Technical Setup</span>
+          </div>
+
+          <a class="mini-link" href="#skills">[ VIEW SKILLS ]</a>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div>
-      <p><strong>Email:</strong> navarro.michael@dnsc.edu.ph</p>
-      <p><strong>Phone:</strong> 09158480061</p>
-      <p><strong>Facebook:</strong> Michael G. Navarro</p>
-      <p><strong>Location:</strong> Davao del Norte, Philippines</p>
-      <p><strong>Status:</strong> Available for creative work</p>
-    </div>
-  </div>
-</section>
-```
+    <section id="contact">
+      <div class="section-title">
+        <span>[ CONTACT ]</span>
+        <h2>Let’s create something clean and creative.</h2>
+      </div>
 
+      <div class="glass-box contact-card">
+        <div class="contact-info">
+          <p>
+            I am open to creative projects, school-related design work, portfolio
+            collaborations, and opportunities where I can improve my skills in design,
+            editing, and UI/UX prototyping.
+          </p>
+
+          <div class="icon-links">
+            <a
+              class="icon-link"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=navarro.michael@dnsc.edu.ph"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Gmail
+            </a>
+
+            <a class="icon-link" href="tel:+639158480061">Call</a>
+
+            <a
+              class="icon-link"
+              href="https://www.facebook.com/share/17sqYuH8bE/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Facebook
+            </a>
+
+            <a
+              class="icon-link"
+              href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=b9U4PNwgAzjz0mZn-1&starting-point-node-id=100%3A16"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Figma
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p><strong>Email:</strong> navarro.michael@dnsc.edu.ph</p>
+          <p><strong>Phone:</strong> 09158480061</p>
+          <p><strong>Facebook:</strong> Michael G. Navarro</p>
+          <p><strong>Location:</strong> Davao del Norte, Philippines</p>
+          <p><strong>Status:</strong> Available for creative work</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -2030,7 +2299,39 @@
         closeDnscPopup();
       }
     });
-  </script>
 
+    const openCertificatePopup = document.getElementById("openCertificatePopup");
+    const certificatePopup = document.getElementById("certificatePopup");
+    const closeCertificatePopup = document.getElementById("closeCertificatePopup");
+
+    function openCertificate() {
+      if (!certificatePopup) return;
+
+      certificatePopup.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCertificate() {
+      if (!certificatePopup) return;
+
+      certificatePopup.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    openCertificatePopup?.addEventListener("click", openCertificate);
+    closeCertificatePopup?.addEventListener("click", closeCertificate);
+
+    certificatePopup?.addEventListener("click", (e) => {
+      if (e.target === certificatePopup) {
+        closeCertificate();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && certificatePopup?.classList.contains("show")) {
+        closeCertificate();
+      }
+    });
+  </script>
 </body>
 </html>
