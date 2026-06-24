@@ -888,57 +888,51 @@
   </footer>
 
   <script>
-    const cursor = document.querySelector(".cursor-water");
-    const hoverItems = document.querySelectorAll("a, .skill-card, .project-card, .profile-card, .skill-icon");
+  const cursor = document.querySelector(".cursor-water");
 
-    document.addEventListener("mousemove", (e) => {
-      cursor.style.left = e.clientX + "px";
-      cursor.style.top = e.clientY + "px";
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });
+
+  document.addEventListener("mousedown", () => {
+    cursor.classList.add("active");
+  });
+
+  document.addEventListener("mouseup", () => {
+    cursor.classList.remove("active");
+  });
+
+  document.addEventListener("mouseleave", () => {
+    cursor.classList.remove("active");
+  });
+
+  const cards = document.querySelectorAll(".profile-card, .skill-card, .project-card");
+
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+      card.style.setProperty("--x", x + "%");
+      card.style.setProperty("--y", y + "%");
     });
+  });
 
-document.addEventListener("mousedown", () => {
-  cursor.classList.add("active");
-});
+  const reveals = document.querySelectorAll(".reveal");
 
-document.addEventListener("mouseup", () => {
-  cursor.classList.remove("active");
-});
-
-document.addEventListener("mouseleave", () => {
-  cursor.classList.remove("active");
-});
-
-      item.addEventListener("mouseleave", () => {
-        cursor.classList.remove("active");
-      });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
     });
+  }, {
+    threshold: 0.15
+  });
 
-    const cards = document.querySelectorAll(".profile-card, .skill-card, .project-card");
-
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-        card.style.setProperty("--x", x + "%");
-        card.style.setProperty("--y", y + "%");
-      });
-    });
-
-    const reveals = document.querySelectorAll(".reveal");
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, {
-      threshold: 0.15
-    });
-
-    reveals.forEach((el) => observer.observe(el));
-  </script>
+  reveals.forEach((el) => observer.observe(el));
+</script>
 </body>
 </html>
