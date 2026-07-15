@@ -1,1 +1,2636 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Michael G. Navarro | Portfolio</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    :root {
+      --bg: #030712;
+      --bg2: #081225;
+      --card: rgba(255, 255, 255, 0.075);
+      --glass: rgba(8, 18, 38, 0.58);
+      --glass-strong: rgba(5, 14, 31, 0.82);
+      --text: #f2fbff;
+      --soft: #bdd0dc;
+      --muted: #8ba2b4;
+      --accent: #00d9ff;
+      --accent2: #7c3cff;
+      --accent3: #ff2fd6;
+      --border: rgba(255, 255, 255, 0.14);
+      --line: rgba(0, 217, 255, 0.25);
+      --shadow: 0 18px 55px rgba(0, 0, 0, 0.34), 0 0 30px rgba(0, 217, 255, 0.14);
+    }
+
+    body.light {
+      --bg: #edf8ff;
+      --bg2: #ffffff;
+      --card: rgba(255, 255, 255, 0.72);
+      --glass: rgba(255, 255, 255, 0.62);
+      --glass-strong: rgba(255, 255, 255, 0.86);
+      --text: #071827;
+      --soft: #334b5d;
+      --muted: #52687a;
+      --accent: #0077cc;
+      --accent2: #02a6d6;
+      --accent3: #8b5cf6;
+      --border: rgba(0, 90, 150, 0.18);
+      --line: rgba(0, 119, 204, 0.28);
+      --shadow: 0 18px 55px rgba(0, 70, 110, 0.12), 0 0 25px rgba(0, 119, 204, 0.12);
+    }
+
+    body.colorblind {
+      --bg: #0d0d0d;
+      --bg2: #161616;
+      --card: rgba(255, 255, 255, 0.075);
+      --glass: rgba(20, 20, 20, 0.66);
+      --glass-strong: rgba(18, 18, 18, 0.86);
+      --text: #f8f8f8;
+      --soft: #e1e1e1;
+      --muted: #c4c4c4;
+      --accent: #ffb000;
+      --accent2: #648fff;
+      --accent3: #dc267f;
+      --border: rgba(255, 176, 0, 0.22);
+      --line: rgba(255, 176, 0, 0.34);
+      --shadow: 0 18px 55px rgba(0, 0, 0, 0.38), 0 0 26px rgba(255, 176, 0, 0.15);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(0, 217, 255, 0.23), transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(124, 60, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 72% 88%, rgba(255, 47, 214, 0.12), transparent 32%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      opacity: 0.45;
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(circle at center, black 0 48%, transparent 82%);
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus,
+    a:focus {
+      outline: none;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.28);
+    }
+
+    .bg-effects {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .smoke {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 45% 55% 60% 40%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(0, 217, 255, 0.32), transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(124, 60, 255, 0.25), transparent 42%),
+        radial-gradient(circle, rgba(255, 255, 255, 0.10), transparent 66%);
+      filter: blur(16px);
+      opacity: 0.52;
+      mix-blend-mode: screen;
+      animation: smokeMove 24s ease-in-out infinite alternate;
+    }
+
+    .s1 {
+      top: -130px;
+      left: -125px;
+    }
+
+    .s2 {
+      right: -160px;
+      bottom: -160px;
+      width: 480px;
+      height: 480px;
+      animation-duration: 28s;
+    }
+
+    .s3 {
+      top: 35%;
+      left: 38%;
+      width: 300px;
+      height: 300px;
+      animation-duration: 31s;
+      opacity: 0.38;
+    }
+
+    @keyframes smokeMove {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+      }
+
+      50% {
+        transform: translate3d(36px, -28px, 0) rotate(150deg) scale(1.07);
+      }
+
+      100% {
+        transform: translate3d(-24px, 32px, 0) rotate(360deg) scale(0.98);
+      }
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 12px;
+      z-index: 1000;
+      width: min(1120px, 92%);
+      margin: 12px auto;
+      padding: 9px 12px;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--glass);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.24), 0 0 18px rgba(0,217,255,0.12);
+    }
+
+    nav::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: -5px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ff004c, #ff8c00, #ffee00, #00ff85, #00d9ff, #7a5cff, #ff00d4, #ff004c);
+      background-size: 300% 100%;
+      filter: blur(11px);
+      opacity: 0.28;
+      pointer-events: none;
+      animation: rainbow 5s linear infinite;
+    }
+
+    .logo {
+      color: var(--accent);
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      font-size: 15px;
+      text-shadow: 0 0 16px rgba(0, 217, 255, 0.55);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      opacity: 0.82;
+      transition: 0.22s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      opacity: 1;
+      text-shadow: 0 0 14px var(--accent);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(0, 217, 255, 0.07);
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .settings-wrap {
+      position: relative;
+    }
+
+    .settings-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.055);
+      cursor: pointer;
+      font-size: 18px;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      touch-action: manipulation;
+    }
+
+    .settings-btn:hover,
+    .settings-btn.open {
+      border-color: var(--accent);
+      transform: rotate(120deg) scale(1.04);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.28);
+    }
+
+    .settings-panel {
+      display: none;
+      position: absolute;
+      top: 48px;
+      right: 0;
+      width: min(315px, 88vw);
+      padding: 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--glass-strong);
+      backdrop-filter: blur(22px) saturate(160%);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: modalPopIn 0.26s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .settings-panel.show {
+      display: block;
+    }
+
+    .settings-panel::before,
+    .glass-box::before,
+    .skill-card::before,
+    .project-card::before,
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.17), transparent 34%, rgba(255,255,255,0.06));
+      opacity: 0.9;
+    }
+
+    .settings-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .settings-content h4 {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 1.3px;
+      margin-bottom: 10px;
+    }
+
+    .settings-section {
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      padding-top: 11px;
+      margin-top: 11px;
+    }
+
+    .settings-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--soft);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .settings-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .theme-btn,
+    .lang-btn,
+    .sample-btn {
+      min-height: 34px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.055);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 800;
+      transition: 0.22s ease;
+      touch-action: manipulation;
+    }
+
+    .theme-btn:hover,
+    .lang-btn:hover,
+    .theme-btn.active,
+    .lang-btn.active,
+    .sample-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: rgba(0, 217, 255, 0.12);
+      box-shadow: 0 0 16px rgba(0, 217, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    .hero {
+      min-height: 84vh;
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      align-items: center;
+      gap: 34px;
+      padding-top: 54px;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6.5vw, 82px);
+      line-height: 0.96;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), #b0fff2, var(--accent2), var(--accent3));
+      background-size: 260% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 16px rgba(0,217,255,0.42));
+      animation: textGlow 4.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes textGlow {
+      from {
+        background-position: 0% 50%;
+      }
+
+      to {
+        background-position: 100% 50%;
+      }
+    }
+
+    .hero h2 {
+      color: var(--soft);
+      font-size: clamp(19px, 2.6vw, 28px);
+      margin-bottom: 16px;
+    }
+
+    .hero p,
+    .glass-box p,
+    .project-card p,
+    .skill-card p {
+      color: var(--soft);
+      line-height: 1.75;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 17px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.055);
+      text-decoration: none;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.24s ease;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+
+    .btn.primary {
+      color: var(--accent);
+      background: rgba(0, 217, 255, 0.12);
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent, rgba(255,255,255,0.16), transparent);
+      transform: translateX(-120%);
+      transition: 0.55s ease;
+    }
+
+    .btn:hover::before {
+      transform: translateX(120%);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 22px rgba(0, 217, 255, 0.24);
+      border-color: var(--accent);
+    }
+
+    .dnsc-wrap {
+      margin-bottom: 20px;
+    }
+
+    .dnsc-btn {
+      position: relative;
+      isolation: isolate;
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      background: rgba(0, 217, 255, 0.075);
+      cursor: pointer;
+      overflow: hidden;
+      user-select: none;
+      transition: 0.25s ease;
+      touch-action: manipulation;
+    }
+
+    .dnsc-btn::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: -2;
+      border-radius: inherit;
+      background: conic-gradient(from 180deg, transparent, var(--accent), #7dffdf, transparent, #ff00d4, transparent);
+      opacity: 0;
+      animation: orbit 3.2s linear infinite;
+      transition: 0.25s ease;
+    }
+
+    .dnsc-btn::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: var(--glass-strong);
+    }
+
+    .dnsc-btn:hover::before,
+    .dnsc-btn.holding::before,
+    .dnsc-btn.ready::before {
+      opacity: 1;
+    }
+
+    .dnsc-btn:hover,
+    .dnsc-btn.holding {
+      transform: translateY(-4px) scale(1.025);
+      box-shadow:
+        0 0 28px rgba(0, 217, 255, 0.42),
+        0 0 55px rgba(255, 0, 212, 0.18);
+    }
+
+    .dnsc-btn.ready {
+      animation: dnscReadyBoom 0.45s ease both;
+    }
+
+    .alien {
+      position: relative;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #b8fff6, #00d9ff 50%, #0047ff);
+      box-shadow: 0 0 16px rgba(0, 217, 255, 0.7);
+      animation: alienFloat 1.7s ease-in-out infinite alternate;
+    }
+
+    .alien::before,
+    .alien::after {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 217, 255, 0.38);
+      opacity: 0;
+      transform: scale(0.6);
+      animation: alienPulse 2s ease-out infinite;
+    }
+
+    .alien::after {
+      animation-delay: 0.7s;
+    }
+
+    .dnsc-btn.holding .alien {
+      animation: alienCharge 0.55s ease-in-out infinite alternate;
+    }
+
+    .holdbar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #00d9ff, #7dffdf, #ffee00, #ff00d4, #00d9ff);
+      background-size: 260% 100%;
+      box-shadow: 0 0 16px rgba(0, 217, 255, 0.9);
+      animation: rainbow 2s linear infinite;
+    }
+
+    .dnsc-btn small {
+      color: var(--soft);
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .hold-text-ready {
+      color: #7dffdf !important;
+      text-shadow: 0 0 14px rgba(0, 217, 255, 0.8);
+    }
+
+    @keyframes orbit {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes alienFloat {
+      from {
+        transform: translateY(0) rotate(-4deg);
+      }
+
+      to {
+        transform: translateY(-4px) rotate(4deg);
+      }
+    }
+
+    @keyframes alienCharge {
+      from {
+        transform: translateY(-2px) scale(1.04) rotate(-8deg);
+      }
+
+      to {
+        transform: translateY(-7px) scale(1.18) rotate(8deg);
+      }
+    }
+
+    @keyframes alienPulse {
+      0% {
+        opacity: 0.65;
+        transform: scale(0.6);
+      }
+
+      75% {
+        opacity: 0;
+        transform: scale(1.55);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.55);
+      }
+    }
+
+    @keyframes dnscReadyBoom {
+      0% {
+        transform: translateY(-4px) scale(1.02);
+        filter: brightness(1);
+      }
+
+      50% {
+        transform: translateY(-6px) scale(1.07);
+        filter: brightness(1.35);
+      }
+
+      100% {
+        transform: translateY(-4px) scale(1.02);
+        filter: brightness(1);
+      }
+    }
+
+    .profile-card,
+    .glass-box,
+    .skill-card,
+    .project-card {
+      position: relative;
+      border: 1px solid var(--border);
+      background: var(--card);
+      backdrop-filter: blur(18px) saturate(145%);
+      -webkit-backdrop-filter: blur(18px) saturate(145%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .profile-card {
+      padding: 18px;
+      border-radius: 28px;
+      transition: 0.28s ease;
+    }
+
+    .profile-card:hover,
+    .skill-card:hover,
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.012);
+      border-color: rgba(0, 217, 255, 0.48);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.34), 0 0 28px rgba(0,217,255,0.21);
+    }
+
+    .profile-img {
+      width: 100%;
+      aspect-ratio: 1 / 1.1;
+      object-fit: cover;
+      display: block;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      position: relative;
+      z-index: 2;
+    }
+
+    .id-card {
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      margin-top: 14px;
+      padding: 15px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: 0.24s ease;
+    }
+
+    .id-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .id-card small {
+      color: var(--accent);
+    }
+
+    .id-card h3 {
+      margin: 6px 0;
+    }
+
+    .ripple {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(0, 217, 255, 0.18);
+      transform: translate(-50%, -50%) scale(0);
+      pointer-events: none;
+      animation: ripple 0.8s ease-out forwards;
+    }
+
+    @keyframes ripple {
+      to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(8);
+      }
+    }
+
+    .certificate-btn {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      margin-top: 13px;
+      padding: 13px 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: 0.24s ease;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+
+    .certificate-btn::before,
+    .id-card::before,
+    .skill-card::after,
+    .project-card::after,
+    .profile-card::after,
+    .glass-box::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, 0.10) 45%, transparent 65%);
+      transform: translateX(-120%);
+      transition: transform 0.65s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .certificate-btn:hover::before,
+    .id-card:hover::before,
+    .skill-card:hover::after,
+    .project-card:hover::after,
+    .profile-card:hover::after,
+    .glass-box:hover::after {
+      transform: translateX(120%);
+    }
+
+    .certificate-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.22);
+      border-color: var(--accent);
+    }
+
+    .cert-icon,
+    .skill-icon {
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: rgba(0, 217, 255, 0.09);
+    }
+
+    .cert-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      font-size: 22px;
+    }
+
+    .certificate-btn strong {
+      display: block;
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    .certificate-btn small {
+      display: block;
+      margin-top: 4px;
+      color: var(--soft);
+    }
+
+    .section-title {
+      margin-bottom: 26px;
+    }
+
+    .section-title span {
+      color: var(--accent);
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .section-title h2 {
+      margin-top: 8px;
+      font-size: clamp(30px, 4.8vw, 50px);
+    }
+
+    .glass-box {
+      padding: 26px;
+      border-radius: 26px;
+    }
+
+    .glass-box > *,
+    .profile-card > *,
+    .skill-card > *,
+    .project-card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skill-card,
+    .project-card {
+      padding: 22px;
+      border-radius: 24px;
+      transition: 0.28s ease;
+    }
+
+    .skill-icon {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      font-size: 24px;
+      margin-bottom: 15px;
+      transition: 0.25s ease;
+    }
+
+    .skill-icon::after,
+    .icon-link::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -14px;
+      width: 76%;
+      height: 13px;
+      border-radius: 999px;
+      transform: translateX(-50%) scaleX(0.9);
+      background: linear-gradient(90deg, #ff004c, #ff8c00, #ffee00, #00ff85, #00d9ff, #7a5cff, #ff00d4, #ff004c);
+      background-size: 300% 100%;
+      filter: blur(10px);
+      opacity: 0;
+      animation: rainbow 3.5s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .skill-card:hover .skill-icon {
+      animation: iconFloat 1.4s ease-in-out infinite alternate;
+      box-shadow: 0 0 22px rgba(0, 217, 255, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    .skill-card:hover .skill-icon::after,
+    .icon-link:hover::after {
+      opacity: 0.9;
+    }
+
+    @keyframes iconFloat {
+      from {
+        transform: translateY(-3px) scale(1.04);
+      }
+
+      to {
+        transform: translateY(-8px) scale(1.10);
+      }
+    }
+
+    @keyframes rainbow {
+      to {
+        background-position: 300% 50%;
+      }
+    }
+
+    .sample-btn {
+      margin-top: 13px;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    .project-type {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 1.7px;
+      margin-bottom: 11px;
+      font-weight: 900;
+    }
+
+    .project-card h3 {
+      font-size: 23px;
+      margin-bottom: 11px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 17px 0;
+    }
+
+    .chip {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      background: rgba(0, 217, 255, 0.055);
+    }
+
+    .mini-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 14px;
+      touch-action: manipulation;
+    }
+
+    .mini-link:hover {
+      text-shadow: 0 0 14px var(--accent);
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .icon-links {
+      display: flex;
+      gap: 11px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .icon-link {
+      position: relative;
+      display: inline-flex;
+      padding: 12px 15px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255,255,255,0.055);
+      text-decoration: none;
+      font-weight: 800;
+      transition: 0.24s ease;
+      touch-action: manipulation;
+    }
+
+    .icon-link:hover {
+      color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 0 22px rgba(0, 217, 255, 0.24);
+      border-color: var(--accent);
+    }
+
+    footer {
+      padding: 26px 0;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background:
+        radial-gradient(circle at 50% 92%, rgba(255, 0, 212, 0.18), transparent 34%),
+        radial-gradient(circle at 16% 10%, rgba(0, 217, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 88% 20%, rgba(124, 60, 255, 0.16), transparent 28%),
+        rgba(0, 0, 0, 0.58);
+      backdrop-filter: blur(20px) saturate(155%);
+      -webkit-backdrop-filter: blur(20px) saturate(155%);
+      opacity: 0;
+    }
+
+    .overlay.show {
+      display: grid;
+      animation: overlayFadeIn 0.23s ease forwards;
+    }
+
+    .overlay.closing {
+      display: grid;
+      animation: overlayFadeOut 0.18s ease forwards;
+    }
+
+    .overlay::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: radial-gradient(circle at center, black 0 40%, transparent 78%);
+      opacity: 0.35;
+    }
+
+    .overlay::after {
+      content: "";
+      position: fixed;
+      left: 10%;
+      right: 10%;
+      bottom: 7%;
+      height: 34px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ff004c, #ff8c00, #ffee00, #00ff85, #00d9ff, #7a5cff, #ff00d4, #ff004c);
+      background-size: 320% 100%;
+      filter: blur(26px);
+      opacity: 0.46;
+      animation: rainbow 4.5s linear infinite, glowPulse 2.2s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes overlayFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes overlayFadeOut {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes glowPulse {
+      from {
+        transform: scaleX(0.88);
+        opacity: 0.32;
+      }
+
+      to {
+        transform: scaleX(1);
+        opacity: 0.55;
+      }
+    }
+
+    .modal {
+      position: relative;
+      width: min(430px, 92vw);
+      padding: 24px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
+        var(--glass-strong);
+      backdrop-filter: blur(28px) saturate(170%);
+      -webkit-backdrop-filter: blur(28px) saturate(170%);
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.45),
+        0 0 36px rgba(0, 217, 255, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      animation: modalPopIn 0.32s cubic-bezier(.16, .9, .22, 1.08) forwards;
+      overflow: visible;
+      isolation: isolate;
+    }
+
+    .modal.wide {
+      width: min(900px, 94vw);
+    }
+
+    .modal > * {
+      position: relative;
+      z-index: 3;
+    }
+
+    .modal::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: conic-gradient(from 0deg, rgba(0, 217, 255, 0.95), rgba(124, 60, 255, 0.68), rgba(255, 47, 214, 0.82), rgba(0, 255, 133, 0.62), rgba(0, 217, 255, 0.95));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      opacity: 0.56;
+      pointer-events: none;
+    }
+
+    .modal::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -13px;
+      z-index: 0;
+      width: 76%;
+      height: 28px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #ff004c, #ff8c00, #ffee00, #00ff85, #00d9ff, #7a5cff, #ff00d4, #ff004c);
+      background-size: 320% 100%;
+      filter: blur(18px);
+      opacity: 0.58;
+      animation: rainbow 3.8s linear infinite;
+      pointer-events: none;
+    }
+
+    .overlay.closing .modal {
+      animation: modalPopOut 0.18s ease forwards;
+    }
+
+    @keyframes modalPopIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.94);
+        filter: blur(7px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes modalPopOut {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+      }
+    }
+
+    .modal h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+      padding-right: 58px;
+      text-shadow: 0 0 18px rgba(0, 217, 255, 0.38);
+    }
+
+    .modal p {
+      color: var(--soft);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      z-index: 30;
+      width: 58px;
+      height: 58px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .close-btn::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.18), transparent 35%), rgba(0, 0, 0, 0.34);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: 0.22s ease;
+    }
+
+    .close-btn::after {
+      content: "×";
+      position: relative;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1;
+      transition: 0.22s ease;
+    }
+
+    .close-btn:hover::before,
+    .close-btn:focus-visible::before {
+      border-color: var(--accent);
+      background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.24), transparent 35%), rgba(0, 217, 255, 0.12);
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.42), 0 0 44px rgba(255, 47, 214, 0.16);
+    }
+
+    .close-btn:hover::after,
+    .close-btn:focus-visible::after {
+      color: var(--accent);
+      transform: rotate(90deg) scale(1.08);
+      text-shadow: 0 0 14px rgba(0, 217, 255, 0.75);
+    }
+
+    .close-btn:active::before {
+      transform: scale(0.9);
+    }
+
+    .close-btn:active::after {
+      transform: rotate(90deg) scale(0.96);
+    }
+
+    .video-box {
+      position: relative;
+      margin-top: 12px;
+      border-radius: 22px;
+    }
+
+    .video-box::after,
+    .cert-frame::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      z-index: 0;
+      width: 72%;
+      height: 22px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #ff004c, #ff8c00, #ffee00, #00ff85, #00d9ff, #7a5cff, #ff00d4);
+      background-size: 300% 100%;
+      filter: blur(16px);
+      opacity: 0.58;
+      animation: rainbow 4s linear infinite;
+      pointer-events: none;
+    }
+
+    video {
+      width: 100%;
+      max-height: 72vh;
+      aspect-ratio: 9 / 16;
+      object-fit: contain;
+      display: block;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: #000;
+      position: relative;
+      z-index: 2;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .cert-frame {
+      position: relative;
+      margin-top: 14px;
+      height: min(64vh, 620px);
+      padding: 10px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: radial-gradient(circle at 20% 10%, rgba(0, 217, 255, 0.12), transparent 30%), rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .cert-frame::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      z-index: 1;
+      background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.14) 45%, transparent 60%);
+      transform: translateX(-25%) rotate(8deg);
+      animation: glassShine 5.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glassShine {
+      0% {
+        transform: translateX(-30%) rotate(8deg);
+        opacity: 0;
+      }
+
+      30% {
+        opacity: 1;
+      }
+
+      65% {
+        opacity: 0.65;
+      }
+
+      100% {
+        transform: translateX(35%) rotate(8deg);
+        opacity: 0;
+      }
+    }
+
+    .cert-frame img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: 18px;
+      background: transparent;
+    }
+
+    .dnsc-links {
+      display: grid;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .dnsc-link {
+      position: relative;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 15px;
+      border-radius: 17px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      text-decoration: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.035));
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, color 0.24s ease;
+      overflow: hidden;
+    }
+
+    .dnsc-link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      transform: translateX(-120%);
+      transition: transform 0.55s ease;
+      pointer-events: none;
+    }
+
+    .dnsc-link:hover {
+      transform: translateY(-5px) scale(1.015);
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.25), 0 14px 34px rgba(0, 0, 0, 0.26);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .dnsc-link:hover::before {
+      transform: translateX(120%);
+    }
+
+    @media (max-width: 900px) {
+      html {
+        scroll-padding-top: 78px;
+      }
+
+      nav {
+        top: 10px;
+        padding: 8px 10px;
+        min-height: 54px;
+        border-radius: 16px;
+      }
+
+      .hero,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links,
+      .status {
+        display: none;
+      }
+
+      .settings-panel {
+        position: fixed;
+        top: 72px;
+        right: 14px;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      html {
+        scroll-padding-top: 70px;
+      }
+
+      section,
+      .hero {
+        padding: 58px 0;
+      }
+
+      .hero {
+        min-height: auto;
+        gap: 26px;
+        padding-top: 36px;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .smoke {
+        width: 210px;
+        height: 210px;
+        opacity: 0.26;
+        filter: blur(9px);
+        animation-duration: 34s;
+      }
+
+      .s3 {
+        display: none;
+      }
+
+      .overlay {
+        padding: 14px;
+      }
+
+      .modal {
+        width: min(94vw, 430px);
+        padding: 21px;
+        border-radius: 22px;
+      }
+
+      .modal h3 {
+        padding-right: 56px;
+        font-size: 19px;
+      }
+
+      .close-btn {
+        top: 2px;
+        right: 2px;
+        width: 64px;
+        height: 64px;
+      }
+
+      .close-btn::before {
+        inset: 10px;
+      }
+
+      .close-btn::after {
+        width: 44px;
+        height: 44px;
+        font-size: 32px;
+      }
+
+      .cert-frame {
+        height: 55vh;
+      }
+
+      .dnsc-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .profile-card,
+      .glass-box,
+      .skill-card,
+      .project-card,
+      nav,
+      .settings-panel,
+      .modal,
+      .overlay {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-effects">
+    <div class="smoke s1"></div>
+    <div class="smoke s2"></div>
+    <div class="smoke s3"></div>
+  </div>
+
+  <div class="overlay" id="desktopOverlay">
+    <div class="modal">
+      <h3 data-i18n="desktopTitle">Better on Desktop</h3>
+      <p data-i18n="desktopText">
+        For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.
+      </p>
+
+      <div class="buttons">
+        <button class="btn primary" id="continueDesktop" type="button" data-i18n="continueAnyway">Continue Anyway</button>
+        <button class="btn" id="backDesktop" type="button" data-i18n="backBtn">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="videoOverlay">
+    <div class="modal">
+      <button class="close-btn" data-close="videoOverlay" type="button" aria-label="Close video popup">×</button>
+      <h3 data-i18n="videoTitle">Michael’s Video Editing Sample</h3>
+      <p data-i18n="videoText">Sample short edit preview.</p>
+      <div class="video-box">
+        <video id="sampleVideo" controls preload="metadata" playsinline>
+          <source src="assets/sample-edit.mp4.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="certOverlay">
+    <div class="modal wide">
+      <button class="close-btn" data-close="certOverlay" type="button" aria-label="Close certificate popup">×</button>
+      <h3 data-i18n="certTitle">Cybersecurity Essentials</h3>
+      <p data-i18n="certText">Cisco Networking Academy · Davao Del Norte State College</p>
+      <div class="cert-frame">
+        <img src="assets/profile.jpg.jpg" alt="Michael Navarro Certificate" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="dnscOverlay">
+    <div class="modal">
+      <button class="close-btn" data-close="dnscOverlay" type="button" aria-label="Close DNSC popup">×</button>
+      <h3>DNSC Portal Access</h3>
+      <p>Choose destination. Links open in a new tab.</p>
+      <div class="dnsc-links">
+        <a class="dnsc-link" href="https://dnsc.edu.ph/" target="_blank" rel="noopener noreferrer">
+          🌐 DNSC Official Website
+        </a>
+        <a class="dnsc-link" href="https://www.facebook.com/officialdnsc/" target="_blank" rel="noopener noreferrer">
+          📘 DNSC Facebook Page
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <div class="logo">MICHAEL_</div>
+
+    <div class="nav-links">
+      <a href="#about" data-i18n="navAbout">ABOUT</a>
+      <a href="#skills" data-i18n="navSkills">SKILLS</a>
+      <a href="#projects" data-i18n="navProjects">PROJECTS</a>
+      <a href="#contact" data-i18n="navContact">CONTACT</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="status" data-i18n="status">OPEN TO WORK</div>
+
+      <div class="settings-wrap">
+        <button class="settings-btn" id="settingsBtn" type="button" aria-label="Settings">⚙️</button>
+
+        <div class="settings-panel" id="settingsPanel">
+          <div class="settings-content">
+            <h4>⚙️ SETTINGS</h4>
+
+            <div class="settings-section">
+              <span class="settings-label">Theme</span>
+              <div class="settings-row">
+                <button class="theme-btn active" data-theme="dark" type="button">🌙 Dark</button>
+                <button class="theme-btn" data-theme="light" type="button">☀️ Light</button>
+                <button class="theme-btn" data-theme="colorblind" type="button">👁️ Eye</button>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <span class="settings-label">Language</span>
+              <div class="settings-row">
+                <button class="lang-btn active" data-lang="en" type="button">EN</button>
+                <button class="lang-btn" data-lang="bisaya" type="button">BIS</button>
+                <button class="lang-btn" data-lang="tagalog" type="button">TAG</button>
+                <button class="lang-btn" data-lang="japanese" type="button">JP</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <div class="dnsc-wrap">
+          <button class="dnsc-btn" id="dnscBtn" type="button">
+            <span class="alien"></span>
+            <span>
+              <strong>DNSC ACCESS</strong><br />
+              <small>LONG PRESS 1–3 SEC</small>
+            </span>
+            <span class="holdbar"></span>
+          </button>
+        </div>
+
+        <h1 data-i18n-html="heroTitle">Hi, I’m <span class="gradient-text">Michael.</span></h1>
+        <h2 data-i18n="heroSub">Graphic Designer · Visual Creator · UI/UX Learner</h2>
+        <p data-i18n="heroText">
+          Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean, modern, and eye-catching visual designs.
+          My skills include photo editing, video editing, and basic network configuration. I’m always willing to learn new tools
+          and improve my skills to create better and more professional outputs.
+        </p>
+
+        <div class="buttons">
+          <a class="btn primary" href="#projects" data-i18n="viewProjects">View Projects</a>
+          <a class="btn" href="#contact" data-i18n="getTouch">Get In Touch</a>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <img src="assets/profile.jpg" alt="Michael G. Navarro" class="profile-img" loading="eager" decoding="async" />
+
+        <div class="id-card" id="idCard">
+          <small data-i18n="digitalId">[ DIGITAL ID ]</small>
+          <h3>Michael G. Navarro</h3>
+          <p data-i18n="idRole">Graphic Designer · DNSC Student</p>
+          <p style="color: var(--accent); margin-top: 8px;" data-i18n="activePortfolio">ACTIVE — CREATIVE PORTFOLIO</p>
+        </div>
+
+        <button class="certificate-btn" id="openCert" type="button">
+          <span class="cert-icon">🏅</span>
+          <span>
+            <strong data-i18n="certificate">Certificate</strong>
+            <small data-i18n="certificateSmall">Tap to view achievement</small>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-title">
+        <span data-i18n="aboutSpan">[ ABOUT ]</span>
+        <h2 data-i18n="aboutTitle">Designing visuals that feel modern and professional.</h2>
+      </div>
+
+      <div class="glass-box">
+        <p data-i18n="aboutP1">
+          I am a 4th year college student with a growing interest in graphic design, visual editing, and user interface design.
+          I enjoy creating designs that are simple, clean, and attractive while making sure the message is easy to understand.
+        </p>
+        <br />
+        <p data-i18n="aboutP2">
+          My creative work focuses on photo editing, video editing, layout design, and digital content creation. I also have
+          experience using Figma, where I can create interface layouts and interactive prototypes for web or app design ideas.
+          Aside from creative work, I also have basic knowledge in network configuration.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-title">
+        <span data-i18n="skillsSpan">[ SKILLS ]</span>
+        <h2 data-i18n="skillsTitle">Tools and skills I work with.</h2>
+      </div>
+
+      <div class="grid skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">🎨</div>
+          <h3 data-i18n="s1Title">Graphic Design</h3>
+          <p data-i18n="s1Text">Creating clean, modern, and eye-catching visual layouts for digital content.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🖼️</div>
+          <h3 data-i18n="s2Title">Photo Editing</h3>
+          <p data-i18n="s2Text">Enhancing images, improving colors, retouching, and preparing visuals for posting.</p>
+        </div>
+
+        <div class="skill-card" id="openVideo">
+          <div class="skill-icon">🎬</div>
+          <h3 data-i18n="s3Title">Video Editing</h3>
+          <p data-i18n="s3Text">Editing short videos, adding transitions, arranging clips, and improving visual flow.</p>
+          <button class="sample-btn" type="button" data-i18n="sampleBtn">View Sample Edit</button>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">💎</div>
+          <h3 data-i18n="s4Title">Figma Prototype</h3>
+          <p data-i18n="s4Text">Designing UI layouts and creating clickable prototypes for web and app concepts.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🌐</div>
+          <h3 data-i18n="s5Title">Basic Network Configuration</h3>
+          <p data-i18n="s5Text">Setting up basic network connections, configurations, and connectivity settings.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">✨</div>
+          <h3 data-i18n="s6Title">Creative Direction</h3>
+          <p data-i18n="s6Text">Choosing colors, styles, spacing, and visual direction for a more polished output.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">📱</div>
+          <h3 data-i18n="s7Title">Social Media Design</h3>
+          <p data-i18n="s7Text">Creating posters, banners, thumbnails, and digital content for online platforms.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">⚡</div>
+          <h3 data-i18n="s8Title">Fast Learner</h3>
+          <p data-i18n="s8Text">Willing to explore new design tools, trends, and techniques to improve my work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-title">
+        <span data-i18n="projectsSpan">[ PROJECTS ]</span>
+        <h2 data-i18n="projectsTitle">Selected creative work.</h2>
+      </div>
+
+      <div class="grid projects-grid">
+        <div class="project-card">
+          <div class="project-type" data-i18n="p1Type">UI/UX DESIGN · FIGMA PROTOTYPE</div>
+          <h3 data-i18n="p1Title">Interactive Figma Prototype</h3>
+          <p data-i18n="p1Text">
+            A clickable prototype created in Figma to present a clean interface flow, screen layout, and user interaction concept.
+          </p>
+          <div class="chips">
+            <span class="chip">Figma</span>
+            <span class="chip">UI Design</span>
+            <span class="chip">Prototype</span>
+          </div>
+          <a class="mini-link" href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=zMthvpgWqKfyunAp-1&starting-point-node-id=100%3A16" target="_blank" rel="noopener noreferrer" data-i18n="viewPrototype">[ VIEW PROTOTYPE ]</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-type" data-i18n="p2Type">GRAPHIC DESIGN · DIGITAL CONTENT</div>
+          <h3 data-i18n="p2Title">Social Media Poster Designs</h3>
+          <p data-i18n="p2Text">
+            Poster and layout designs focused on strong visuals, readable text, balanced spacing, and modern color combinations.
+          </p>
+          <div class="chips">
+            <span class="chip">Poster Design</span>
+            <span class="chip">Layout</span>
+            <span class="chip">Branding</span>
+          </div>
+          <a class="mini-link" href="#contact" data-i18n="requestSample">[ REQUEST SAMPLE ]</a>
+        </div>
+
+        <div class="project-card" id="openVideo2">
+          <div class="project-type" data-i18n="p3Type">VIDEO EDITING · CREATIVE MEDIA</div>
+          <h3 data-i18n="p3Title">Short Video Edits</h3>
+          <p data-i18n="p3Text">
+            Edited video content with smooth pacing, transitions, visual timing, and improved flow for more engaging presentation.
+          </p>
+          <div class="chips">
+            <span class="chip">Video Editing</span>
+            <span class="chip">Transitions</span>
+            <span class="chip">Visual Flow</span>
+          </div>
+          <a class="mini-link" href="javascript:void(0)" data-i18n="viewSample">[ VIEW SAMPLE EDIT ]</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-type" data-i18n="p4Type">TECHNICAL SKILL · NETWORK SETUP</div>
+          <h3 data-i18n="p4Title">Basic Network Configuration</h3>
+          <p data-i18n="p4Text">
+            Practical experience in configuring basic network settings and connectivity setups with stable connection.
+          </p>
+          <div class="chips">
+            <span class="chip">Networking</span>
+            <span class="chip">Configuration</span>
+            <span class="chip">Technical Setup</span>
+          </div>
+          <a class="mini-link" href="#skills" data-i18n="viewSkills">[ VIEW SKILLS ]</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-title">
+        <span data-i18n="contactSpan">[ CONTACT ]</span>
+        <h2 data-i18n="contactTitle">Let’s create something clean and creative.</h2>
+      </div>
+
+      <div class="glass-box contact-card">
+        <div>
+          <p data-i18n="contactText">
+            I am open to creative projects, school-related design work, portfolio collaborations, and opportunities where I can
+            improve my skills in design, editing, and UI/UX prototyping.
+          </p>
+
+          <div class="icon-links">
+            <a class="icon-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=navarro.michael@dnsc.edu.ph" target="_blank" rel="noopener noreferrer">Gmail</a>
+            <a class="icon-link" href="tel:+639158480061">Call</a>
+            <a class="icon-link" href="https://www.facebook.com/share/17sqYuH8bE/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a class="icon-link" href="https://www.figma.com/proto/Npw7WUyck8e9BkN001VwXM/Untitled?node-id=100-16&t=b9U4PNwgAzjz0mZn-1&starting-point-node-id=100%3A16" target="_blank" rel="noopener noreferrer">Figma</a>
+          </div>
+        </div>
+
+        <div>
+          <p><strong>Email:</strong> navarro.michael@dnsc.edu.ph</p>
+          <p><strong data-i18n="phone">Phone:</strong> 09158480061</p>
+          <p><strong>Facebook:</strong> Michael G. Navarro</p>
+          <p><strong data-i18n="location">Location:</strong> Davao del Norte, Philippines</p>
+          <p><strong data-i18n="statusLabel">Status:</strong> <span data-i18n="statusValue">Available for creative work</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-i18n="footer">
+    © 2026 Michael G. Navarro · Graphic Designer · Portfolio Online
+  </footer>
+
+  <script>
+    const text = {
+      en: {
+        desktopTitle: "Better on Desktop",
+        desktopText: "For a smoother and more comfortable viewing experience, this portfolio is best viewed on a desktop or laptop.",
+        continueAnyway: "Continue Anyway",
+        backBtn: "Back",
+        navAbout: "ABOUT",
+        navSkills: "SKILLS",
+        navProjects: "PROJECTS",
+        navContact: "CONTACT",
+        status: "OPEN TO WORK",
+        heroTitle: "Hi, I’m <span class='gradient-text'>Michael.</span>",
+        heroSub: "Graphic Designer · Visual Creator · UI/UX Learner",
+        heroText: "Hi, I’m Michael G. Navarro, a Graphic Designer who enjoys creating clean, modern, and eye-catching visual designs. My skills include photo editing, video editing, and basic network configuration. I’m always willing to learn new tools and improve my skills to create better and more professional outputs.",
+        viewProjects: "View Projects",
+        getTouch: "Get In Touch",
+        digitalId: "[ DIGITAL ID ]",
+        idRole: "Graphic Designer · DNSC Student",
+        activePortfolio: "ACTIVE — CREATIVE PORTFOLIO",
+        certificate: "Certificate",
+        certificateSmall: "Tap to view achievement",
+        certTitle: "Cybersecurity Essentials",
+        certText: "Cisco Networking Academy · Davao Del Norte State College",
+        videoTitle: "Michael’s Video Editing Sample",
+        videoText: "Sample short edit preview.",
+        aboutSpan: "[ ABOUT ]",
+        aboutTitle: "Designing visuals that feel modern and professional.",
+        aboutP1: "I am a 4th year college student with a growing interest in graphic design, visual editing, and user interface design. I enjoy creating designs that are simple, clean, and attractive while making sure the message is easy to understand.",
+        aboutP2: "My creative work focuses on photo editing, video editing, layout design, and digital content creation. I also have experience using Figma, where I can create interface layouts and interactive prototypes for web or app design ideas. Aside from creative work, I also have basic knowledge in network configuration.",
+        skillsSpan: "[ SKILLS ]",
+        skillsTitle: "Tools and skills I work with.",
+        s1Title: "Graphic Design",
+        s1Text: "Creating clean, modern, and eye-catching visual layouts for digital content.",
+        s2Title: "Photo Editing",
+        s2Text: "Enhancing images, improving colors, retouching, and preparing visuals for posting.",
+        s3Title: "Video Editing",
+        s3Text: "Editing short videos, adding transitions, arranging clips, and improving visual flow.",
+        sampleBtn: "View Sample Edit",
+        s4Title: "Figma Prototype",
+        s4Text: "Designing UI layouts and creating clickable prototypes for web and app concepts.",
+        s5Title: "Basic Network Configuration",
+        s5Text: "Setting up basic network connections, configurations, and connectivity settings.",
+        s6Title: "Creative Direction",
+        s6Text: "Choosing colors, styles, spacing, and visual direction for a more polished output.",
+        s7Title: "Social Media Design",
+        s7Text: "Creating posters, banners, thumbnails, and digital content for online platforms.",
+        s8Title: "Fast Learner",
+        s8Text: "Willing to explore new design tools, trends, and techniques to improve my work.",
+        projectsSpan: "[ PROJECTS ]",
+        projectsTitle: "Selected creative work.",
+        p1Type: "UI/UX DESIGN · FIGMA PROTOTYPE",
+        p1Title: "Interactive Figma Prototype",
+        p1Text: "A clickable prototype created in Figma to present a clean interface flow, screen layout, and user interaction concept.",
+        viewPrototype: "[ VIEW PROTOTYPE ]",
+        p2Type: "GRAPHIC DESIGN · DIGITAL CONTENT",
+        p2Title: "Social Media Poster Designs",
+        p2Text: "Poster and layout designs focused on strong visuals, readable text, balanced spacing, and modern color combinations.",
+        requestSample: "[ REQUEST SAMPLE ]",
+        p3Type: "VIDEO EDITING · CREATIVE MEDIA",
+        p3Title: "Short Video Edits",
+        p3Text: "Edited video content with smooth pacing, transitions, visual timing, and improved flow for more engaging presentation.",
+        viewSample: "[ VIEW SAMPLE EDIT ]",
+        p4Type: "TECHNICAL SKILL · NETWORK SETUP",
+        p4Title: "Basic Network Configuration",
+        p4Text: "Practical experience in configuring basic network settings and connectivity setups with stable connection.",
+        viewSkills: "[ VIEW SKILLS ]",
+        contactSpan: "[ CONTACT ]",
+        contactTitle: "Let’s create something clean and creative.",
+        contactText: "I am open to creative projects, school-related design work, portfolio collaborations, and opportunities where I can improve my skills in design, editing, and UI/UX prototyping.",
+        phone: "Phone:",
+        location: "Location:",
+        statusLabel: "Status:",
+        statusValue: "Available for creative work",
+        footer: "© 2026 Michael G. Navarro · Graphic Designer · Portfolio Online"
+      },
+
+      bisaya: {
+        desktopTitle: "Mas Nindot sa Desktop",
+        desktopText: "Para mas smooth ug mas komportable ang viewing experience, mas maayo tan-awon ni nga portfolio gamit desktop or laptop.",
+        continueAnyway: "Padayon Gihapon",
+        backBtn: "Balik",
+        navAbout: "MAHITUNGOD",
+        navSkills: "KASANAYAN",
+        navProjects: "PROYEKTO",
+        navContact: "KONTAK",
+        status: "OPEN SA TRABAHO",
+        heroTitle: "Kumusta, ako si <span class='gradient-text'>Michael.</span>",
+        heroSub: "Graphic Designer · Visual Creator · UI/UX Learner",
+        heroText: "Kumusta, ako si Michael G. Navarro, usa ka Graphic Designer nga ganahan mohimo ug limpyo, moderno, ug nindot nga visual designs. Kabalo ko sa photo editing, video editing, ug basic network configuration. Andam ko kanunay makat-on ug bag-ong tools aron mas mo-improve akong outputs.",
+        viewProjects: "Tan-awa ang Proyekto",
+        getTouch: "Kontaka Ko",
+        digitalId: "[ DIGITAL ID ]",
+        idRole: "Graphic Designer · DNSC Student",
+        activePortfolio: "ACTIVE — CREATIVE PORTFOLIO",
+        certificate: "Certificate",
+        certificateSmall: "Tap para makita ang achievement",
+        certTitle: "Cybersecurity Essentials",
+        certText: "Cisco Networking Academy · Davao Del Norte State College",
+        videoTitle: "Michael’s Video Editing Sample",
+        videoText: "Sample short edit preview.",
+        aboutSpan: "[ MAHITUNGOD ]",
+        aboutTitle: "Naghimo ug visual designs nga moderno ug professional tan-awon.",
+        aboutP1: "Ako usa ka 4th year college student nga interesado sa graphic design, visual editing, ug user interface design. Ganahan ko mohimo ug design nga simple, limpyo, ug dali masabtan.",
+        aboutP2: "Ang akong creative work naka-focus sa photo editing, video editing, layout design, ug digital content creation. Naa pud koy experience sa Figma para makahimo ug UI layouts ug clickable prototypes. Naa pud koy basic knowledge sa network configuration.",
+        skillsSpan: "[ KASANAYAN ]",
+        skillsTitle: "Mga tools ug skills nga akong ginagamit.",
+        s1Title: "Graphic Design",
+        s1Text: "Paghimo ug limpyo, moderno, ug eye-catching nga visual layouts para sa digital content.",
+        s2Title: "Photo Editing",
+        s2Text: "Pag-enhance sa images, pag-ayo sa colors, retouching, ug pagprepare sa visuals para posting.",
+        s3Title: "Video Editing",
+        s3Text: "Pag-edit sa short videos, pagbutang transitions, pag-arrange sa clips, ug pagpa-nindot sa visual flow.",
+        sampleBtn: "Tan-awa ang Sample Edit",
+        s4Title: "Figma Prototype",
+        s4Text: "Paghimo ug UI layouts ug clickable prototypes para sa web ug app concepts.",
+        s5Title: "Basic Network Configuration",
+        s5Text: "Pag-set up sa basic network connections, configurations, ug connectivity settings.",
+        s6Title: "Creative Direction",
+        s6Text: "Pagpili sa colors, styles, spacing, ug visual direction para mas polished ang output.",
+        s7Title: "Social Media Design",
+        s7Text: "Paghimo ug posters, banners, thumbnails, ug digital content para online platforms.",
+        s8Title: "Fast Learner",
+        s8Text: "Andam makat-on ug bag-ong design tools, trends, ug techniques para mo-improve.",
+        projectsSpan: "[ PROYEKTO ]",
+        projectsTitle: "Pipila sa akong creative works.",
+        p1Type: "UI/UX DESIGN · FIGMA PROTOTYPE",
+        p1Title: "Interactive Figma Prototype",
+        p1Text: "Usa ka clickable prototype nga gihimo sa Figma aron ipakita ang limpyo nga interface flow, screen layout, ug user interaction concept.",
+        viewPrototype: "[ TAN-AWA ANG PROTOTYPE ]",
+        p2Type: "GRAPHIC DESIGN · DIGITAL CONTENT",
+        p2Title: "Social Media Poster Designs",
+        p2Text: "Mga poster ug layout designs nga naka-focus sa nindot nga visuals, klaro nga text, sakto nga spacing, ug modern color combinations.",
+        requestSample: "[ PANGAYO SAMPLE ]",
+        p3Type: "VIDEO EDITING · CREATIVE MEDIA",
+        p3Title: "Short Video Edits",
+        p3Text: "Edited video content nga naay smooth pacing, transitions, visual timing, ug mas maayo nga flow.",
+        viewSample: "[ TAN-AWA ANG SAMPLE EDIT ]",
+        p4Type: "TECHNICAL SKILL · NETWORK SETUP",
+        p4Title: "Basic Network Configuration",
+        p4Text: "Practical experience sa pag-configure sa basic network settings ug connectivity setups.",
+        viewSkills: "[ TAN-AWA ANG SKILLS ]",
+        contactSpan: "[ KONTAK ]",
+        contactTitle: "Maghimo ta ug limpyo ug creative nga output.",
+        contactText: "Open ko sa creative projects, school-related design work, portfolio collaborations, ug opportunities nga makatabang mo-improve akong skills sa design, editing, ug UI/UX prototyping.",
+        phone: "Telepono:",
+        location: "Lokasyon:",
+        statusLabel: "Status:",
+        statusValue: "Available para creative work",
+        footer: "© 2026 Michael G. Navarro · Graphic Designer · Portfolio Online"
+      },
+
+      tagalog: {
+  heroTitle: "Yo, ako nga pala si <span class='gradient-text'>Michael.</span>",
+
+heroSub: "Graphic Designer · Visual Creator · UI/UX Enjoyer",
+
+heroText: "Solid gumawa ng malinis at modern na visuals, boss. Mahilig ako sa graphic design, photo editing, video editing, pati basic network setup. Laging game matuto ng bagong tools para mas angat pa lalo yung outputs.",
+
+status: "OPEN SA RAKET",
+
+viewProjects: "Silipin Mo 'To",
+
+getTouch: "Chat Mo 'Ko",
+
+aboutTitle: "Mga design na malinis, astig, at hindi sabog tignan.",
+
+aboutP1: "4th year college student ako na trip na trip ang graphic design, visual editing, at UI/UX. Goal ko gumawa ng designs na simple pero may dating, boss.",
+
+aboutP2: "Sa photo editing, video editing, layout design, at digital content ako madalas kumikilos. Marunong din sa Figma para sa UI at clickable prototypes, pati basic network setup goods din.",
+
+skillsTitle: "Mga bala ko pagdating sa design.",
+
+s1Title: "Graphic Design",
+s1Text: "Malinis, modern, at maporma na visuals para sa social media at digital content.",
+
+s2Title: "Photo Editing",
+s2Text: "Ayos colors, retouch, enhance... basta gagawing swabe yung image.",
+
+s3Title: "Video Editing",
+s3Text: "Smooth edits, solid transitions, at hindi nakakahilo panoorin.",
+
+sampleBtn: "Silipin ang Edit",
+
+projectsTitle: "Mga gawa kong legit.",
+
+contactTitle: "Tara, gumawa tayo ng astig na project.",
+
+contactText: "Open ako sa raket, school projects, collabs, at kung ano mang creative na trip basta design, editing, o UI/UX.",
+
+statusValue: "Game sa bagong project.",
+
+footer: "© 2026 Michael G. Navarro · Graphic Designer · Solid Portfolio"
+      },
+
+     japanese: {
+    desktopTitle: "Desukutoppu de no hyouji ga osusume desu",
+    desktopText: "Yori kaiteki de sumuuzu ni miru tame ni, kono porutoforio wa desukutoppu matawa nooto pasokon de no etsuran ga osusume desu.",
+    continueAnyway: "Kono mama tsuzukeru",
+    backBtn: "Modoru",
+
+    navAbout: "Shoukai",
+    navSkills: "Sukiru",
+    navProjects: "Sakuhin",
+    navContact: "Renrakusaki",
+
+    status: "Shigoto uketsuke chuu",
+
+    heroTitle: "Konnichiwa, <span class='gradient-text'>Michael</span> desu.",
+    heroSub: "Gurafikku Dezainaa · Bijuaru Kurieetaa · UI/UX Gakushuusha",
+    heroText: "Konnichiwa, Michael G. Navarro desu. Watashi wa kirei de gendaiteki de me o hiku bijuaru dezain o tsukuru no ga suki na gurafikku dezainaa desu. Shashin henshuu, douga henshuu, kihonteki na nettowaaku settei no sukiru ga arimasu.",
+
+    viewProjects: "Sakuhin o miru",
+    getTouch: "Renraku suru",
+
+    digitalId: "[ Dejitaru ID ]",
+    idRole: "Gurafikku Dezainaa · DNSC Gakusei",
+    activePortfolio: "ACTIVE — Creative Portfolio",
+
+    certificate: "Shoumeisho",
+    certificateSmall: "Tappu shite jisseki o miru",
+    certTitle: "Cybersecurity Essentials",
+    certText: "Cisco Networking Academy · Davao Del Norte State College",
+
+    videoTitle: "Maykero no Douga Henshuu Sanpuru",
+    videoText: "Mijikai henshuu sanpuru no preview.",
+
+    aboutSpan: "[ Shoukai ]",
+    aboutTitle: "Gendaiteki de purofesshonaru na bijuaru o seisaku shimasu.",
+    aboutP1: "Watashi wa gurafikku dezain, bijuaru henshuu, yuuzaa intaafeesu dezain ni kyoumi o motsu daigaku yon nensei desu.",
+    aboutP2: "Watashi no seisaku wa shashin henshuu, douga henshuu, reiauto dezain, dejitaru kontentsu seisaku ni shouten o ateteimasu. Figma de UI reiauto ya purototaipu mo sakusei dekimasu.",
+
+    skillsSpan: "[ Sukiru ]",
+    skillsTitle: "Shiyou shiteiru tsuuru to sukiru.",
+
+    s1Title: "Gurafikku Dezain",
+    s1Text: "Dejitaru kontentsu you ni kirei de gendaiteki na bijuaru reiauto o seisaku shimasu.",
+
+    s2Title: "Shashin Henshuu",
+    s2Text: "Gazou no kyouka, iro chousei, retacchi, toukou you bijuaru no junbi o okonaimasu.",
+
+    s3Title: "Douga Henshuu",
+    s3Text: "Mijikai douga no henshuu, toranjishon no tsuika, kurippu no seiri o okonaimasu.",
+
+    sampleBtn: "Sanpuru o miru",
+
+    s4Title: "Figma Purototaipu",
+    s4Text: "Web ya apuri you no UI reiauto to kurikku kanou na purototaipu o sakusei shimasu.",
+
+    s5Title: "Kihonteki na Nettowaaku Settei",
+    s5Text: "Kihonteki na nettowaaku setsuzoku to settei o okonaimasu.",
+
+    s6Title: "Creative Houkou",
+    s6Text: "Iro, sutairu, yohaku, bijuaru houkou o erabimasu.",
+
+    s7Title: "SNS Dezain",
+    s7Text: "Posutaa, banaa, sanmuneiru, dejitaru kontentsu o seisaku shimasu.",
+
+    s8Title: "Gakushuu Iyoku",
+    s8Text: "Atarashii dezain tsuuru ya gijutsu o manabi, sukiru o koujou sasemasu.",
+
+    projectsSpan: "[ Sakuhin ]",
+    projectsTitle: "Erabareta Creative Sakuhin.",
+
+    p1Type: "UI/UX Dezain · FIGMA Purototaipu",
+    p1Title: "Interactive Figma Purototaipu",
+    p1Text: "Intaafeesu furoo to yuuzaa sousa o shimesu kurikku kanou na Figma purototaipu desu.",
+    viewPrototype: "[ Purototaipu o miru ]",
+
+    p2Type: "Gurafikku Dezain · Dejitaru Kontentsu",
+    p2Title: "SNS Posutaa Dezain",
+    p2Text: "Yomiyasui moji, baransu no yoi yohaku, gendaiteki na iro ni juuten o oita dezain desu.",
+    requestSample: "[ Sanpuru o irai ]",
+
+    p3Type: "Douga Henshuu · Creative Media",
+    p3Title: "Tanpen Douga Henshuu",
+    p3Text: "Sumuuzu na tenpo to shizen na nagare o juushi shita douga henshuu desu.",
+    viewSample: "[ Sanpuru o miru ]",
+
+    p4Type: "Gijutsu Sukiru · Nettowaaku Settei",
+    p4Title: "Kihonteki na Nettowaaku Settei",
+    p4Text: "Kihonteki na nettowaaku settei to setsuzoku kankyou no kousei keiken ga arimasu.",
+    viewSkills: "[ Sukiru o miru ]",
+
+    contactSpan: "[ Renrakusaki ]",
+    contactTitle: "Kirei de Creative na sakuhin o issho ni tsukurimashou.",
+    contactText: "Creative purojekuto, gakkou kanren no dezain sagyou, porutoforio koraboreeshon o kangei shiteimasu.",
+
+    phone: "Denwa:",
+    location: "Basho:",
+    statusLabel: "Joutai:",
+    statusValue: "Creative sagyou ni taiou kanou",
+
+    footer: "© 2026 Maykero G. Navarro · Gurafikku Dezainaa · Online Portfolio"
+}
+    };
+
+    const settingsBtn = document.getElementById("settingsBtn");
+    const settingsPanel = document.getElementById("settingsPanel");
+    const themeBtns = document.querySelectorAll(".theme-btn");
+    const langBtns = document.querySelectorAll(".lang-btn");
+
+    settingsBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      settingsPanel.classList.toggle("show");
+      settingsBtn.classList.toggle("open", settingsPanel.classList.contains("show"));
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!settingsPanel.contains(event.target) && !settingsBtn.contains(event.target)) {
+        settingsPanel.classList.remove("show");
+        settingsBtn.classList.remove("open");
+      }
+    });
+
+    function setTheme(theme) {
+      document.body.classList.remove("light", "colorblind");
+
+      if (theme === "light") {
+        document.body.classList.add("light");
+      }
+
+      if (theme === "colorblind") {
+        document.body.classList.add("colorblind");
+      }
+
+      themeBtns.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.theme === theme);
+      });
+
+      localStorage.setItem("portfolioTheme", theme);
+    }
+
+    themeBtns.forEach((btn) => {
+      btn.addEventListener("click", () => setTheme(btn.dataset.theme));
+    });
+
+    setTheme(localStorage.getItem("portfolioTheme") || "dark");
+
+    function setLanguage(lang) {
+      const dict = text[lang] || text.en;
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.dataset.i18n;
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+        const key = el.dataset.i18nHtml;
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      langBtns.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+
+      document.documentElement.lang =
+        lang === "japanese" ? "ja" :
+        lang === "tagalog" ? "tl" :
+        lang === "bisaya" ? "ceb" : "en";
+
+      localStorage.setItem("portfolioLanguage", lang);
+    }
+
+    langBtns.forEach((btn) => {
+      btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(localStorage.getItem("portfolioLanguage") || "en");
+
+    function lockBodyScroll() {
+      document.body.style.overflow = "hidden";
+    }
+
+    function unlockBodyScrollIfNoOverlay() {
+      const stillOpen = document.querySelector(".overlay.show");
+      if (!stillOpen) {
+        document.body.style.overflow = "";
+      }
+    }
+
+    function openOverlay(id) {
+      const overlay = document.getElementById(id);
+      if (!overlay) return;
+
+      overlay.classList.remove("closing");
+      overlay.classList.add("show");
+      lockBodyScroll();
+
+      if (id === "videoOverlay") {
+        const video = document.getElementById("sampleVideo");
+        if (video) {
+          video.load();
+        }
+      }
+    }
+
+    function closeOverlay(id) {
+      const overlay = document.getElementById(id);
+      if (!overlay || !overlay.classList.contains("show")) return;
+
+      overlay.classList.add("closing");
+
+      if (id === "videoOverlay") {
+        const video = document.getElementById("sampleVideo");
+        if (video) {
+          video.pause();
+          video.currentTime = 0;
+        }
+      }
+
+      window.setTimeout(() => {
+        overlay.classList.remove("show", "closing");
+        unlockBodyScrollIfNoOverlay();
+
+        if (id === "dnscOverlay") {
+          resetDnscButton();
+        }
+      }, 180);
+    }
+
+    const openCertBtn = document.getElementById("openCert");
+    const openVideoBtn = document.getElementById("openVideo");
+    const openVideoBtn2 = document.getElementById("openVideo2");
+
+    if (openCertBtn) {
+      openCertBtn.addEventListener("click", () => openOverlay("certOverlay"));
+    }
+
+    if (openVideoBtn) {
+      openVideoBtn.addEventListener("click", () => openOverlay("videoOverlay"));
+    }
+
+    if (openVideoBtn2) {
+      openVideoBtn2.addEventListener("click", () => openOverlay("videoOverlay"));
+    }
+
+    document.querySelectorAll("[data-close]").forEach((btn) => {
+      btn.addEventListener("pointerup", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        closeOverlay(btn.dataset.close);
+      });
+
+      btn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+
+    document.querySelectorAll(".overlay").forEach((overlay) => {
+      overlay.addEventListener("pointerup", (event) => {
+        if (event.target === overlay) {
+          closeOverlay(overlay.id);
+        }
+      });
+    });
+
+    const desktopOverlay = document.getElementById("desktopOverlay");
+    const continueDesktop = document.getElementById("continueDesktop");
+    const backDesktop = document.getElementById("backDesktop");
+
+    function isMobileDevice() {
+      const smallScreen = window.innerWidth <= 900;
+      const touchDevice = navigator.maxTouchPoints > 0;
+      const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+
+      return smallScreen || touchDevice || coarsePointer;
+    }
+
+    window.addEventListener("load", () => {
+      if (isMobileDevice() && !sessionStorage.getItem("desktopNoticeClosed")) {
+        setTimeout(() => {
+          desktopOverlay.classList.add("show");
+          document.body.style.overflow = "hidden";
+        }, 450);
+      }
+    });
+
+    continueDesktop.addEventListener("click", () => {
+      desktopOverlay.classList.remove("show");
+      document.body.style.overflow = "";
+      sessionStorage.setItem("desktopNoticeClosed", "yes");
+    });
+
+    backDesktop.addEventListener("click", () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "https://www.google.com";
+      }
+    });
+
+    const idCard = document.getElementById("idCard");
+
+    idCard.addEventListener("click", (event) => {
+      const rect = idCard.getBoundingClientRect();
+      const ripple = document.createElement("span");
+
+      ripple.className = "ripple";
+      ripple.style.left = `${event.clientX - rect.left}px`;
+      ripple.style.top = `${event.clientY - rect.top}px`;
+
+      idCard.appendChild(ripple);
+
+      setTimeout(() => ripple.remove(), 900);
+    });
+
+    const dnscBtn = document.getElementById("dnscBtn");
+    let dnscHoldTimer = null;
+    let dnscIsHolding = false;
+    let dnscAlreadyOpened = false;
+
+    function resetDnscButton() {
+      dnscIsHolding = false;
+      dnscAlreadyOpened = false;
+
+      clearTimeout(dnscHoldTimer);
+      dnscHoldTimer = null;
+
+      if (!dnscBtn) return;
+
+      dnscBtn.classList.remove("holding", "ready");
+
+      const smallText = dnscBtn.querySelector("small");
+      if (smallText) {
+        smallText.textContent = "LONG PRESS 1–3 SEC";
+        smallText.classList.remove("hold-text-ready");
+      }
+
+      const holdbar = dnscBtn.querySelector(".holdbar");
+      if (holdbar) {
+        holdbar.style.transition = "none";
+        holdbar.style.width = "0";
+
+        requestAnimationFrame(() => {
+          holdbar.style.transition = "";
+        });
+      }
+    }
+
+    function openDnscAccess() {
+      if (dnscAlreadyOpened || !dnscBtn) return;
+
+      dnscAlreadyOpened = true;
+      dnscIsHolding = false;
+
+      clearTimeout(dnscHoldTimer);
+      dnscHoldTimer = null;
+
+      dnscBtn.classList.remove("holding");
+      dnscBtn.classList.add("ready");
+
+      const smallText = dnscBtn.querySelector("small");
+      if (smallText) {
+        smallText.textContent = "ACCESS UNLOCKED";
+        smallText.classList.add("hold-text-ready");
+      }
+
+      if (navigator.vibrate) {
+        navigator.vibrate([35, 25, 35]);
+      }
+
+      window.setTimeout(() => {
+        openOverlay("dnscOverlay");
+      }, 180);
+
+      window.setTimeout(() => {
+        dnscBtn.classList.remove("ready");
+      }, 900);
+    }
+
+    function startDnscHold(event) {
+      event.preventDefault();
+
+      if (dnscAlreadyOpened || !dnscBtn) return;
+
+      dnscIsHolding = true;
+      dnscBtn.classList.add("holding");
+
+      const smallText = dnscBtn.querySelector("small");
+      if (smallText) {
+        smallText.textContent = "HOLDING...";
+      }
+
+      const holdbar = dnscBtn.querySelector(".holdbar");
+      if (holdbar) {
+        holdbar.style.transition = "none";
+        holdbar.style.width = "0";
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            holdbar.style.transition = "width 1.3s linear";
+            holdbar.style.width = "100%";
+          });
+        });
+      }
+
+      try {
+        dnscBtn.setPointerCapture(event.pointerId);
+      } catch (error) {}
+
+      clearTimeout(dnscHoldTimer);
+
+      dnscHoldTimer = window.setTimeout(() => {
+        if (!dnscIsHolding) return;
+        openDnscAccess();
+      }, 1300);
+    }
+
+    function cancelDnscHold() {
+      if (dnscAlreadyOpened || !dnscBtn) return;
+
+      dnscIsHolding = false;
+      clearTimeout(dnscHoldTimer);
+      dnscHoldTimer = null;
+
+      dnscBtn.classList.remove("holding");
+
+      const smallText = dnscBtn.querySelector("small");
+      if (smallText) {
+        smallText.textContent = "LONG PRESS 1–3 SEC";
+        smallText.classList.remove("hold-text-ready");
+      }
+
+      const holdbar = dnscBtn.querySelector(".holdbar");
+      if (holdbar) {
+        holdbar.style.transition = "width 0.2s ease";
+        holdbar.style.width = "0";
+      }
+    }
+
+    if (dnscBtn) {
+      dnscBtn.addEventListener("pointerdown", startDnscHold);
+
+      dnscBtn.addEventListener("pointerup", () => {
+        if (!dnscAlreadyOpened) {
+          cancelDnscHold();
+        }
+      });
+
+      dnscBtn.addEventListener("pointerleave", () => {
+        if (!dnscAlreadyOpened) {
+          cancelDnscHold();
+        }
+      });
+
+      dnscBtn.addEventListener("pointercancel", () => {
+        if (!dnscAlreadyOpened) {
+          cancelDnscHold();
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+
+      settingsPanel.classList.remove("show");
+      settingsBtn.classList.remove("open");
+
+      closeOverlay("videoOverlay");
+      closeOverlay("certOverlay");
+      closeOverlay("dnscOverlay");
+
+      if (desktopOverlay.classList.contains("show")) {
+        desktopOverlay.classList.remove("show");
+        document.body.style.overflow = "";
+        sessionStorage.setItem("desktopNoticeClosed", "yes");
+      }
+    });
+  </script>
+  <script>
+  /* DNSC ACCESS FIX
+     Problem fixed:
+     - After long press, the DNSC popup will stay open.
+     - Releasing the press will NOT close/popout the popup.
+     - DNSC popup closes ONLY when the user clicks the X button.
+  */
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const dnscOverlay = document.getElementById("dnscOverlay");
+    const dnscBtn = document.getElementById("dnscBtn");
+
+    if (!dnscOverlay || !dnscBtn) return;
+
+    /* Prevent DNSC popup from closing when user releases press
+       or taps outside the modal frame */
+    ["pointerdown", "pointerup", "click", "touchstart", "touchend"].forEach(function (eventName) {
+      dnscOverlay.addEventListener(
+        eventName,
+        function (event) {
+          const closeBtn = event.target.closest("[data-close='dnscOverlay']");
+
+          if (!closeBtn) {
+            event.stopPropagation();
+          }
+        },
+        true
+      );
+    });
+    
+    const dnscCloseBtn = dnscOverlay.querySelector("[data-close='dnscOverlay']");
+
+    if (dnscCloseBtn) {
+      dnscCloseBtn.addEventListener(
+        "click",
+        function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          dnscOverlay.classList.add("closing");
+
+          window.setTimeout(function () {
+            dnscOverlay.classList.remove("show", "closing");
+            document.body.style.overflow = "";
+
+            dnscBtn.classList.remove("holding", "ready");
+
+            const smallText = dnscBtn.querySelector("small");
+            if (smallText) {
+              smallText.textContent = "LONG PRESS 1–3 SEC";
+              smallText.classList.remove("hold-text-ready");
+            }
+
+            const holdbar = dnscBtn.querySelector(".holdbar");
+            if (holdbar) {
+              holdbar.style.transition = "none";
+              holdbar.style.width = "0";
+
+              requestAnimationFrame(function () {
+                holdbar.style.transition = "";
+              });
+            }
+          }, 180);
+        },
+        true
+      );
+    }
+  });
+</script>
+</body>
+</html>
